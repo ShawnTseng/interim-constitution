@@ -43,41 +43,23 @@ Cardano區塊鏈將以投票決策模式進行治理，促進包容性、多樣�
 
 Cardano區塊鏈應依據《臨時憲法》附錄中的《Cardano區塊鏈保障措施》進行運作。
 
-### ARTICLE II THE CARDANO BLOCKCHAIN COMMUNITY
+### 第二條：Cardano區塊鏈社群
 
-#### Section 1
+#### 第一節
 
-No formal membership shall be required to use, participate in and benefit from
-the Cardano Blockchain.
-Instead, all Ada holders, all developers of, all those building on,
-and all those otherwise supporting, maintaining or using the Cardano Blockchain
-are beneficiaries of the Cardano Blockchain ecosystem and, as such,
-are collectively members of the Cardano community.
-All Cardano community members are accordingly beneficiaries of this
-Interim Constitution, entitled to its rights, privileges and protections and,
-as such, are expected to support and uphold this Interim Constitution.
+使用、參與和受益於Cardano區塊鏈不需正式會員資格。所有ADA持有者、開發者、建設者及其他支持、維護或使用Cardano區塊鏈的人員，都是Cardano區塊鏈生態系統的受益者，並因此共同成為Cardano社群的成員。所有Cardano社群成員均為《臨時憲法》的受益者，享有其權利、特權和保護，並因此應支持和遵守這份《臨時憲法》。
 
-#### Section 2
+#### 第二節
 
-Members of the Cardano community who hold ada are entitled to access
-and participate in the on-chain decision-making processes of the
-Cardano Blockchain ecosystem, including voting and taking part in
-on-chain governance regarding the Cardano Blockchain.
+持有ADA的Cardano社群成員有權參與Cardano區塊鏈生態系統的鏈上決策過程，包括投票和參與Cardano區塊鏈的鏈上治理。
 
-#### Section 3
+#### 第三節
 
-Members of the Cardano community have a responsibility to maintain the integrity
-of the Cardano Blockchain ecosystem by following this Interim Constitution,
-operating the Cardano Blockchain network, participating in Cardano Blockchain
-governance activities, and resolving disputes in a fair and transparent manner.
+Cardano社群成員有責任遵守這份《臨時憲法》，維護Cardano區塊鏈生態系統的完整性，這包括運營Cardano區塊鏈網絡、參與Cardano區塊鏈治理活動，並以公平透明的方式解決爭議。
 
-#### Section 4
+#### 第四節
 
-The Cardano community is entitled and encouraged through the provisions
-of this Interim Constitution to collaborate in developing, maintaining and
-building applications for the Cardano community, and to form temporary and
-permanent organizations and entities as the Cardano community deems desirable
-or appropriate in support of the Cardano Blockchain ecosystem.
+Cardano社群根據這份《臨時憲法》有權並鼓勵合作開發、維護和建設Cardano區塊鏈的應用程式，並可以根據需要成立臨時或永久性的組織和實體，以支持Cardano區塊鏈生態系統。
 
 ### ARTICLE III PARTICIPATORY GOVERNANCE
 
