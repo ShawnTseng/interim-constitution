@@ -6,7 +6,11 @@ Make sure to translate the following words into the specified terms:
 [guardrails] -> [保障措施],
 [workshops] -> [研討會],
 [collaboration] -> [合作],
-[treasury] -> [國庫]
+[treasury] -> [國庫],
+[Delegated Representatives] -> [委託代表],
+[Stake Pool Operators] -> [質押池營運商],
+[Constitutional Committee] -> [憲法委員會],
+[governance action] -> [治理行動]
  -->
 
 # Cardano 區塊鏈生態系統臨時憲法
@@ -61,100 +65,57 @@ Cardano社群成員有責任遵守這份《臨時憲法》，維護Cardano區塊
 
 Cardano社群根據這份《臨時憲法》有權並鼓勵合作開發、維護和建設Cardano區塊鏈的應用程式，並可以根據需要成立臨時或永久性的組織和實體，以支持Cardano區塊鏈生態系統。
 
-### ARTICLE III PARTICIPATORY GOVERNANCE
+### 第三條：參與式治理
 
-#### Section 1
+#### 第一節
 
-The Cardano Blockchain ecosystem shall be governed by a decentralized,
-on-chain governance model, utilizing, to the extent possible and beneficial,
-smart contracts and other blockchain-based tools to facilitate decision-making
-and ensure transparency.
-On-chain voting for governance actions shall follow the process outlined in
-CIP-1694 and the Cardano Blockchain Guardrails.
+Cardano區塊鏈生態系統將採用去中心化的鏈上治理模式，盡可能運用智能合約和其他區塊鏈工具來促進決策過程並確保透明度。治理行動的鏈上投票將遵循CIP-1694和Cardano區塊鏈保障措施中規定的流程。
 
-#### Section 2
+#### 第二節
 
-Three independent governance bodies shall participate in voting for
-on-chain governance actions to provide checks and balances for the
-Cardano Blockchain consisting of Delegated Representatives (DRep),
-Stake Pool Operators (SPO) and the Constitutional Committee (CC).
+三個獨立的治理機構將參與鏈上治理行動的投票，以提供Cardano區塊鏈的制衡機制，包括委託代表（DRep）、質押池營運商（SPO）和憲法委員會（CC）。
 
-#### Section 3
+#### 第三節
 
-On-chain governance decisions shall be made through a collective
-decision-making process, with specific consensus threshold requirements
-as required by CIP-1694.
-All on-chain governance actions shall be voted upon in accordance with CIP-1694
-and the Cardano Blockchain Guardrails.
+鏈上治理決策將通過集體決策過程作出，並依據CIP-1694的共識門檻要求進行。所有鏈上治理行動應按照CIP-1694和Cardano區塊鏈保障措施進行投票。
 
-#### Section 4
+#### 第四節
 
-All Ada holders shall have the right to vote in
-on-chain governance action decision-making processes, subject to
-any restrictions or requirements provided for in this Interim Constitution
-including CIP-1694 and the Cardano Blockchain Guardrails.
-Voting rights are in proportion to the Ada that is held.
+所有ADA持有者有權參與鏈上治理決策的投票，但需遵守《臨時憲法》以及CIP-1694和Cardano區塊鏈保障措施中的相關限制或要求。投票權的比例依持有的ADA數量而定。
 
-All Ada holders shall have the right to propose changes to
-the governance structure of the Cardano Blockchain ecosystem in accordance with
-CIP-1694 and Cardano Blockchain Guardrails.
+所有ADA持有者也有權根據CIP-1694和Cardano區塊鏈保障措施，提出對Cardano區塊鏈生態系統治理結構的變更建議。
 
-#### Section 5
+#### 第五節
 
-A special form of governance action exists to allow community sentiment
-to be gauged without committing to any on-chain change.
-"Info" actions have no on-chain effect other than
-recording the votes on the action.
+有一種特殊的治理行動形式可以在不進行任何鏈上變更的情況下，了解社群的意見。這種「資訊」行動除了記錄投票結果外，不會對區塊鏈上產生任何實質影響。
 
-#### Section 6
+#### 第六節
 
-Any governance action submitted to Ada holders for approval shall require
-a standardized and legible format including a URL and hash linked to documented
-off-chain content.
-Sufficient rationale shall be provided to justify the requested change to the
-Cardano Blockchain.
-The rationale shall include, at a minimum, a title, abstract,
-reason for the proposal, and relevant supporting materials.
+任何提交給ADA持有者批准的治理提案，都必須以標準化且易於閱讀的格式呈現，包括一個連結到相關文件的URL和哈希值。提案必須提供充分的理由來說明為什麼需要對Cardano區塊鏈進行變更。這些理由至少應包括標題、摘要、提案原因以及相關的支持資料。
 
-Any governance action proposal reaching the on-chain governance stage shall
-be identical in content as to the final off-chain version of such
-governance action proposal.
+任何進入鏈上治理階段的治理提案，其內容必須與最終的鏈下版本完全一致。
 
-Hard Fork Initiation and Protocol Parameter Change governance actions
-should undergo sufficient technical review and scrutiny as mandated by the
-Cardano Blockchain Guardrails to ensure that the governance action does not
-endanger the security, functionality or performance of the Cardano Blockchain.
-Governance actions should address their expected impact on the
-Cardano Blockchain ecosystem.
+硬分叉啟動和協議參數變更的治理行動應按照Cardano區塊鏈保障措施進行充分的技術審查與檢查，以確保這些行動不會危害Cardano區塊鏈的安全性、功能性或性能。治理行動應評估其對Cardano區塊鏈生態系統的預期影響。
 
-All Ada holders shall have the right to ensure that the process for
-participating in, submitting and voting on governance actions is open and
-transparent and is protected from undue influence and manipulation.
+所有ADA持有者有權確保參與、提交和投票於治理行動的過程是公開透明的，並且受到保護，防止任何不當影響或操控。
 
-#### Section 7
+#### 第七節
 
-The Cardano community is expected to support the creation, maintenance and
-ongoing administration of off-chain governance processes as may be necessary
-to give effect to the requirements of CIP-1694 and to ensure that there is
-awareness of and an opportunity to debate and shape all future
-governance actions.
+Cardano社群應支持創建、維護和持續管理鏈下治理過程，以確保符合CIP-1694的要求，並提供了解、討論和塑造所有未來治理行動的機會。
 
-#### Section 8
+#### 第八節
 
-Any governance action requesting ada from the Cardano treasury in excess of
-1,000,000 ada shall require an allocation of ada as a part of such
-funding request to cover the cost of periodic independent audits and
-the implementation of oversight metrics as to the use of such ada.
+任何要求從Cardano國庫中提取超過1,000,000 ADA的治理行動，都必須在資金申請中分配部分ADA，用於支付定期獨立審計的費用以及實施對這些ADA使用情況的監督指標。
 
 ### ARTICLE IV DELEGATED REPRESENTATIVES
 
-#### Section 1
+#### 第一節
 
 In order to participate in governance actions, holders of ada may register
 as DReps and directly vote on such governance actions or may delegate their
 voting rights to other registered DReps who shall vote on their behalf.
 
-#### Section 2
+#### 第二節
 
 Any Ada holder shall have the option to register as a DRep.
 Any Ada holder shall be allowed to delegate their voting stake to one or more
@@ -170,7 +131,7 @@ The Cardano community is expected to support the creation, maintenance and
 ongoing administration of tools to enable Ada holders to explore and evaluate
 DRep candidates and select DReps on such criteria as they deem relevant.
 
-#### Section 3
+#### 第三節
 
 DReps may be compensated for their efforts to foster the creation of a
 professional governance cohort for the Cardano Blockchain ecosystem.
@@ -191,7 +152,7 @@ under exceptional circumstances by voting on "Motion of no-confidence" and
 
 ### ARTICLE VI CONSTITUTIONAL COMMITTEE
 
-#### Section 1
+#### 第一節
 
 A Constitutional Committee shall be established as the branch of Cardano's
 on-chain governance process that ensures governance actions are consistent with
@@ -205,7 +166,7 @@ Constitutional Committee members shall be Ada holders and are expected to have
 appropriate expertise, considering their past contributions and involvement
 in the Cardano Blockchain ecosystem.
 
-#### Section 2
+#### 第二節
 
 Initially, the Constitutional Committee shall be composed of seven members.
 The Interim Constitutional Committee members shall serve an inaugural term
@@ -223,7 +184,7 @@ of the Cardano Blockchain.
 Term lengths for Constitutional Committee members shall be set
 in accordance with the Cardano Blockchain Guardrails.
 
-#### Section 3
+#### 第三節
 
 No governance action, other than a "Motion of no-confidence" or
 "Update constitutional committee/threshold" may be implemented on-chain
@@ -238,7 +199,7 @@ Constitutional Committee must be reinstated or replaced using the
 "Update committee/threshold" governance action before any other
 governance action may go forward.
 
-#### Section 4
+#### 第四節
 
 Constitutional Committee processes shall be transparent.
 The Constitutional Committee shall publish each decision.
@@ -246,7 +207,7 @@ When voting no on a proposal, the Committee shall set forth the basis
 for its decision with reference to specific Articles of this Constitution
 that are in conflict with a given proposal.
 
-#### Section 5
+#### 第五節
 
 The Cardano community is expected to support the creation, maintenance and
 ongoing administration of tools as may be necessary and appropriate for the
@@ -254,7 +215,7 @@ Constitutional Committee to perform its required functions.
 
 ### ARTICLE VII AMENDMENTS
 
-#### Section 1
+#### 第一節
 
 Amendments to this Interim Constitution, including to the
 Cardano Blockchain Guardrails Appendix shall be approved by a
@@ -263,14 +224,14 @@ satisfying the applicable approval threshold.
 
 ### ARTICLE VIII INTERIM PERIOD
 
-#### Section 1
+#### 第一節
 
 The Interim Period shall be a temporary period that shall continue until
 such date that the Final Constitution has been ratified by Ada holders
 in accordance with the Ratification Of Final Constitution
 as set forth in Appendix II.
 
-#### Section 2
+#### 第二節
 
 The process for transitioning from this Interim Constitution to
 Final Constitution is contained in Appendix II.
@@ -1613,7 +1574,7 @@ that are introduced in CIP-1694:
 
 ## APPENDIX II: RATIFICATION OF FINAL CONSTITUTION
 
-### Section 1
+### 第一節
 
 A series of global workshops for Ada holders to discuss and debate the
 Articles of a final constitution will commence during the second half of 2024.
@@ -1625,11 +1586,11 @@ alternate delegates, who shall participate in a Constitutional Convention.
 Each voting delegate participating in the Constitutional Convention
 shall have an equal vote.
 
-### Section 2
+### 第二節
 
 The Constitutional Convention shall be held no later than the end of 2024.
 
-### Section 3
+### 第三節
 
 The Final Constitution shall be approved at the Constitutional Convention
 where delegates elected to attend the Constitutional Convention shall agree
