@@ -29,28 +29,19 @@ Cardano社群承諾共同遵守這份《臨時憲法》的原則，並攜手努�
 
 這份《臨時憲法》體現了Cardano區塊鏈去中心化生態系統的運作與治理指導原則，並將隨著時間的推移進行調整與演進，以滿足Cardano社群不斷變化的需求。所有Cardano社群的成員都應遵守這份《臨時憲法》，並有權參與治理過程，包括完成最終《憲法》並由ADA持有者進行表決通過。我們鼓勵所有成員攜手合作，共同為Cardano區塊鏈生態系統的發展、永續性及成功做出貢獻。
 
-### ARTICLE I CARDANO BLOCKCHAIN ECOSYSTEM PRINCIPLES
+### 第一條：Cardano區塊鏈生態系統原則
 
-#### Section 1
+#### 第一節
 
-Through adopting a constitution, the Cardano Blockchain ecosystem shall
-establish a robust governance framework, ensuring that decisions are made
-in the best interest of the Cardano community.
-The Cardano community shall uphold principles of transparency, openness,
-and responsible governance, promoting a culture of trust and collaboration.
+透過制定憲法，Cardano區塊鏈生態系統將建立一個健全的治理框架，確保所有決策都以Cardano社群的最佳利益為依據。Cardano社群應維護透明、開放和負責任的治理原則，促進信任與合作的文化。
 
-#### Section 2
+#### 第二節
 
-The Cardano Blockchain shall be governed on a vote-based decision-making model,
-fostering inclusivity, a diversity of views, innovation and adaptability.
-All Ada holders shall have the opportunity to contribute to the governance
-and direction of the decentralized Cardano Blockchain ecosystem.
+Cardano區塊鏈將以投票決策模式進行治理，促進包容性、多樣化的觀點、創新和適應性。所有ADA持有者都有機會參與這個去中心化Cardano區塊鏈生態系統的治理與方向設定。
 
-#### Section 3
+#### 第三節
 
-The Cardano Blockchain shall operate in accordance with the
-Cardano Blockchain Guardrails as set forth in the Guardrails Appendix
-to this Interim Constitution.
+Cardano區塊鏈應依據《臨時憲法》附錄中的《Cardano區塊鏈保障措施》進行運作。
 
 ### ARTICLE II THE CARDANO BLOCKCHAIN COMMUNITY
 
