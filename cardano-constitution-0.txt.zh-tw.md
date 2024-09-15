@@ -17,54 +17,17 @@ Make sure to translate the following words into the specified terms:
 
 在制定這份臨時憲法時，必須明白這不是僅針對區塊鏈的憲法，而是針對區塊鏈生態系統的憲法——這是一項更具雄心的計畫。因此，雖然治理行為如何獲得批准非常重要，但這並不是這份臨時憲法的唯一重點。這份臨時憲法提供了一個基礎和框架，讓Cardano區塊鏈生態系統中的所有參與者可以一起治理，並開創全新的互動與合作方式。它承認並授權憲法委員會，確認Cardano社群參與合作機構的權利，實施鏈上治理，並授權委任代表（DReps）在鏈上投票中代表Ada持有者的聲音。臨時憲法還認識到在過渡期間保障Cardano國庫資金的使用，並納入Cardano保障措施來實現這一點。
 
-### PREAMBLE
+### 前言
 
-In the beginning of the Cardano Blockchain ecosystem, three pioneering entities,
-IOHK, Emurgo, and the Cardano Foundation, came together to foster the emergence
-of a new blockchain, the Cardano Blockchain, laying the foundation for
-a decentralized network that would empower individuals,
-and promote collaboration and innovation.
-Their pioneering efforts have shaped the path for a blockchain
-designed to ensure a fair and transparent environment where all participants
-can contribute to the Cardano Blockchain ecosystem's growth and success.
+在Cardano區塊鏈生態系統的創立初期，IOHK、Emurgo和Cardano基金會這三個先驅組織攜手合作，推動了Cardano區塊鏈的誕生，為這個去中心化網絡奠定了基礎，旨在賦予個人權力，並促進合作與創新。他們的努力為區塊鏈的發展指引了方向，確保所有參與者都能在公平透明的環境中，為Cardano區塊鏈生態系統的成長和成功做出貢獻。
 
-Over time, the Cardano Blockchain ecosystem has expanded significantly, and now,
-the Cardano Blockchain ecosystem, comprising of thousands of Ada holders,
-individuals, builders, developers, enterprises, stake pools,
-users of the Cardano Blockchain and others,
-operates in a truly decentralized manner, further strengthening the resilience
-and autonomy of the Cardano Blockchain ecosystem.
-As the Cardano Blockchain ecosystem continues to grow, it has become imperative
-to similarly adapt and evolve its governance model, reflecting the principles
-of decentralization, community involvement, inclusivity and collaboration that
-have been the cornerstone of the Cardano Blockchain ecosystem since its start.
+隨著時間推移，Cardano區塊鏈生態系統大幅擴展，現今由數千名ADA持有者、個人、建設者、開發者、企業、質押池以及Cardano區塊鏈的使用者等組成，實現了真正的去中心化運作，進一步強化了Cardano區塊鏈生態系統的韌性與自主性。隨著Cardano區塊鏈生態系統持續成長，其治理模式也必須適時調整與演進，以反映自其創立以來一直秉持的去中心化、社群參與、包容性和合作的原則。
 
-Recognizing the need for a more robust and dynamic governance framework,
-and one that utilizes wherever possible and beneficial blockchain technology
-in the governance process, the Cardano community, as the members of
-this decentralized Cardano Blockchain ecosystem, hereby establishes this
-Cardano Interim Constitution.
-It shall serve as a guiding set of principles for the operation and
-governance of our collective efforts, fostering an environment where all
-participants can contribute to the betterment of the
-Cardano Blockchain ecosystem as a whole.
+為了建立一個更強大且靈活的治理框架，並在治理過程中盡可能利用區塊鏈技術的優勢，Cardano社群作為這個去中心化生態系統的成員，特此制定《Cardano臨時憲法》。這份憲法將作為我們集體行動和治理的指導方針，讓所有參與者都有機會為Cardano區塊鏈生態系統的發展和進步做出貢獻。
 
-Together, the Cardano community commits to uphold the principles in this
-Interim Constitution and to work together towards the continuous improvement,
-growth, and success of our decentralized blockchain ecosystem known as
-the Cardano Blockchain.
+Cardano社群承諾共同遵守這份《臨時憲法》的原則，並攜手努力，不斷提升、壯大和推動我們稱為Cardano區塊鏈的去中心化生態系統邁向成功。
 
-This Interim Constitution shall serve as the embodiment of the
-guiding principles for the operation and governance of the
-decentralized Cardano Blockchain ecosystem, providing a foundation that will
-adapt and evolve over time to meet the continuing needs
-of the Cardano community.
-All members of the Cardano community are expected to abide by this
-Interim Constitution, and are entitled to participate in its
-governance processes, including completing a Final Constitution to be ratified
-by Ada holders, and are encouraged to work collaboratively towards
-the betterment of the Cardano Blockchain ecosystem as a whole,
-contributing to its growth, sustainability, and success.
+這份《臨時憲法》體現了Cardano區塊鏈去中心化生態系統的運作與治理指導原則，並將隨著時間的推移進行調整與演進，以滿足Cardano社群不斷變化的需求。所有Cardano社群的成員都應遵守這份《臨時憲法》，並有權參與治理過程，包括完成最終《憲法》並由ADA持有者進行表決通過。我們鼓勵所有成員攜手合作，共同為Cardano區塊鏈生態系統的發展、永續性及成功做出貢獻。
 
 ### ARTICLE I CARDANO BLOCKCHAIN ECOSYSTEM PRINCIPLES
 
