@@ -10,7 +10,8 @@ Make sure to translate the following words into the specified terms:
 [Delegated Representatives] -> [委託代表],
 [Stake Pool Operators] -> [質押池營運商],
 [Constitutional Committee] -> [憲法委員會],
-[governance action] -> [治理行動]
+[governance action] -> [治理行動],
+[liquid democracy model] -> [流動式民主]
  -->
 
 # Cardano 區塊鏈生態系統臨時憲法
@@ -107,36 +108,25 @@ Cardano社群應支持創建、維護和持續管理鏈下治理過程，以確�
 
 任何要求從Cardano國庫中提取超過1,000,000 ADA的治理行動，都必須在資金申請中分配部分ADA，用於支付定期獨立審計的費用以及實施對這些ADA使用情況的監督指標。
 
-### ARTICLE IV DELEGATED REPRESENTATIVES
+### 第四條 委託代表
 
 #### 第一節
 
-In order to participate in governance actions, holders of ada may register
-as DReps and directly vote on such governance actions or may delegate their
-voting rights to other registered DReps who shall vote on their behalf.
+為了參與治理行動，ADA 持有者可註冊為委託代表 (DReps) 並直接對治理行動進行投票，或將其投票權委託給其他已註冊的委託代表，由其代為投票。
 
 #### 第二節
 
-Any Ada holder shall have the option to register as a DRep.
-Any Ada holder shall be allowed to delegate their voting stake to one or more
-registered DReps, including themselves.
-DReps may be individuals or coordinated groups.
-DReps are entitled to cast votes directly for on-chain governance actions and
-represent those Ada holders delegating their voting rights to them.
-This voting system shall enshrine a liquid democracy model where Ada holders
-can seamlessly select among DReps, register as a DRep, and change their
-delegation at any time.
+任何 ADA 持有者均可選擇註冊為委託代表 (DRep)。
+任何 ADA 持有者都可將其投票權委託給一位或多位已註冊的委託代表，包括他們自己。
+委託代表可以是個人或合作團體。
+委託代表有權直接對鏈上治理行動進行投票，並代表將投票權委託給他們的 ADA 持有者進行表決。
+此投票系統將體現流動式民主，讓 ADA 持有者能夠自由選擇委託代表，註冊為委託代表，並隨時更改其委託設定。
 
-The Cardano community is expected to support the creation, maintenance and
-ongoing administration of tools to enable Ada holders to explore and evaluate
-DRep candidates and select DReps on such criteria as they deem relevant.
+Cardano 社群預期會支持建立、維護和持續管理工具，讓 ADA 持有者能夠探索和評估委託代表候選人，並根據他們認為重要的標準來選擇委託代表。
 
 #### 第三節
 
-DReps may be compensated for their efforts to foster the creation of a
-professional governance cohort for the Cardano Blockchain ecosystem.
-DReps shall ensure that any compensation received in connection with their
-activities as a DRep is disclosed.
+委託代表可能會因促進 Cardano 區塊鏈生態系統專業治理團隊的建立而獲得報酬。委託代表應確保其在擔任委託代表期間所收到的任何報酬都得到公開披露。
 
 ### ARTICLE V STAKE POOL OPERATORS
 
