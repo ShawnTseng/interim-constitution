@@ -168,14 +168,11 @@ Cardano 社群將建立選舉憲法委員會成員的程序，並根據 Cardano 
 
 Cardano 社群預期會支持建立、維護及持續管理所需和適當的工具，以協助憲法委員會履行其必要的職能。
 
-### ARTICLE VII AMENDMENTS
+### 第七條 修正案
 
 #### 第一節
 
-Amendments to this Interim Constitution, including to the
-Cardano Blockchain Guardrails Appendix shall be approved by a
-collective decision-making process, requiring an on-chain governance action
-satisfying the applicable approval threshold.
+對此臨時憲法的修正，包括對 Cardano 區塊鏈保障措施附錄的修訂，必須通過集體決策過程進行批准，並滿足相應的鏈上治理行動和批准門檻。
 
 ### ARTICLE VIII INTERIM PERIOD
 
