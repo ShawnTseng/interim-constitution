@@ -174,19 +174,15 @@ Cardano 社群預期會支持建立、維護及持續管理所需和適當的工
 
 對此臨時憲法的修正，包括對 Cardano 區塊鏈保障措施附錄的修訂，必須通過集體決策過程進行批准，並滿足相應的鏈上治理行動和批准門檻。
 
-### ARTICLE VIII INTERIM PERIOD
+### 第八條 過渡期
 
 #### 第一節
 
-The Interim Period shall be a temporary period that shall continue until
-such date that the Final Constitution has been ratified by Ada holders
-in accordance with the Ratification Of Final Constitution
-as set forth in Appendix II.
+過渡期是指一個暫時的期間，將持續到最終憲法根據附錄 II 所述的最終憲法批准程序由 ADA 持有者批准之日為止。
 
 #### 第二節
 
-The process for transitioning from this Interim Constitution to
-Final Constitution is contained in Appendix II.
+從此臨時憲法過渡到最終憲法的過程詳見附錄 II。
 
 ## APPENDIX I: CARDANO BLOCKCHAIN GUARDRAILS
 
