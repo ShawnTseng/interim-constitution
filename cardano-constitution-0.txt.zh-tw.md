@@ -11,7 +11,8 @@ Make sure to translate the following words into the specified terms:
 [Stake Pool Operators] -> [質押池營運商],
 [Constitutional Committee] -> [憲法委員會],
 [governance action] -> [治理行動],
-[liquid democracy model] -> [流動式民主]
+[liquid democracy model] -> [流動式民主],
+[epoch] -> [紀元]
  -->
 
 # Cardano 區塊鏈生態系統臨時憲法
@@ -145,73 +146,43 @@ Cardano 社群預期會支持建立、維護和持續管理工具，讓 ADA 持�
 
 #### 第二節
 
-Initially, the Constitutional Committee shall be composed of seven members.
-The Interim Constitutional Committee members shall serve an inaugural term
-of 73 epochs starting from the date of the Chang hard fork.
-Thereafter, through an on-chain governance action, Ada holders may adjust
-the number of members on the Constitutional Committee in accordance with the
-Cardano Blockchain Guardrails.
-The Cardano community shall establish a process for election of members of the
-Constitutional Committee and shall,
-subject to the Cardano Blockchain Guardrails,
-determine the size of the Constitutional Committee from time to time,
-assuring that there are, at all times, a sufficient number of
-Constitutional Committee members to assure the integrity
-of the Cardano Blockchain.
-Term lengths for Constitutional Committee members shall be set
-in accordance with the Cardano Blockchain Guardrails.
+初期，憲法委員會將由七名成員組成。
+臨時憲法委員會成員將從 Chang 硬分叉之日起，服務於 73 個紀元的創始任期。
+此後，ADA 持有者可以通過鏈上治理行動，根據 Cardano 區塊鏈保障措施，調整憲法委員會的成員數量。
+Cardano 社群將建立選舉憲法委員會成員的程序，並根據 Cardano 區塊鏈保障措施，定期決定憲法委員會的規模，確保始終有足夠的憲法委員會成員以維護 Cardano 區塊鏈的完整性。
+憲法委員會成員的任期長短將按照 Cardano 區塊鏈保障措施設定。
 
 #### 第三節
 
-No governance action, other than a "Motion of no-confidence" or
-"Update constitutional committee/threshold" may be implemented on-chain
-unless the Constitutional Committee shall have first determined and affirmed
-through an on-chain action that such proposal does not violate
-this Interim Constitution.
+除「不信任動議」或「更新憲法委員會/門檻」外，任何治理行動在鏈上實施前，必須先由憲法委員會通過鏈上行動確定並確認該提案不違反此臨時憲法。
 
-The Constitutional Committee shall be considered to be in one of the following
-two states at all times: a state of confidence or a state of no-confidence.
-In a state of no-confidence, members of the then standing
-Constitutional Committee must be reinstated or replaced using the
-"Update committee/threshold" governance action before any other
-governance action may go forward.
+憲法委員會始終被視為處於以下兩種狀態之一：信任狀態或不信任狀態。在不信任狀態下，現任的憲法委員會成員必須使用「更新委員會/門檻」治理行動進行重新任命或更換，才能進行其他治理行動。
 
 #### 第四節
 
-Constitutional Committee processes shall be transparent.
-The Constitutional Committee shall publish each decision.
-When voting no on a proposal, the Committee shall set forth the basis
-for its decision with reference to specific Articles of this Constitution
-that are in conflict with a given proposal.
+憲法委員會的過程應保持透明。
+憲法委員會應公布每項決策。
+當對某項提案投反對票時，委員會應闡明其決定的依據，並參照與該提案衝突的憲法條款。
 
 #### 第五節
 
-The Cardano community is expected to support the creation, maintenance and
-ongoing administration of tools as may be necessary and appropriate for the
-Constitutional Committee to perform its required functions.
+Cardano 社群預期會支持建立、維護及持續管理所需和適當的工具，以協助憲法委員會履行其必要的職能。
 
-### ARTICLE VII AMENDMENTS
+### 第七條 修正案
 
 #### 第一節
 
-Amendments to this Interim Constitution, including to the
-Cardano Blockchain Guardrails Appendix shall be approved by a
-collective decision-making process, requiring an on-chain governance action
-satisfying the applicable approval threshold.
+對此臨時憲法的修正，包括對 Cardano 區塊鏈保障措施附錄的修訂，必須通過集體決策過程進行批准，並滿足相應的鏈上治理行動和批准門檻。
 
-### ARTICLE VIII INTERIM PERIOD
+### 第八條 過渡期
 
 #### 第一節
 
-The Interim Period shall be a temporary period that shall continue until
-such date that the Final Constitution has been ratified by Ada holders
-in accordance with the Ratification Of Final Constitution
-as set forth in Appendix II.
+過渡期是指一個暫時的期間，將持續到最終憲法根據附錄 II 所述的最終憲法批准程序由 ADA 持有者批准之日為止。
 
 #### 第二節
 
-The process for transitioning from this Interim Constitution to
-Final Constitution is contained in Appendix II.
+從此臨時憲法過渡到最終憲法的過程詳見附錄 II。
 
 ## APPENDIX I: CARDANO BLOCKCHAIN GUARDRAILS
 
