@@ -128,17 +128,11 @@ Cardano 社群預期會支持建立、維護和持續管理工具，讓 ADA 持�
 
 委託代表可能會因促進 Cardano 區塊鏈生態系統專業治理團隊的建立而獲得報酬。委託代表應確保其在擔任委託代表期間所收到的任何報酬都得到公開披露。
 
-### ARTICLE V STAKE POOL OPERATORS
+### 第五條 質押池營運商
 
-SPOs shall have a specific role in approving critical
-on-chain governance actions which require additional oversight and independence,
-voting separately and independently from DReps as set forth in CIP-1694 and
-in the Cardano Blockchain Guardrails.
-SPOs shall participate in hard fork initiation processes as the operators
-of the nodes that participate in Cardano Blockchain’s consensus mechanism.
-SPOs shall act as a check on the power of the Constitutional Committee
-under exceptional circumstances by voting on "Motion of no-confidence" and
-"Update committee/threshold" governance actions.
+質押池營運商（SPOs）在批准需要額外監督和獨立性的關鍵鏈上治理行動中扮演特定角色，並按照 CIP-1694 和 Cardano 區塊鏈保障措施，與委託代表（DReps）分開獨立投票。
+質押池營運商作為參與 Cardano 區塊鏈共識機制的節點運營商，應參與硬分叉啟動過程。
+在特殊情況下，質押池營運商應通過對「不信任動議」和「更新委員會/門檻」治理行動進行投票，對憲法委員會的權力進行制衡。
 
 ### ARTICLE VI CONSTITUTIONAL COMMITTEE
 
