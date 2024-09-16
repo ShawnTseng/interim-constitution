@@ -134,21 +134,14 @@ Cardano 社群預期會支持建立、維護和持續管理工具，讓 ADA 持�
 質押池營運商作為參與 Cardano 區塊鏈共識機制的節點運營商，應參與硬分叉啟動過程。
 在特殊情況下，質押池營運商應通過對「不信任動議」和「更新委員會/門檻」治理行動進行投票，對憲法委員會的權力進行制衡。
 
-### ARTICLE VI CONSTITUTIONAL COMMITTEE
+### 第六條 憲法委員會
 
 #### 第一節
 
-A Constitutional Committee shall be established as the branch of Cardano's
-on-chain governance process that ensures governance actions are consistent with
-this Interim Constitution.
-The Constitutional Committee shall comprise a set of Ada holders that
-is collectively responsible for ensuring that on-chain governance actions
-prior to enactment on-chain, are constitutional.
-The Constitutional Committee shall be limited to voting on
-the constitutionality of governance actions.
-Constitutional Committee members shall be Ada holders and are expected to have
-appropriate expertise, considering their past contributions and involvement
-in the Cardano Blockchain ecosystem.
+憲法委員會將作為 Cardano 鏈上治理過程中的一個機構，負責確保治理行動符合此臨時憲法。
+憲法委員會由一群 ADA 持有者組成，他們共同負責確保治理行動在鏈上實施前符合憲法。
+憲法委員會的職責僅限於對治理行動的憲法性進行投票。
+憲法委員會成員必須是 ADA 持有者，並應具備適當的專業知識，考量他們在 Cardano 區塊鏈生態系統中的過往貢獻和參與。
 
 #### 第二節
 
