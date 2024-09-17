@@ -184,49 +184,27 @@ Cardano 社群預期會支持建立、維護及持續管理所需和適當的工
 
 從此臨時憲法過渡到最終憲法的過程詳見附錄 II。
 
-## APPENDIX I: CARDANO BLOCKCHAIN GUARDRAILS
+## 附錄一：Cardano 區塊鏈保障措施
 
-### 1 INTRODUCTION
+### 1 簡介
 
-To implement Cardano Blockchain on-chain governance pursuant to CIP-1694,
-it is necessary to establish sensible guardrails that will enable the
-Cardano Blockchain to continue to operate in a secure and sustainable way.
+為了根據 CIP-1694 實施 Cardano 區塊鏈的鏈上治理，有必要建立合理的保障措施，以確保 Cardano 區塊鏈能夠繼續安全且可持續地運行。
 
-This Appendix sets forth guardrails that must be applied to Cardano Blockchain
-on-chain governance actions, including changes to the protocol parameters
-and limits on treasury withdrawals.
-These guardrails cover both essential, intrinsic limits on settings,
-and recommendations that are based on experience, measurement
-and governance objectives.
+本附錄規定了必須應用於 Cardano 區塊鏈鏈上治理行動的保障措施，包括協議參數的變更和國庫取款的限制。
+這些保障措施涵蓋了設置的基本內在限制，以及根據經驗、測量和治理目標所提出的建議。
 
-These guardrails are designed to avoid unexpected problems with the operation of
-the Cardano Blockchain.
-They are intended to guide the choice of sensible parameter settings and avoid
-potential problems with security, performance or functionality.
-As described below, some of these guardrails are automatable and will be
-enforced via an on-chain script or built-in ledger rules.
+這些保障措施旨在避免 Cardano 區塊鏈運行中出現意外問題。
+它們的目的是引導合理參數設置的選擇，避免在安全性、性能或功能性方面可能出現的問題。
+如以下所述，其中一些保障措施是可自動化的，將通過鏈上腳本或內建帳本規則強制執行。
 
-These guardrails apply to the Cardano Blockchain Layer 1 mainnet environment.
-They are not intended to apply to test environments or to other blockchains
-that use the Cardano Blockchain software.
+這些保障措施適用於 Cardano 區塊鏈的一層主網環境，不適用於測試環境或其他使用 Cardano 區塊鏈軟體的區塊鏈。
 
-Not all parameters for the Cardano Blockchain can be considered independently.
-Some parameters interact with other settings in an intrinsic way.
-Where known, these interactions are addressed in this Appendix.
+Cardano 區塊鏈的所有參數並非都能獨立考量。有些參數會與其他設置產生內在的相互作用。對於已知的這些相互作用，本附錄將加以說明。
 
-While the guardrails in this Appendix presently reflect the current state of
-technical insight, this Appendix should be treated as a living document.
-Implementation improvements, new simulations or performance evaluation results
-for the Cardano Blockchain may allow some of the restrictions contained in these
-guardrails to be relaxed (or, in some circumstances, require them to be
-tightened) in due course.
-Additional guardrails may also be needed where, for example,
-new protocol parameters are introduced.
-The guardrails set forth in this Appendix may be amended from time to time
-pursuant to an on-chain governance action that satisfies the applicable
-voting threshold.
-Any such amendment to any guardrails shall require and be deemed to be
-an amendment to the Constitution itself.
+雖然本附錄中的保障措施反映了當前的技術見解，但應將本附錄視為一個動態文件。隨著 Cardano 區塊鏈的實施改進、新模擬或性能評估結果，這些保障措施中的某些限制可能會在適當時機放寬（或在某些情況下需要收緊）。
+在引入新協議參數等情況下，可能還需要額外的保障措施。
+本附錄中的保障措施可依據滿足相應投票門檻的鏈上治理行動進行修訂。
+任何對保障措施的修訂將被視為對憲法本身的修訂。
 
 #### Terminology and Guidance
 
