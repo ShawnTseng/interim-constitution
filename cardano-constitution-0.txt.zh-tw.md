@@ -12,7 +12,13 @@ Make sure to translate the following words into the specified terms:
 [Constitutional Committee] -> [憲法委員會],
 [governance action] -> [治理行動],
 [liquid democracy model] -> [流動式民主],
-[epoch] -> [紀元]
+[epoch] -> [紀元],
+[should] -> [應該],
+[should not] -> [不應該],
+[must] -> [必須],
+[must not] -> [不得],
+[data center] -> [資料中心],
+[information] -> [資訊]
  -->
 
 # Cardano 區塊鏈生態系統臨時憲法
@@ -206,77 +212,30 @@ Cardano 區塊鏈的所有參數並非都能獨立考量。有些參數會與其
 本附錄中的保障措施可依據滿足相應投票門檻的鏈上治理行動進行修訂。
 任何對保障措施的修訂將被視為對憲法本身的修訂。
 
-#### Terminology and Guidance
+#### 術語與指引
 
-**Should/Should not.**  Where this Appendix says that a value "should not"
-be set below or above some value, this means that the guardrail is a
-recommendation or guideline, and the specific value could be open to discussion
-or alteration by a suitably expert group recognized by the Cardano community
-in light of experience with the Cardano Blockchain governance system or the
-operation of the Cardano Blockchain.
+**應該/不應該**   如果本附錄中提到某個值「不應該」設定在某個範圍之下或之上，這意味著該保障措施是一項建議或指導方針，具體的數值可以由 Cardano 社群認可的專家小組根據對 Cardano 區塊鏈治理系統或 Cardano 區塊鏈運行的經驗進行討論或調整。
 
-**Must/Must not.**  Where this Appendix says that a value "must not" be set
-below or above some value, this means that the guardrail is a requirement that
-will be enforced by Cardano Blockchain ledger rules, types or other built-in
-mechanisms where possible, and that if not followed could cause a
-protocol failure, security breach or other undesirable outcome.
+**必須/不得** 如果本附錄中提到某個值「不得」設定在某個範圍之下或之上，這意味著該保障措施是一項強制性要求，將通過 Cardano 區塊鏈帳本規則、類型或其他內建機制進行強制執行，若不遵守可能會導致協議故障、安全漏洞或其他不良結果。
 
-**Benchmarking.** Benchmarking refers to careful system level
-performance evaluation that is designed to show a-priori that, for example,
-95% of blocks will be diffused across a global network of Cardano Blockchain
-nodes within the required 5s time interval in all cases.
-This may require construction of specific test workflows and execution on a
-large test network of Cardano nodes,
-simulating a global Cardano Blockchain network.
+**基準測試**  基準測試指的是對系統層級性能進行細緻的評估，旨在事先證明，例如，95% 的區塊將在所有情況下的要求 5 秒時間間隔內擴散到全球 Cardano 區塊鏈節點網絡中。
+這可能需要建立特定的測試工作流程，並在大型 Cardano 節點測試網絡上執行，以模擬全球 Cardano 區塊鏈網絡。
 
-**Performance analysis.**  Performance analysis refers to projecting theoretical
-performance, empirical benchmarking or simulation results to predict actual
-system behavior.
-For example, performance results obtained from tests in a controlled test
-environment (such as a collection of data centers with known networking
-properties) may be extrapolated to inform likely performance behavior in a real
-Cardano Blockchain network environment.
+**性能分析**  性能分析指的是通過理論預測、經驗基準測試或模擬結果來預測系統的實際行為。例如，從受控測試環境（如具備已知網絡特性的資料中心集群）中獲得的性能數據，可以用來推測在真實的 Cardano 區塊鏈網絡環境中的預期性能表現。
 
-**Simulation.**  Simulation refers to synthetic execution that is designed to
-inform performance/functionality decisions in a repeatable way.
-For example, the IOSim Cardano Blockchain module allows the operation of the
-networking stack to be simulated in a controlled and repeatable way,
-allowing issues to be detected before code deployment.
+**模擬**  模擬指的是進行合成執行，以重複的方式評估系統的性能或功能。例如，IOSim Cardano 區塊鏈模組可以在受控環境中重複模擬網絡運作，這樣可以在實際部署代碼之前發現問題。
 
-**Performance Monitoring.**  Performance monitoring involves measuring the
-actual behavior of the Cardano Blockchain network, for example,
-by using timing probes to evaluate round-trip times,
-or test blocks to assess overall network health.
-It complements benchmarking and performance analysis by providing information
-about actual system behavior that cannot be obtained using simulated workloads
-or theoretical analysis.
+**性能監控**  性能監控涉及測量 Cardano 區塊鏈網絡的實際運作，例如，使用時間探針來評估往返時間，或使用測試區塊來評估整體網絡健康狀況。它補充了基準測試和性能分析，提供關於實際系統行為的資訊，這些資訊無法通過模擬工作負載或理論分析獲得。
 
-**Reverting Changes.**  Where performance monitoring shows that actual
-network behavior following a change is inconsistent with the performance
-requirements for the Cardano Blockchain, then the change must be reverted to its
-previous state if that is possible.
-For example, if the block size is increased from 100KB to 120KB and 95% of
-blocks are no longer diffused within 5s, then a change must be made to revert
-the block size to 100KB.
-If this is not possible, then one or more alternative changes must be made that
-will ensure that the performance requirements are met.
+**恢復變更**  如果性能監控顯示在變更後實際網絡行為與 Cardano 區塊鏈的性能要求不一致，則必須將變更恢復到之前的狀態（如果可能的話）。例如，如果區塊大小從 100KB 增加到 120KB，結果 95% 的區塊不再能在 5 秒內擴散，那麼必須將區塊大小恢復到 100KB。如果無法恢復，則必須進行一個或多個替代變更，以確保滿足性能要求。
 
-**Severity Levels.**  Issues that affect the Cardano Blockchain network are
-classified by severity level, where:
+**嚴重性等級**  影響 Cardano 區塊鏈網絡的問題按照嚴重性等級進行分類，其中:
 
-- Severity 1 is a critical incident or issue with very high impact to the
-security, performance or functionality of the Cardano Blockchain network
-- Severity 2 is a major incident or issue with significant impact to the
-security, performance or functionality of the Cardano Blockchain network
-- Severity 3 is a minor incident or issue with low impact to the security,
-performance or functionality of the Cardano Blockchain network
+- 嚴重性 1 是對 Cardano 區塊鏈網絡的安全性、性能或功能有非常高影響的關鍵事件或問題。
+- 嚴重性 2 是對 Cardano 區塊鏈網絡的安全性、性能或功能有重大影響的主要事件或問題。
+- 嚴重性 3 是對 Cardano 區塊鏈網絡的安全性、性能或功能影響較低的輕微事件或問題。
 
-**Future Performance Requirements.** Planned development such as new mechanisms
-for out-of-memory storage may impact block diffusion or other times.
-When changing parameters, it is necessary to consider these future performance
-requirements as well as the current operation of the Cardano Blockchain.
-Until development is complete, the requirements will be
-conservative; they may then be relaxed to account for actual timing behavior.
+**未來性能要求**  計劃中的開發，如新的記憶體外儲存機制，可能會影響區塊擴散或其他時間指標。在變更參數時，需要考慮這些未來的性能要求，以及 Cardano 區塊鏈的當前運作狀況。在開發完成之前，性能要求將保持保守；隨後可能會根據實際時間行為進行放寬。
 
 #### Automated Checking ("Guardrails Script")
 
