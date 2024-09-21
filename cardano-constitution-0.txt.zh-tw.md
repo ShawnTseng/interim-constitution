@@ -18,7 +18,8 @@ Make sure to translate the following words into the specified terms:
 [must] -> [必須],
 [must not] -> [不得],
 [data center] -> [資料中心],
-[information] -> [資訊]
+[information] -> [資訊],
+[deadlock] -> [死結]
  -->
 
 # Cardano 區塊鏈生態系統臨時憲法
@@ -237,58 +238,42 @@ Cardano 區塊鏈的所有參數並非都能獨立考量。有些參數會與其
 
 **未來性能要求**  計劃中的開發，如新的記憶體外儲存機制，可能會影響區塊擴散或其他時間指標。在變更參數時，需要考慮這些未來的性能要求，以及 Cardano 區塊鏈的當前運作狀況。在開發完成之前，性能要求將保持保守；隨後可能會根據實際時間行為進行放寬。
 
-#### Automated Checking ("Guardrails Script")
+#### 自動檢查（「保障措施腳本」）
 
-A script hash is associated with the constitution hash when an
-**New Constitution or Guardrails Script** governance action is enacted.
-It acts as an additional safeguard to the ledger rules and types,
-filtering non-compliant governance actions.
+當執行 **新憲法或保障措施腳本** 的治理行動時，會將腳本雜湊與憲法雜湊綁定。這個腳本作為一項額外的安全措施，用來輔助帳本規則和類型，從而過濾掉不符合規範的治理行動。
 
-The guardrails script only affects two types of governance actions:
+保障措施腳本僅影響兩種類型的治理行動：
 
-- **Parameter Update** actions, and
-- **Treasury Withdrawal** actions.
+- **參數更新** 行動, 和
+- **國庫提款** 行動.
 
-The script is executed when either of these types of governance action is
-submitted on-chain.
-This avoids scenarios where, for example, an erroneous script could prevent
-the chain from ever enacting a Hard Fork action, resulting in deadlock.
-There are three different situations that apply to script usage.
+當這些類型的治理行動之一被提交至鏈上時，該腳本會被執行。這樣可以避免某些情況，例如錯誤的腳本可能阻止鏈進行硬分叉，導致死結的發生。腳本的使用適用於以下三種不同的情況。
 
-**Symbol and Explanation**
+**符號與解釋**
 
-- (y) The script can be used to enforce the guardrail.
-- (x) The script cannot be used to enforce the guardrail.
-- (~ - reason) The script cannot be used to enforce the guardrail for the
-reason given, but future ledger changes could enable this.
+- (y) 該腳本可以用來強制執行保障措施。
+- (x) 該腳本無法用來強制執行保障措施。
+- (~ - reason) 該腳本無法用來強制執行保障措施，原因如上所述，但未來的帳本變更可能使其成為可能。
 
-Guardrails may overlap: in this case, the most restrictive set of guardrails
-will apply.
+保障措施可能會重疊；在這種情況下，將適用最嚴格的保障措施。
 
-Where a parameter is not explicitly listed in this document,
-then the script **must not** permit any changes to the parameter.
+如果某個參數未在本文件中明確列出，則該腳本 **不得** 對該參數進行任何更改。
 
-Conversely, where a parameter is explicitly listed in this document
-but no checkable guardrails are specified, the script **must not** impose any
-constraints on changes to the parameter.
+相反，當某個參數在本文件中明確列出但未指定可檢查的保障措施時，該腳本 **不得** 對該參數的變更施加任何限制。
 
-### 2 GUARDRAILS AND GUIDELINES ON PROTOCOL PARAMETER UPDATE ACTIONS
+### 2 保障措施與協議參數更新行動指南
 
-Below are guardrails and guidelines for changing updatable
-protocol parameter settings via the protocol parameter update governance action
-such that the Cardano Blockchain is never in an unrecoverable state as
-a result of such changes.
+以下是通過協議參數更新治理行動更改可更新協議參數設置的保障措施與指導方針，旨在確保 Cardano 區塊鏈不會因這些變更而陷入無法恢復的狀態。
 
-Note that there are at least five different sources of parameter names,
-and these are not always consistent:
+請注意，參數名稱至少有五個不同的來源，且這些名稱並不總是一致：
 
-1. The name used in the Genesis file
-2. The name used in protocol parameter update governance actions
-3. The name used internally in ledger rules
-4. The name used in the formal ledger specification
-5. The name used in research papers
+1. 在創世檔案中使用的名稱
+2. 在協議參數更新治理行動中使用的名稱
+3. 在帳本規則中使用的名稱
+4. 在正式帳本規範中使用的名稱
+5. 在研究論文中使用的名稱
 
-Where these parameter names differ, this Appendix uses the second convention.
+當這些參數名稱不一致時，本附錄使用第二種慣例。
 
 ###### Guardrails
 
