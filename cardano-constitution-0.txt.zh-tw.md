@@ -400,7 +400,7 @@ DoS protection decreases in line with the free node memory
 - Provides an incentive to return UTxOs when no longer needed.
 Should significantly exceed minimum tx cost (~ 0.15 ada)
 
-###### Guardrails
+###### 保障措施
 
 UCPB-01 (y) *utxoCostPerByte* **must not** be lower than 3,000 (0.003 ada)
 
@@ -430,7 +430,7 @@ are returned when they are no longer required.
 Reducing the number of active stake addresses also reduces processing and
 memory costs at the epoch boundary when calculating stake snapshots.
 
-###### Guardrails
+###### 保障措施
 
 SAD-01 (y) *stakeAddressDeposit* **must not** be lower than 1,000,000 (1 ada)
 
@@ -450,7 +450,7 @@ are returned when they are no longer required.
 Rewards and stake snapshot calculations are also impacted by the number of
 active stake pools.
 
-###### Guardrails
+###### 保障措施
 
 SPD-01 (y) *stakePoolDeposit* **must not** be lower than 250,000,000 (250 ada)
 
@@ -465,7 +465,7 @@ Part of the rewards mechanism
 - The minimum pool cost is transferred to the pool rewards address before
 any delegator rewards are paid
 
-###### Guardrails
+###### 保障措施
 
 MPC-01 (y) *minPoolCost* **must not** be negative
 
@@ -482,7 +482,7 @@ Part of the rewards mechanism
 treasury before any pool rewards are paid
 - Can be set in the range 0.0-1.0 (0%-100%)
 
-###### Guardrails
+###### 保障措施
 
 TC-01 (y) *treasuryCut* **must not** be lower than 0.1 (10%)
 
@@ -506,7 +506,7 @@ Governs the long-term sustainability of Cardano
 
 - The reserves are gradually depleted until no rewards are supplied
 
-###### Guardrails
+###### 保障措施
 
 ME-01 (y) *monetaryExpansion* **must not** exceed 0.005
 
@@ -528,7 +528,7 @@ Gives an economic return for Plutus script execution
 
 Provides security against low-cost DoS attacks
 
-###### Guardrails
+###### 保障措施
 
 EIUP-PS-01 (y) *executionUnitPrices[priceSteps]* **must not** exceed
 2,000 / 10,000,000
@@ -559,7 +559,7 @@ are met.
 
 Defines the cost for using Plutus reference scripts in Lovelace
 
-###### Guardrails
+###### 保障措施
 
 MFRS-01 (y) *minFeeRefScriptCoinsPerByte* **must not** exceed
 1,000  (0.001 ada)
@@ -620,7 +620,7 @@ on mainnet performance or behavior prior to enactment.
 The effects of different transaction mixes must be analyzed,
 including normal transactions, Plutus scripts, and governance actions.
 
-###### Guardrails
+###### 保障措施
 
 NETWORK-01 (x - "should") No individual network parameter **should**
 change more than once per two epochs
@@ -635,7 +635,7 @@ e.g., per-transaction and per-block memory unit limits
 
 The maximum size of a block, in Bytes.
 
-###### Guardrails
+###### 保障措施
 
 MBBS-01 (y) *maxBlockBodySize* **must not** exceed 122,880 Bytes (120KB)
 
@@ -672,7 +672,7 @@ supported by benchmarking and monitoring results
 
 The maximum size of a transaction, in Bytes.
 
-###### Guardrails
+###### 保障措施
 
 MTS-01 (y) *maxTxSize* **must not** exceed 32,768 Bytes (32KB)
 
@@ -695,7 +695,7 @@ MTS-06 (x - "should") *maxTxSize* **should not** exceed 1/4 of the block size
 The limit on the maximum number of memory units that can be used by
 Plutus scripts, either per-transaction or per-block.
 
-###### Guardrails
+###### 保障措施
 
 MTEU-M-01 (y) *maxTxExecutionUnits[memory]* **must not** exceed
 40,000,000 units
@@ -737,7 +737,7 @@ MEU-M-01 (~ - no access to existing parameter values)
 The limit on the maximum number of CPU steps that can be used by Plutus scripts,
 either per-transaction or per-block.
 
-###### Guardrails
+###### 保障措施
 
 MTEU-S-01 (y) *maxTxExecutionUnits[steps]* **must not** exceed
 15,000,000,000 (15Bn) units
@@ -782,7 +782,7 @@ The size of the block header.
 Note that increasing the block header size may affect the overall block size
 (*maxBlockBodySize*)
 
-###### Guardrails
+###### 保障措施
 
 MBHS-01 (y) *maxBlockHeaderSize* **must not** exceed 5,000 Bytes
 
@@ -835,7 +835,7 @@ pool division/replication
 required when changing this parameter
 - Large changes in this parameter will trigger mass redelegation events
 
-###### Guardrails
+###### 保障措施
 
 SPTN-01 (y) *stakePoolTargetNum* **must not** be lower than 250
 
@@ -859,7 +859,7 @@ required
 
 - Can be set in the range 0.0-infinity
 
-###### Guardrails
+###### 保障措施
 
 PPI-01 (y) *poolPledgeInfluence* **must not** be lower than 0.1
 
@@ -875,7 +875,7 @@ PPI-04 (x - "should") *poolPledgeInfluence* **should not** vary by more than
 Defines the maximum number of epochs notice that a pool can give
 when planning to retire
 
-###### Guardrails
+###### 保障措施
 
 PRME-01 (y) *poolRetireMaxEpoch* **must not** be negative
 
@@ -893,7 +893,7 @@ as a percentage of the normal execution cost
 Provides security against low-cost attacks by making it more expensive
 rather than less expensive to execute failed scripts
 
-###### Guardrails
+###### 保障措施
 
 CP-01 (y) *collateralPercentage* **must not** be lower than 100
 
@@ -908,7 +908,7 @@ CP-04 (y) *collateralPercentage* **must not** be zero
 Defines the maximum number of inputs that can be used for collateral
 when executing a Plutus script
 
-###### Guardrails
+###### 保障措施
 
 MCI-01 (y) *maxCollateralInputs* **must not** be lower than 1
 
@@ -916,7 +916,7 @@ MCI-01 (y) *maxCollateralInputs* **must not** be lower than 1
 
 The limit on the serialized size of the Value in each output.
 
-###### Guardrails
+###### 保障措施
 
 MVS-01 (y) *maxValueSize* **must not** exceed 12,288 Bytes (12KB)
 
@@ -943,7 +943,7 @@ Cost models are defined for each Plutus language version.
 A new language version may introduce additional micro-parameters or
 remove existing micro-parameters.
 
-###### Guardrails
+###### 保障措施
 
 PCM-01 (x - unquantifiable) *Cost model* values **must** be set by
 benchmarking on a reference architecture
@@ -1001,7 +1001,7 @@ The deposit that is charged when submitting a governance action.
 
 - Helps to limit the number of actions that are submitted
 
-###### Guardrails
+###### 保障措施
 
 GD-01 (y) *govDeposit* **must not** be negative
 
@@ -1018,7 +1018,7 @@ The deposit that is charged when registering a DRep.
 
 - Helps to limit the number of active DReps
 
-###### Guardrails
+###### 保障措施
 
 DRD-01 (y) *dRepDeposit* **must not** be negative
 
@@ -1035,7 +1035,7 @@ The period (as a whole number of epochs)
 after which a DRep is considered to be inactive for vote calculation purposes,
 if they do not vote on any proposal.
 
-###### Guardrails
+###### 保障措施
 
 DRA-01 (y) *dRepActivity* **must not** be lower than 13 epochs (2 months)
 
@@ -1079,7 +1079,7 @@ The threshold parameters are listed below:
 - *pvtMotionNoConfidence*
 - *pvtPPSecurityGroup*
 
-###### Guardrails
+###### 保障措施
 
 VT-GEN-01 (y) All thresholds **must** be in the range 50%-100%
 
@@ -1105,7 +1105,7 @@ The period after which a governance action will expire if it is not enacted
 
 - As a whole number of epochs
 
-###### Guardrails
+###### 保障措施
 
 GAL-01 (y) *govActionLifetime* **must not** be lower than 1 epoch (5 days)
 
@@ -1125,7 +1125,7 @@ GAL-05 (~ - no access to existing parameter values) *govActionLifetime*
 
 The limit on the maximum term that a committee member may serve
 
-###### Guardrails
+###### 保障措施
 
 CMTL-01 (y) *committeeMaxTermLimit* **must not** be zero
 
@@ -1145,7 +1145,7 @@ CMTL-05 (x - "should") *committeeMaxTermLimit* **should not** exceed
 The least number of members that can be included in a Constitutional Committee
 following a governance action to change the Constitutional Committee.
 
-###### Guardrails
+###### 保障措施
 
 CMS-01 (y) *committeeMinSize* **must not** be negative
 
@@ -1192,7 +1192,7 @@ It is not necessary to provide specific guardrails on updating these parameters.
 **Treasury withdrawal** actions specify the destination
 and amount of a number of withdrawals from the Cardano treasury.
 
-###### Guardrails
+###### 保障措施
 
 TREASURY-01 (x)  DReps **must** define a net change limit for
 the Cardano Treasury's balance per period of time.
@@ -1222,7 +1222,7 @@ which will take effect following the hard fork.
 Existing updatable protocol parameters may also be deprecated by the hard fork,
 in which case the guardrails become obsolete for all future changes.
 
-###### Guardrails
+###### 保障措施
 
 HARDFORK-01 (~ - no access to existing parameter values)
 The major protocol version **must** be the same as or one greater than
@@ -1263,7 +1263,7 @@ available in the new Plutus version.
 may change the size, composition or required voting thresholds for the
 Constitutional Committee
 
-###### Guardrails
+###### 保障措施
 
 UPDATE-CC-01 (x)  **Update Constitutional Committee and/or threshold**
 **and/or term** governance actions **must not** be ratified until Ada holders
@@ -1274,7 +1274,7 @@ have ratified through an on-chain governance action the Final Constitution.
 New constitution or guardrails script actions change the hash of the
 on-chain constitution and the associated guardrails script.
 
-###### Guardrails
+###### 保障措施
 
 NEW-CONSTITUTION-01 (x)  An **New Constitution**
 **or Guardrails Script** governance action **must** be submitted to define
@@ -1287,7 +1287,7 @@ via a Hard Fork governance action
 in the governance system.
 No guardrails are imposed on **No Confidence** actions.
 
-###### Guardrails
+###### 保障措施
 
 - None
 
@@ -1296,7 +1296,7 @@ No guardrails are imposed on **No Confidence** actions.
 **Info** actions are not enacted on chain.
 No guardrails are imposed on **Info** actions.
 
-###### Guardrails
+###### 保障措施
 
 - None
 
@@ -1335,7 +1335,7 @@ At this point, DRep voting will be enabled and staking rewards can only be
 withdrawn if the Ada holder has delegated their vote
 (including to the pre-defined Abstain/No Confidence voting options).
 
-###### Guardrails
+###### 保障措施
 
 INTERIM-01 (x) To provide sufficient time for DReps to register and
 campaign and for Ada holders to choose their initial voting delegations,
