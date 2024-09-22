@@ -18,7 +18,12 @@ Make sure to translate the following words into the specified terms:
 [must] -> [必須],
 [must not] -> [不得],
 [data center] -> [資料中心],
-[information] -> [資訊]
+[information] -> [資訊],
+[deadlock] -> [死結],
+[deposit] -> [押金],
+["yes"] -> [「同意」],
+[byte] -> [位元組],
+[level] -> [水準]
  -->
 
 # Cardano 區塊鏈生態系統臨時憲法
@@ -237,198 +242,149 @@ Cardano 區塊鏈的所有參數並非都能獨立考量。有些參數會與其
 
 **未來性能要求**  計劃中的開發，如新的記憶體外儲存機制，可能會影響區塊擴散或其他時間指標。在變更參數時，需要考慮這些未來的性能要求，以及 Cardano 區塊鏈的當前運作狀況。在開發完成之前，性能要求將保持保守；隨後可能會根據實際時間行為進行放寬。
 
-#### Automated Checking ("Guardrails Script")
+#### 自動檢查（「保障措施腳本」）
 
-A script hash is associated with the constitution hash when an
-**New Constitution or Guardrails Script** governance action is enacted.
-It acts as an additional safeguard to the ledger rules and types,
-filtering non-compliant governance actions.
+當執行 **新憲法或保障措施腳本** 的治理行動時，會將腳本雜湊與憲法雜湊綁定。這個腳本作為一項額外的安全措施，用來輔助帳本規則和類型，從而過濾掉不符合規範的治理行動。
 
-The guardrails script only affects two types of governance actions:
+保障措施腳本僅影響兩種類型的治理行動：
 
-- **Parameter Update** actions, and
-- **Treasury Withdrawal** actions.
+- **參數更新** 行動, 和
+- **國庫提款** 行動.
 
-The script is executed when either of these types of governance action is
-submitted on-chain.
-This avoids scenarios where, for example, an erroneous script could prevent
-the chain from ever enacting a Hard Fork action, resulting in deadlock.
-There are three different situations that apply to script usage.
+當這些類型的治理行動之一被提交至鏈上時，該腳本會被執行。這樣可以避免某些情況，例如錯誤的腳本可能阻止鏈進行硬分叉，導致死結的發生。腳本的使用適用於以下三種不同的情況。
 
-**Symbol and Explanation**
+**符號與解釋**
 
-- (y) The script can be used to enforce the guardrail.
-- (x) The script cannot be used to enforce the guardrail.
-- (~ - reason) The script cannot be used to enforce the guardrail for the
-reason given, but future ledger changes could enable this.
+- (y) 該腳本可以用來強制執行保障措施。
+- (x) 該腳本無法用來強制執行保障措施。
+- (~ - reason) 該腳本無法用來強制執行保障措施，原因如上所述，但未來的帳本變更可能使其成為可能。
 
-Guardrails may overlap: in this case, the most restrictive set of guardrails
-will apply.
+保障措施可能會重疊；在這種情況下，將適用最嚴格的保障措施。
 
-Where a parameter is not explicitly listed in this document,
-then the script **must not** permit any changes to the parameter.
+如果某個參數未在本文件中明確列出，則該腳本 **不得** 對該參數進行任何更改。
 
-Conversely, where a parameter is explicitly listed in this document
-but no checkable guardrails are specified, the script **must not** impose any
-constraints on changes to the parameter.
+相反，當某個參數在本文件中明確列出但未指定可檢查的保障措施時，該腳本 **不得** 對該參數的變更施加任何限制。
 
-### 2 GUARDRAILS AND GUIDELINES ON PROTOCOL PARAMETER UPDATE ACTIONS
+### 2 保障措施與協議參數更新行動指南
 
-Below are guardrails and guidelines for changing updatable
-protocol parameter settings via the protocol parameter update governance action
-such that the Cardano Blockchain is never in an unrecoverable state as
-a result of such changes.
+以下是通過協議參數更新治理行動更改可更新協議參數設置的保障措施與指導方針，旨在確保 Cardano 區塊鏈不會因這些變更而陷入無法恢復的狀態。
 
-Note that there are at least five different sources of parameter names,
-and these are not always consistent:
+請注意，參數名稱至少有五個不同的來源，且這些名稱並不總是一致：
 
-1. The name used in the Genesis file
-2. The name used in protocol parameter update governance actions
-3. The name used internally in ledger rules
-4. The name used in the formal ledger specification
-5. The name used in research papers
+1. 在創世檔案中使用的名稱
+2. 在協議參數更新治理行動中使用的名稱
+3. 在帳本規則中使用的名稱
+4. 在正式帳本規範中使用的名稱
+5. 在研究論文中使用的名稱
 
-Where these parameter names differ, this Appendix uses the second convention.
+當這些參數名稱不一致時，本附錄使用第二種慣例。
 
-###### Guardrails
+###### 保障措施
 
-PARAM-01 (y)  Any protocol parameter that is not explicitly named in this
-document **must not** be changed by a Parameter update governance action
+PARAM-01 (y) 本文件中未明確命名的任何協議參數 **不得** 通過參數更新治理行動進行更改。
 
-PARAM-02 (y) Where a protocol parameter is explicitly listed in this document
-but no checkable guardrails are specified, the guardrails script **must not**
-impose any constraints on changes to the parameter.
-Checkable guardrails are shown by a (y)
+PARAM-02 (y) 當某個協議參數在本文件中明確列出但未指定可檢查的保障措施時，保障措施腳本 **不得** 對該參數的變更施加任何限制。可檢查的保障措施用 (y) 表示。
 
-#### 2.1 Critical Protocol Parameters
+#### 2.1 關鍵協議參數
 
-The below protocol parameters are critical from a security point of view.
+以下協議參數從安全性角度來看是關鍵的。
 
-##### Parameters that are Critical to the Operation of the Blockchain
+##### 對區塊鏈運作至關重要的參數
 
-- *maximum block body size* (*maxBlockBodySize*)
-- *maximum transaction size* (*maxTxSize*)
-- *maximum block header size* (*maxBlockHeaderSize*)
-- *maximum size of a serialized asset value* (*maxValueSize*)
-- *maximum script execution/memory units in a single block*
-(*maxBlockExecutionUnits[steps/memory]*)
-- *minimum fee coefficient* (*txFeePerByte*)
-- *minimum fee constant* (*txFeeFixed*)
-- *minimum fee per byte for reference scripts* (*minFeeRefScriptCoinsPerByte*)
-- *minimum Lovelace deposit per byte of serialized UTxO* (*utxoCostPerByte*)
-- *governance action deposit* (*govDeposit*)
+- *最大區塊主體大小* (*maxBlockBodySize*)
+- *最大交易大小* (*maxTxSize*)
+- *最大區塊標頭大小* (*maxBlockHeaderSize*)
+- *序列化資產值的最大大小* (*maxValueSize*)
+- *單個區塊中的最大腳本執行/記憶體單位*
+(*maxBlockExecutionUnits[步驟/記憶體]*)
+- *最小手續費係數* (*txFeePerByte*)
+- *最小手續費常數* (*txFeeFixed*)
+- *參考腳本每位元組的最小手續費* (*minFeeRefScriptCoinsPerByte*)
+- *序列化 UTxO 每位元組的最小 Lovelace 押金* (*utxoCostPerByte*)
+- *治理行動押金* (*govDeposit*)
 
-###### Guardrails
+###### 保障措施
 
-PARAM-03 (y)  Critical protocol  parameters require an SPO vote in addition
-to a DRep vote: SPOs **must** say "yes" with a collective support of more than
-50% of all active block production stake.
-This is enforced by the guardrails on the stake pool voting threshold.
+PARAM-03 (y)  關鍵協議參數除了需要 DRep 投票外，還需要 SPO 投票：SPO **必須** 以超過 50% 的有效產塊質押支持「同意」。這一要求由質押池投票門檻的保障措施強制執行。
 
-PARAM-04 (x)  At least 3 months **should** normally pass between
-the publication of an off-chain proposal to change a
-critical protocol parameter and the submission of the corresponding
-on-chain governance action.
-This guardrail may be relaxed in the event of a Severity 1 or Severity 2
-network issue following careful technical discussion and evaluation.
+PARAM-04 (x)  通常在發布關於變更關鍵協議參數的鏈下提案與提交相應的鏈上治理行動之間，至少 **應該** 經過 3 個月的時間。如果出現嚴重程度為 1 或 2 的網路問題，經過仔細的技術討論和評估後，此保障條件可予以放寬。
+       
 
-##### Parameters that are Critical to the Governance System
+##### 對治理系統至關重要的參數
 
-- *delegation key Lovelace deposit* (*stakeAddressDeposit*)
-- *pool registration Lovelace deposit* (*stakePoolDeposit*)
-- *minimum fixed rewards cut for pools* (*minPoolCost*)
-- *DRep deposit amount* (*dRepDeposit*)
-- *minimal Constitutional Committee size* (*committeeMinSize*)
-- *maximum term length (in epochs) for the Constitutional Committee members*
-(*committeeMaxTermLimit*)
+- *委託金鑰押金(Lovelace)* (*stakeAddressDeposit*)
+- *質押池註冊押金(Lovelace)* (*stakePoolDeposit*)
+- *質押池最低固定獎勵比例* (*minPoolCost*)
+- *委託代表押金金額* (*dRepDeposit*)
+- *最低憲法委員會成員數量* (*committeeMinSize*)
+- *憲法委員會成員的最長任期（以紀元計）*(*committeeMaxTermLimit*)
 
-###### Guardrails
+###### 保障措施
 
-PARAM-05 (y)  DReps **must** vote "yes" with a collective support of more than
-50% of all active voting stake.
-This is enforced by the guardrails on the DRep voting thresholds.
+PARAM-05 (y)  委託代表 **必須** 以超過 50% 的全體活躍投票權支持投票「同意」。這一要求受到委託代表投票門檻的保障。
 
-PARAM-06 (x)  At least 3 months **should** normally pass between the
-publication of an off-chain proposal to change a parameter that is critical
-to the governance system and the submission of the corresponding on-chain
-governance action.
-This guardrail may be relaxed in the event of a Severity 1 or Severity 2
-network issue following careful technical discussion and evaluation.
+PARAM-06 (x)  通常在發布關於變更治理系統關鍵參數的鏈下提案與提交相應的鏈上治理行動之間，至少 **應該** 經過 3 個月的時間。若發生嚴重的網路問題（Severity 1 或 Severity 2），經過仔細的技術討論和評估後，此保障條件可予以放寬。
 
-#### 2.2 Economic Parameters
+#### 2.2 經濟參數
 
-The overall goals when managing economic parameters are to:
+管理經濟參數的整體目標是：
 
-1. Enable long-term economic sustainability for the
-Cardano Blockchain ecosystem;
-2. Ensure that stake pools are adequately rewarded for maintaining the
-Cardano Blockchain;
-3. Ensure that Ada holders are adequately rewarded for using stake
-in constructive ways, including when delegating ada for block production; and
-4. Balance economic incentives for different Cardano Blockchain ecosystem
-stakeholders, including but not limited to Stake Pool Operators, Ada holders,
-DeFi users, infrastructure users, developers (e.g. DApps)
-and financial intermediaries (e.g. exchanges)
+1. 促進 Cardano 區塊鏈生態系統的長期經濟可持續性；
+2. 確保質押池獲得足夠的獎勵，以維護 Cardano 區塊鏈；
+3. 確保 Ada 持有者因以建設性方式使用質押而獲得足夠的獎勵，包括在委託 Ada 進行區塊生產時；and
+4. 平衡不同 Cardano 區塊鏈生態系統利益相關者的經濟激勵，包括但不限於質押池營運商、Ada 持有者、DeFi 用戶、基礎設施用戶、開發者（如 DApps）和金融中介（如交易所）。
 
-##### Triggers for Change
+##### 變更觸發因素
 
-1. Significant changes in the fiat value of Ada resulting in
-potential problems with security, performance or functionality
-2. Changes in transaction volumes or types
-3. Community requests or suggestions
-4. Emergency situations that require changes to economic parameters
+1. Ada 的法定貨幣價值發生重大變化，可能導致安全性、性能或功能上的問題
+2. 交易量或類型的變化
+3. 社區的請求或建議
+4. 需要對經濟參數進行變更的緊急情況
 
-##### Counter-indicators
+##### 反指標
 
-Changes to the economic parameters should not be made in isolation.
-They need to account for:
+對經濟參數的變更不應孤立進行，必須考慮：
 
-- External economic factors
-- Network security concerns
+- 外部經濟因素
+- 網絡安全問題
 
-##### Core Metrics
+##### 核心指標
 
-- Fiat value of Ada resulting in potential problems with security,
-performance or functionality
-- Transaction volumes and types
-- Number and health of stake pools
-- External economic factors
+- Ada 的法幣價值可能導致安全性、性能或功能性問題
+- 交易量和類型
+- 參與的質押池數量及其健康狀況
+- 外部經濟因素
 
-#### Changes to Specific Economic Parameters
+#### 對特定經濟參數的變更
 
-##### Transaction fee per byte (txFeePerByte) and fixed transaction fee (txFeeFixed)
+##### 每位元組交易費用 (txFeePerByte) 和固定交易費用 (txFeeFixed)
 
-Defines the cost for basic transactions in Lovelace:
+定義基本交易的費用，以 Lovelace 計算：
 
-*fee(tx) = txFeeFixed + txFeePerByte x nBytes(tx)*
+*費用(tx) = txFeeFixed + txFeePerByte x nBytes(tx)*
 
-###### Guardrails
+###### 保障措施
 
-TFPB-01 (y) *txFeePerByte* **must not** be lower than 30 (0.000030 ada)
-This protects against low-cost denial of service attacks
+TFPB-01 (y) *txFeePerByte* **不得** 低於 30 (0.000030 ada)
+此舉可防止低成本的拒絕服務攻擊。
 
-TFPB-02 (y) *txFeePerByte* **must not** exceed 1,000 (0.001 ada)
-This ensures that transactions can be paid for
+TFPB-02 (y) *txFeePerByte* **不得** 超過 1,000 (0.001 ada)
+這確保交易可以被支付。
 
-TFPB-03 (y) *txFeePerByte* **must not** be negative
+TFPB-03 (y) *txFeePerByte* **不得** 為負值
 
-TFF-01 (y) *txFeeFixed* **must not** be lower than 100,000  (0.1 ada)
-This protects against low-cost denial of service attacks
+TFF-01 (y) *txFeeFixed* **不得** 低於 100,000  (0.1 ada)
+此舉可防止低成本的拒絕服務攻擊。
 
-TFF-02 (y) *txFeeFixed* **must not** exceed 10,000,000 (10 ada)
-This ensures that transactions can be paid for
+TFF-02 (y) *txFeeFixed* **不得** 超過 10,000,000 (10 ada)
+這確保交易可以被支付。
 
-TFF-03 (y) *txFeeFixed* **must not** be negative
+TFF-03 (y) *txFeeFixed* **不得** 為負值
 
-TFGEN-01 (x - "should") To maintain a consistent level of protection against
-denial-of-service attacks, *txFeeFixed* and *txFeeFixed* **should** be adjusted
-whenever Plutus Execution prices are adjusted
-(executionUnitPrices[steps/memory])
+TFGEN-01 (x - "should") 為了維持對拒絕服務攻擊的一致防護水準，*txFeePerByte* 和 *txFeeFixed* **應該** 在調整 Plutus 執行價格時進行調整
+(executionUnitPrices[步驟/記憶體])
 
-TFGEN-02 (x - unquantifiable) Any changes to  *txFeeFixed* or *txFeeFixed*
-**must** consider the implications of reducing the cost of a
-denial-of-service attack or increasing the maximum transaction fee so that
-it becomes impossible to construct a transaction.
+TFGEN-02 (x - unquantifiable) 對 *txFeePerByte* 或 *txFeeFixed* 的任何變更 **必須** 考慮到降低拒絕服務攻擊成本或提高最高交易費用的影響，以至於可能無法建立交易。
 
 ##### UTxO cost per byte (utxoCostPerByte)
 
