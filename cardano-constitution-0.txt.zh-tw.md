@@ -1047,39 +1047,31 @@ CMS-02 (y) *committeeMinSize* **不得** 低於 3
 
 CMS-03 (y) *committeeMinSize* **不得** 超過 10
 
-#### 2.6 Monitoring and Reversion of Parameter Changes
+#### 2.6 參數變更的監控與恢復
 
-All network parameter changes **must be** monitored carefully for no less than
-2 epochs (10 days)
+所有網路參數變更 **必須** 監控至少 2 紀元（10 天）。
 
-- Changes **must** be reverted as soon as possible if block propagation delays
-exceed 4.5s for more than 5% of blocks over any 6 hour rolling window
+- 如果區塊傳播延遲超過 4.5 秒，且在任何 6 小時的時間段內有超過 5% 的區塊受到影響，則變更 **must** 立即恢復。
 
-All other parameter changes should be monitored
+所有其他參數變更應該進行監控。
 
-- The reversion plan **should** be implemented if the overall effect
-on performance, security or functionality is unacceptable.
+- 如果對性能、安全性或功能的整體影響不可接受，則 **應該** 實施恢復計畫。
 
-A specific reversion/recovery plan **must be** produced for
-each parameter change.
-This plan must include:
+每項參數變更 **必須** 制定具體的恢復計畫。
+此計畫必須包括：
 
-- Which parameters need to change and in which ways in order to return to the
-previous state (or a similar state)
-- How to recover the network in the event of disastrous failure
+- 需要變更哪些參數以及如何變更，以便返回到先前的狀態（或相似狀態）
+- 如何在發生災難性故障時恢復網路
 
-This plan **should** be followed if problems are observed
-following the parameter change.
-Note that not all changes can be reverted.
-Additional care must be taken when making changes to these parameters.
+如果在參數變更後觀察到問題，則 **應該** 遵循此計畫。
+請注意，並非所有變更都可以恢復。
+對這些參數的變更必須格外小心。
 
-#### 2.7 Non-Updatable Protocol Parameters
+#### 2.7 不可更新的協議參數
 
-Some fundamental protocol parameters cannot be changed by the
-Protocol Parameter Update governance action.
-These parameters can only be changed in a new Genesis file as
-part of a hard fork.
-It is not necessary to provide specific guardrails on updating these parameters.
+某些基本的協議參數不能通過協議參數更新的治理行動進行變更。
+這些參數只能作為硬分叉的一部分，在新的 Genesis 檔案中進行變更。
+不必為更新這些參數提供特定的保障措施。
 
 ### 3 GUARDRAILS AND GUIDELINES ON TREASURY WITHDRAWAL ACTIONS
 
