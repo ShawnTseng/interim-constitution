@@ -27,7 +27,9 @@ Make sure to translate the following words into the specified terms:
 [Fungible] -> [同質化],
 [Not-Fungible] -> [非同質化],
 [pledge] -> [抵押],
-[primitive] -> [原始型別]
+[primitive] -> [原始型別],
+[threshold] -> [門檻],
+[collateral] -> [擔保]
  -->
 
 # Cardano 區塊鏈生態系統臨時憲法
@@ -298,8 +300,8 @@ PARAM-02 (y) 當某個協議參數在本文件中明確列出但未指定可檢�
 - *最大區塊主體大小* (*maxBlockBodySize*)
 - *最大交易大小* (*maxTxSize*)
 - *最大區塊標頭大小* (*maxBlockHeaderSize*)
-- *序列化資產值的最大大小* (*maxValueSize*)
-- *單個區塊中的最大腳本執行/記憶體單位*
+- *最大序列化資產值大小* (*maxValueSize*)
+- *單一區塊中的最大腳本執行單位/記憶體單位*
 (*maxBlockExecutionUnits[steps/memory]*)
 - *最小手續費係數* (*txFeePerByte*)
 - *最小手續費常數* (*txFeeFixed*)
@@ -394,7 +396,7 @@ TFGEN-02 (x - unquantifiable) 對 *txFeePerByte* 或 *txFeeFixed* 的任何變�
 
 定義UTxO存儲的成本。
 
-- 設定在單一UTxO中持有的最低ada閾值
+- 設定在單一UTxO中持有的最低ada門檻
 (~1 ada，最壞情況可達50 ada或更多)
 - 提供對低成本拒絕服務攻擊（DoS）對UTxO存儲的保護。這種攻擊已在其他區塊鏈上執行過，並非理論上存在。DoS保護會隨著閒置節點記憶體的減少而降低（與UTxO增長成正比）。
 - 有助於降低長期存儲成本
@@ -450,11 +452,11 @@ SPD-02 (y) *stakePoolDeposit* **不得** 超過 500,000,000 (500 ada)
 
 SPD-03 (y) *stakePoolDeposit* **不得** 為負值
 
-##### 最低質押池成本 (minPoolCost)
+##### 質押池最低固定獎勵比例 (minPoolCost)
 
 獎勵機制的一部分
 
-- 最低質押池成本會先轉入質押池獎勵地址，之後才支付委託人的獎勵
+- 質押池最低固定獎勵比例會先轉入質押池獎勵地址，之後才支付委託人的獎勵
 
 ###### 保障措施
 
@@ -464,11 +466,11 @@ MPC-02 (y) *minPoolCost* **不得** 超過 500,000,000 (500 ada)
 
 MPC-03 (x - "should") *minPoolCost* **應該** 根據運營質押池的經濟成本來設定
 
-##### 國庫分成 (treasuryCut)
+##### 國庫擴展率 (treasuryCut)
 
 獎勵機制的一部分
 
-- 國庫分成是來自貨幣擴展的一部分資金，會在支付質押池獎勵之前轉入國庫
+- 國庫擴展率是來自貨幣擴展的一部分資金，會在支付質押池獎勵之前轉入國庫
 - 可設定範圍為 0.0-1.0 (0%-100%)
 
 ###### 保障措施
@@ -487,7 +489,7 @@ TC-05 (~ - 無法變更歷史紀錄)  *treasuryCut* **不得** 在 36 個紀元�
 
 獎勵機制的一部分
 
-- 貨幣擴展控制每個紀元用於獎勵的儲備金額
+- 貨幣擴展率控制每個紀元用於獎勵的儲備金額
 
 管理 Cardano 的長期可持續性
 
@@ -769,9 +771,9 @@ SPTN-03 (y) *stakePoolTargetNum* **不得** 為負值
 
 SPTN-04 (y) *stakePoolTargetNum* **不得** 為零
 
-##### 質押影響因子 (poolPledgeInfluence)
+##### 抵押影響因子 (poolPledgeInfluence)
 
-啟用質押保護機制。
+啟用抵押保護機制。
 
 提供對 Sybil 攻擊的保護。
 
@@ -791,9 +793,9 @@ PPI-03 (y) *poolPledgeInfluence* **不得** 為負值
 
 PPI-04 (x - "should") *poolPledgeInfluence* **不應該** 在任何 18 紀元期間（約 3 個月）內變動超過 +/- 10%。
 
-##### 池退役窗口 (poolRetireMaxEpoch)
+##### 質押池退休窗口 (poolRetireMaxEpoch)
 
-定義池在計劃退役時可以給予的最大紀元通知數量。
+定義質押池在計劃退休時可以給予的最大紀元通知數量。
 
 ###### 保障措施
 
@@ -801,13 +803,13 @@ PRME-01 (y) *poolRetireMaxEpoch* **不得** 為負值
 
 PRME-02 (x - "should") *poolRetireMaxEpoch* **不應該** 低於 1
 
-##### 抵押百分比 (collateralPercentage)
+##### 擔保百分比 (collateralPercentage)
 
-定義執行 Plutus 腳本時必須提供的抵押金額，作為正常執行成本的百分比。
+定義執行 Plutus 腳本時必須提供的擔保金額，作為正常執行成本的百分比。
 
-- 抵押金為額外費用支付。
-- 如果腳本執行失敗，則抵押金會損失。
-- 如果腳本成功執行，則抵押金不會損失。
+- 擔保為額外費用支付。
+- 如果腳本執行失敗，則擔保會損失。
+- 如果腳本成功執行，則擔保不會損失。
 
 透過增加執行失敗腳本的成本來提供對低成本攻擊的安全保障。
 
@@ -821,9 +823,9 @@ CP-03 (y) *collateralPercentage* **不得** 為負值
 
 CP-04 (y) *collateralPercentage* **不得** 為零
 
-##### 抵押輸入的最大數量 (maxCollateralInputs)
+##### 最大擔保輸入數量 (maxCollateralInputs)
 
-定義執行 Plutus 腳本時可以用作抵押的最大輸入數量。
+定義執行 Plutus 腳本時可以用作擔保的最大輸入數量。
 
 ###### 保障措施
 
@@ -936,7 +938,7 @@ DRD-03 (y) *dRepDeposit* **不得** 超過 100,000,000,000 (100,000 ada)
 
 DRD-04 (x - "should") *dRepDeposit* **應該** 隨法幣變動進行調整
 
-##### 委託代表活躍期 (dRepActivity)
+##### 委託代表活動期 (dRepActivity)
 
 在此期間（以整數紀元計算），若委託代表未對任何提案投票，則其被視為在投票計算中不活躍。
 
@@ -1019,9 +1021,9 @@ GAL-04 (x - "should") *govActionLifetime* **應該** 以人類可理解的方式
 GAL-05 (~ - no access to existing parameter values) *govActionLifetime*
 **必須** 小於 *dRepActivity*
 
-##### 憲法委員會最大任期 (committeeMaxTermLimit)
+##### 憲法委員會最長任期 (committeeMaxTermLimit)
 
-委員會成員可擔任的最大任期限制
+委員會成員可擔任的最長任期限制
 
 ###### 保障措施
 
@@ -1073,256 +1075,183 @@ CMS-03 (y) *committeeMinSize* **不得** 超過 10
 這些參數只能作為硬分叉的一部分，在新的 Genesis 檔案中進行變更。
 不必為更新這些參數提供特定的保障措施。
 
-### 3 GUARDRAILS AND GUIDELINES ON TREASURY WITHDRAWAL ACTIONS
+### 3 國庫取款行動的保障措施與指導方針
 
-**Treasury withdrawal** actions specify the destination
-and amount of a number of withdrawals from the Cardano treasury.
+**國庫取款** 行動指定了從 Cardano 國庫提取的金額及其目的地。
 
 ###### 保障措施
 
-TREASURY-01 (x)  DReps **must** define a net change limit for
-the Cardano Treasury's balance per period of time.
+TREASURY-01 (x)  委託代表 **必須** 為 Cardano 國庫的餘額定義每個時間段的淨變更限額。
 
-TREASURY-02 (x)  The budget for the Cardano Treasury **must not** exceed
-the net change limit for the Cardano Treasury's balance per period of time.
+TREASURY-02 (x)  國庫的預算 **不得** 超過該時間段的淨變更限額。
 
-TREASURY-03 (x)  The budget for the Cardano Treasury **must** be
-denominated in ada.
+TREASURY-03 (x)  Cardano 國庫的預算 **必須** 以 ada 為單位。
 
-TREASURY-04 (x)  Treasury withdrawals **must not** be ratified until there is
-a community-approved Cardano budget then in effect pursuant to a previous
-on-chain governance action agreed by the DReps with a threshold of greater than
-50% of the active voting stake.
+TREASURY-04 (x)  在獲得社區批准的 Cardano 預算生效之前，國庫取款 **不得** 被核准，該預算需根據之前的鏈上治理行動獲得委託代表同意，且其有效投票權限門檻必須超過 50%。
 
-### 4 GUARDRAILS AND GUIDELINES ON HARD FORK INITIATION ACTIONS
+### 4 硬分叉啟動行動的保障措施與指導方針
 
-The **hard fork initiation** action requires both a new major and a new minor
-protocol version to be specified.
+**硬分叉啟動** 行動要求指定新的主要和次要協議版本。
 
-- As positive integers
+- 以正整數表示
 
-As the result of a hard fork, new updatable protocol parameters may be
-introduced.
-Guardrails may be defined for these parameters,
-which will take effect following the hard fork.
-Existing updatable protocol parameters may also be deprecated by the hard fork,
-in which case the guardrails become obsolete for all future changes.
+作為硬分叉的結果，可能會引入新的可更新協議參數。
+這些參數可以定義保障措施，並在硬分叉後生效。
+現有的可更新協議參數也可能在硬分叉中被淘汰，在這種情況下，該保障措施對於未來的所有變更將不再適用。
 
 ###### 保障措施
 
 HARDFORK-01 (~ - no access to existing parameter values)
-The major protocol version **must** be the same as or one greater than
-the major version that will be enacted immediately prior to this change.
-If the major protocol version is one greater,
-then the minor protocol version **must** be zero.
+主要協議版本 **必須** 與立即在此變更之前生效的主要版本相同或大於一。
+如果主要協議版本大於一，則次要協議版本 **必須** 為零。
 
 HARDFORK-02 (~ - no access to existing parameter values)
-The minor protocol version **must** be no less than the minor version
-that will be enacted immediately prior to this change.
+次要協議版本 **must** 小於立即在此變更之前生效的次要版本。
 
-HARDFORK-03 (~ - no access to existing parameter values) At least one of the
-protocol versions (major or minor or both) **must** change.
+HARDFORK-03 (~ - no access to existing parameter values) 至少有一個協議版本（主要或次要或兩者） **必須** 變更。
 
-HARDFORK-04 (x) At least 85% of stake pools by active stake **should** have
-upgraded to a Cardano node version that is capable of processing
-the rules associated with the new protocol version.
+HARDFORK-04 (x) 至少 85% 的質押池按活躍質押 **應該** 升級到能夠處理與新協議版本相關規則的 Cardano 節點版本。
 
-HARDFORK-05 (x) Any new updatable protocol parameters
-that are introduced with a hard fork **must** be included in this Appendix
-and suitable guardrails defined for those parameters.
+HARDFORK-05 (x) 任何隨著硬分叉引入的新可更新協議參數 **必須** 包含在本附錄中，並為這些參數定義適當的保障措施。
 
-HARDFORK-06 (x) Settings for any new protocol parameters
-that are introduced with a hard fork
-**must** be included in the appropriate Genesis file.
+HARDFORK-06 (x) 隨著硬分叉引入的任何新協議參數的設置
+**必須** 包含在適當的 Genesis 檔案中。
 
-HARDFORK-07 (x) Any deprecated protocol parameters **must** be indicated
-in this Appendix.
+HARDFORK-07 (x) 任何被淘汰的協議參數 **必須** 在本附錄中標示。
 
 HARDFORK-08 (~ - no access to *Plutus cost model* parameters)
-New Plutus versions **must** be supported by a
-version-specific *Plutus cost model* that covers each primitive that is
-available in the new Plutus version.
+新的 Plutus 版本 **必須** 由一個版本特定的 Plutus *Plutus 成本模型* 支持，該模型涵蓋新 Plutus 版本中可用的每個原始型別。
 
-### 5 GUARDRAILS AND GUIDELINES ON UPDATE CONSTITUTIONAL COMMITTEE OR THRESHOLD ACTIONS
+### 5 更新憲法委員會或門檻行動的保障措施與指導方針
 
-**Update Constitutional Committee or Threshold** governance actions
-may change the size, composition or required voting thresholds for the
-Constitutional Committee
+**更新憲法委員會或門檻** 的治理行動可以改變憲法委員會的規模、組成或所需投票門檻。
 
 ###### 保障措施
 
-UPDATE-CC-01 (x)  **Update Constitutional Committee and/or threshold**
-**and/or term** governance actions **must not** be ratified until Ada holders
-have ratified through an on-chain governance action the Final Constitution.
+UPDATE-CC-01 (x)  **更新憲法委員會和/或門檻**
+**和/或任期** 的治理行動 **不得** 在 Ada 持有者透過鏈上治理行動批准最終憲法之前被核准。
 
-### 6 GUARDRAILS AND GUIDELINES ON NEW CONSTITUTION OR GUARDRAILS SCRIPT ACTIONS
+### 6 新憲法或保障措施腳本行動的保障措施與指導方針
 
-New constitution or guardrails script actions change the hash of the
-on-chain constitution and the associated guardrails script.
+新憲法或保障措施腳本行動會改變鏈上憲法的哈希值及相關的保障措施腳本。
 
 ###### 保障措施
 
-NEW-CONSTITUTION-01 (x)  An **New Constitution**
-**or Guardrails Script** governance action **must** be submitted to define
-any required guardrails for new parameters that are introduced
-via a Hard Fork governance action
+NEW-CONSTITUTION-01 (x)  一項 **新憲法**
+**或保障措施腳本** 的治理行動 **必須** 被提交，以定義通過硬分叉治理行動引入的新參數所需的任何保障措施。
 
-### 7 GUARDRAILS AND GUIDELINES ON NO CONFIDENCE ACTIONS
+### 7 不信任行動的保障措施與指導方針
 
-**No confidence** actions signal a state of no confidence
-in the governance system.
-No guardrails are imposed on **No Confidence** actions.
+**不信任** 行動表示對治理系統的不信任狀態。
+對於 **不信任** 行動不設置任何保障措施。
 
 ###### 保障措施
 
-- None
+- 無
 
-### 8 GUARDRAILS AND GUIDELINES ON INFO ACTIONS
+### 8 資訊行動的保障措施與指導方針
 
-**Info** actions are not enacted on chain.
-No guardrails are imposed on **Info** actions.
-
-###### 保障措施
-
-- None
-
-### 9 GUARDRAILS DURING THE INTERIM PERIOD
-
-Interim Period
-
-The Interim Period begins with the Chang Hard-Fork and ends after
-a community-ratified Final Constitution is enacted on-chain.
-Throughout the Interim Period, technical and constitution-enforced triggers
-will progressively turn on the features of CIP-1694.
-
-Interim Period Technical Rollout:
-
-- The Chang Hard Fork will enable three initial CIP-1694 governance actions
-and enable the representative framework to be established.
-These actions are the **"Info"**, **"Hard-fork initiation"** and
-**"Protocol parameter changes"** actions.
-Ada holders will be able to register as and delegate to DReps immediately after
-the hard fork but, as described in CIP-1694, DRep voting will not be available,
-except on **"Info"** actions.
-This ensures that Ada holders have sufficient time to choose
-their voting delegations.
-SPOs will be able to vote as described in CIP-1694.
-**"Hard-fork initiation"** and **"Protocol parameter changes"** actions
-will also be ratified by the Constitutional Committee.
-Ada holders will be able to withdraw their staking rewards as usual.
-
-- A subsequent hard fork, ratified by the Constitutional Committee and SPOs,
-shortly after the Chang Hard Fork, will enable the four remaining
-CIP-1694 governance actions: **"treasury withdrawals"**,
-**"motion of no-confidence"**,
-**"update constitutional committee and/or threshold and/or terms"**, and
-**"new constitution or guardrails script"**.
-At this point, DRep voting will be enabled and staking rewards can only be
-withdrawn if the Ada holder has delegated their vote
-(including to the pre-defined Abstain/No Confidence voting options).
+**資訊** 行動不會在鏈上執行。
+對於**資訊** 行動不設置任何保障措施。
 
 ###### 保障措施
 
-INTERIM-01 (x) To provide sufficient time for DReps to register and
-campaign and for Ada holders to choose their initial voting delegations,
-at least 18 epochs (90 days, or approximately 3 months) **must** elapse after
-the Chang hard fork before the subsequent hard fork can be ratified.
-Once the subsequent hard fork is enacted, DRep voting can occur
-as described in CIP-1694.
+- 無
 
-INTERIM-02 (x) Treasury withdrawals **must not** be ratified until there is
-a community-approved Cardano Blockchain Ecosystem budget then in effect pursuant
-to a previous on-chain governance action.
+### 9 在過渡期間的保障措施
 
-INTERIM-03 (x) Treasury withdrawals **must** be consistent with the
-community-approved Cardano Blockchain ecosystem budget(s).
+過渡期間
 
-INTERIM-04 (x) Ada holders **must** have ratified the Final Constitution
-as specified in Appendix II before ratifying any other proposed
-**"new constitution"**, **"update constitutional committee**
-**and/or threshold and/or terms"**, and
-**"motion of no-confidence"** governance actions.
+過渡期間始於 Chang 硬分叉，並在社群批准的最終憲法在線上生效後結束。
+在過渡期間，技術和憲法強制的觸發器將逐步啟用 CIP-1694 的功能。
 
-INTERIM-05 (x)  **"New guardrails script"** actions
-that are consistent with the Interim Constitution may be ratified during
-the interim period, provided the Interim Constitution itself is not changed.
+過渡期間技術推出：
 
-### 10 LIST OF PROTOCOL PARAMETER GROUPS
+- Chang 硬分叉將啟用三個初始的 CIP-1694 治理行動，並建立代表性框架。
+這些行動包括 **「資訊」**, **「硬分叉啟動」** 和
+**「協議參數變更」** 行動。
+Ada 持有者將能夠在硬分叉後立即註冊為 DRep 並進行委託，但根據 CIP-1694 的說明，DRep 投票將不會可用，除非是 **「資訊」** 行動。
+這確保了 Ada 持有者有足夠的時間來選擇他們的投票委託。
+質押池營運商 (SPOs) 將能夠按照 CIP-1694 的說明進行投票。
+**「硬分叉啟動」** 和 **「協議參數變更」** 行動也將由憲法委員會批准。Ada 持有者將能夠如常提領他們的質押獎勵。
 
-The protocol parameters are grouped by type,
-allowing different thresholds to be set for each group.
+- 在 Chang 硬分叉之後，憲法委員會和質押池營運商批准的後續硬分叉，將啟用四項剩餘的 CIP-1694 治理行動：**「國庫取款」**、**「不信任動議」**、**「更新憲法委員會和/或門檻和/或條款」** 及 **「新憲法或保障措施腳本」**。此時，委託代表投票將被啟用，質押獎勵僅能在 Ada 持有者已委託其投票（包括預先定義的棄權/不信任投票選項）後提取。
 
-The network group consists of:
+###### 保障措施
 
-- *maximum block body size* (*maxBlockBodySize*)
-- *maximum transaction size* (*maxTxSize*)
-- *maximum block header size* (*maxBlockHeaderSize*)
-- *maximum size of a serialized asset value* (*maxValueSize*)
-- *maximum script execution units in a single transaction*
+
+
+INTERIM-01 (x) 為了給委託代表足夠的時間進行註冊和競選，並讓 Ada 持有者選擇初始投票委託，**必須** 在 Chang 硬分叉之後經過至少 18 個紀元（90 天，約 3 個月）後，才能批准隨後的硬分叉。一旦隨後的硬分叉生效，委託代表投票可以按照 CIP-1694 的描述進行。
+
+INTERIM-02 (x) 在社群批准的 Cardano 區塊鏈生態系統預算生效之前，國庫取款 **不得** 被批准，該預算根據之前的鏈上治理行動而定。
+
+INTERIM-03 (x) 國庫取款 **必須** 與社群批准的 Cardano 區塊鏈生態系統預算保持一致。
+
+INTERIM-04 (x) Ada 持有者 **必須** 在批准任何其他提議的 **「新憲法」**、**「更新憲法委員會和/或門檻和/或條款」** 及
+**「不信任動議」** 治理行動之前，先批准附錄 II 中所提到的最終憲法。
+
+INTERIM-05 (x)  **「新保障措施腳本」** 與過渡憲法一致的行動可以在過渡期間內被批准，前提是過渡憲法本身不被更改。
+
+### 10 協定參數組清單
+
+協定參數依類型分組，使每個組別能設置不同的門檻。
+
+網路組別包含：
+
+- *最大區塊主體大小* (*maxBlockBodySize*)
+- *最大交易大小* (*maxTxSize*)
+- *最大區塊標頭大小* (*maxBlockHeaderSize*)
+- *最大序列化資產值大小* (*maxValueSize*)
+- *單一交易中的最大腳本執行單位*
 (*maxTxExecutionUnits[steps]*)
-- *maximum script execution units in a single block*
+- *單一區塊中的最大腳本執行單位*
 (*maxBlockExecutionUnits[steps]*)
-- *maximum number of collateral inputs* (*maxCollateralInputs*)
+- *最大擔保輸入數量* (*maxCollateralInputs*)
 
-The economic group consists of:
+經濟組別包含：
 
-- *minimum fee coefficient* (*txFeePerByte*)
-- *minimum fee constant* (*txFeeFixed*)
-- *minimum fee per byte for reference scripts* (*minFeeRefScriptCoinsPerByte*)
-- *delegation key Lovelace deposit* (*stakeAddressDeposit*)
-- *pool registration Lovelace deposit* (*stakePoolDeposit*)
-- *monetary expansion* (*monetaryExpansion*)
-- *treasury expansion* (*treasuryCut*)
-- *minimum fixed rewards cut for pools* (*minPoolCost*)
-- *minimum Lovelace deposit per byte of serialized UTxO* (*coinsPerUTxOByte*)
-- *prices of Plutus execution units*
-(*executionUnitPrices[priceSteps/priceMemory]*)
+- *最小手續費係數* (*txFeePerByte*)
+- *最小手續費常數* (*txFeeFixed*)
+- *參考腳本每位元組的最小手續費* (*minFeeRefScriptCoinsPerByte*)
+- *委託金鑰押金(Lovelace)* (*stakeAddressDeposit*)
+- *質押池註冊押金(Lovelace)* (*stakePoolDeposit*)
+- *貨幣擴展率* (*monetaryExpansion*)
+- *國庫擴展率* (*treasuryCut*)
+- *最低固定獎勵分配給池的比例* (*minPoolCost*)
+- *每位元組序列化 UTxO 的最低押金* (*coinsPerUTxOByte*)
+- *Plutus 腳本執行價格* (*executionUnitPrices[priceSteps/priceMemory]*)
 
-The technical group consists of:
+技術組別包含：
 
-- *pool pledge influence* (*poolPledgeInfluence*)
-- *pool retirement maximum epoch* (*poolRetireMaxEpoch*)
-- *desired number of pools* (*stakePoolTargetNum*)
-- *Plutus execution cost models* (*costModels*)
-- *proportion of collateral needed for scripts* (*collateralPercentage*)
+- *質押池抵押影響* (*poolPledgeInfluence*)
+- *質押池退休的最大紀元* (*poolRetireMaxEpoch*)
+- *期望質押池數量* (*stakePoolTargetNum*)
+- *Plutus 執行成本模型* (*costModels*)
+- *腳本所需的擔保比例* (*collateralPercentage*)
 
-The governance group consists of all the new protocol parameters
-that are introduced in CIP-1694:
+治理組別包含在 CIP-1694 中引入的所有新協定參數：
 
-- *governance voting thresholds*
+- *治理投票門檻*
 (*dRepVotingThresholds[...], poolVotingThresholds[...]*)
-- *governance action maximum lifetime in epochs* (*govActionLifetime*)
-- *governance action deposit* (*govActionDeposit*)
-- *DRep deposit amount* (*dRepDeposit*)
-- *DRep activity period in epochs* (*dRepActivity*)
-- *minimal constitutional committee size* (*committeeMinSize*)
-- *maximum term length (in epochs) for the constitutional committee members*
+- *治理行動在紀元中的最大有效期* (*govActionLifetime*)
+- *治理行動押金* (*govActionDeposit*)
+- *委託代表押金金額* (*dRepDeposit*)
+- *委託代表的活動期（以紀元計）* (*dRepActivity*)
+- *最低憲法委員會成員數量* (*committeeMinSize*)
+- *憲法委員會成員的最長任期（以紀元計）*
 (*committeeMaxTermLimit*)
 
-## APPENDIX II: RATIFICATION OF FINAL CONSTITUTION
+## 附錄 II：最終憲法的批准
 
 ### 第一節
 
-A series of global workshops for Ada holders to discuss and debate the
-Articles of a final constitution will commence during the second half of 2024.
-Workshops shall be geographically distributed to capture the breadth
-of sentiment in the Cardano community.
-Workshops shall elect up to a total of one hundred and forty delegates
-comprising up to seventy voting delegates and up to seventy non-voting
-alternate delegates, who shall participate in a Constitutional Convention.
-Each voting delegate participating in the Constitutional Convention
-shall have an equal vote.
+針對 Ada 持有者討論和辯論最終憲法條款的全球研討會將於 2024 年下半年開始。研討會將在不同地區舉行，以反映 Cardano 社群的廣泛意見。研討會將選出最多一百四十名代表，包括最多七十名投票代表和七十名不具投票權的替代代表，他們將參加憲法大會。每位參加憲法大會的投票代表將擁有平等的投票權。
 
 ### 第二節
 
-The Constitutional Convention shall be held no later than the end of 2024.
+憲法大會將在 2024 年底之前舉行。
 
 ### 第三節
 
-The Final Constitution shall be approved at the Constitutional Convention
-where delegates elected to attend the Constitutional Convention shall agree
-to the Final Constitution with such amendments as they deem
-appropriate and necessary.
-The Final Constitution as approved at the Constitutional Convention
-shall be submitted as a governance action in accordance with CIP-1694
-no later than January 31, 2025.
+最終憲法將在憲法大會上獲得批准，參加憲法大會的代表將根據他們認為適當和必要的修正案達成共識。
+憲法大會批准的最終憲法將按照 CIP-1694 於 2025 年 1 月 31 日之前提交作為治理行動。
