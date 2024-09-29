@@ -23,7 +23,13 @@ Make sure to translate the following words into the specified terms:
 [deposit] -> [押金],
 ["yes"] -> [「同意」],
 [byte] -> [位元組],
-[level] -> [水準]
+[level] -> [水準],
+[Fungible] -> [同質化],
+[Not-Fungible] -> [非同質化],
+[pledge] -> [抵押],
+[primitive] -> [原始型別],
+[threshold] -> [門檻],
+[collateral] -> [擔保]
  -->
 
 # Cardano 區塊鏈生態系統臨時憲法
@@ -294,9 +300,9 @@ PARAM-02 (y) 當某個協議參數在本文件中明確列出但未指定可檢�
 - *最大區塊主體大小* (*maxBlockBodySize*)
 - *最大交易大小* (*maxTxSize*)
 - *最大區塊標頭大小* (*maxBlockHeaderSize*)
-- *序列化資產值的最大大小* (*maxValueSize*)
-- *單個區塊中的最大腳本執行/記憶體單位*
-(*maxBlockExecutionUnits[步驟/記憶體]*)
+- *最大序列化資產值大小* (*maxValueSize*)
+- *單一區塊中的最大腳本執行單位/記憶體單位*
+(*maxBlockExecutionUnits[steps/memory]*)
 - *最小手續費係數* (*txFeePerByte*)
 - *最小手續費常數* (*txFeeFixed*)
 - *參考腳本每位元組的最小手續費* (*minFeeRefScriptCoinsPerByte*)
@@ -382,7 +388,7 @@ TFF-02 (y) *txFeeFixed* **不得** 超過 10,000,000 (10 ada)
 TFF-03 (y) *txFeeFixed* **不得** 為負值
 
 TFGEN-01 (x - "should") 為了維持對拒絕服務攻擊的一致防護水準，*txFeePerByte* 和 *txFeeFixed* **應該** 在調整 Plutus 執行價格時進行調整
-(executionUnitPrices[步驟/記憶體])
+(executionUnitPrices[steps/memory])
 
 TFGEN-02 (x - unquantifiable) 對 *txFeePerByte* 或 *txFeeFixed* 的任何變更 **必須** 考慮到降低拒絕服務攻擊成本或提高最高交易費用的影響，以至於可能無法建立交易。
 
@@ -390,7 +396,7 @@ TFGEN-02 (x - unquantifiable) 對 *txFeePerByte* 或 *txFeeFixed* 的任何變�
 
 定義UTxO存儲的成本。
 
-- 設定在單一UTxO中持有的最低ada閾值
+- 設定在單一UTxO中持有的最低ada門檻
 (~1 ada，最壞情況可達50 ada或更多)
 - 提供對低成本拒絕服務攻擊（DoS）對UTxO存儲的保護。這種攻擊已在其他區塊鏈上執行過，並非理論上存在。DoS保護會隨著閒置節點記憶體的減少而降低（與UTxO增長成正比）。
 - 有助於降低長期存儲成本
@@ -398,661 +404,563 @@ TFGEN-02 (x - unquantifiable) 對 *txFeePerByte* 或 *txFeeFixed* 的任何變�
 
 ###### 保障措施
 
-UCPB-01 (y) *utxoCostPerByte* **must not** be lower than 3,000 (0.003 ada)
+UCPB-01 (y) *utxoCostPerByte* **不得** 低於 3,000 (0.003 ada)
 
-UCPB-02 (y) *utxoCostPerByte* **must not** exceed 6,500 (0.0065 ada)
+UCPB-02 (y) *utxoCostPerByte* **不得** 超過 6,500 (0.0065 ada)
 
-UCPB-03 (y) *utxoCostPerByte* **must not** be zero
+UCPB-03 (y) *utxoCostPerByte* **不得** 為零
 
-UCPB-04 (y) *utxoCostPerByte* **must not** be negative
+UCPB-04 (y) *utxoCostPerByte* **不得** 為負值
 
-UCPB-05 (x - "should") Changes **should** account for
-i) The acceptable cost of attack
-ii) The acceptable time for an attack (at least one epoch is assumed)
-iii) The acceptable memory configuration for full node users
-(assumed to be 16GB for wallets or 24GB for stake pools)
-iv) The sizes of UTxOs (~200B per UTxO minimum, up to about 10KB) and
-v) The current total node memory usage
+UCPB-05 (x - "should") 變更 **應該** 考慮以下因素
+i) 可接受的攻擊成本
+ii) 可接受的攻擊時間（假設至少一個紀元）
+iii) 完整節點使用者可接受的記憶體配置（假設錢包為16GB，質押池為24GB）
+iv) UTxO 的大小（每個 UTxO 最小約 200B，最大約 10KB）
+v) 當前節點的總記憶體使用量
 
-##### Stake address deposit (stakeAddressDeposit)
+##### 質押地址押金 (stakeAddressDeposit)
 
-Ensures that stake addresses are retired when no longer needed
+確保質押地址在不再需要時被註銷
 
-- Helps reduce long term storage costs
-- Helps limit CPU and memory costs in the ledger
+- 有助於降低長期儲存成本
+- 有助於限制帳本中的 CPU 和記憶體成本
 
-The rationale for the deposit is to incentivize that scarce memory resources
-are returned when they are no longer required.
-Reducing the number of active stake addresses also reduces processing and
-memory costs at the epoch boundary when calculating stake snapshots.
+設立押金的理由是為了激勵將稀缺的記憶體資源在不再需要時歸還。減少活躍的質押地址數量，也能在紀元邊界計算質押快照時，降低系統的處理和記憶體成本。
 
 ###### 保障措施
 
-SAD-01 (y) *stakeAddressDeposit* **must not** be lower than 1,000,000 (1 ada)
+SAD-01 (y) *stakeAddressDeposit* **不得** 低於 1,000,000 (1 ada)
 
-SAD-02 (y) *stakeAddressDeposit* **must not** exceed 5,000,000 (5 ada)
+SAD-02 (y) *stakeAddressDeposit* **不得** 超過 5,000,000 (5 ada)
 
-SAD-03 (y) *stakeAddressDeposit* **must not** be negative
+SAD-03 (y) *stakeAddressDeposit* **不得** 為負值
 
-##### Stake pool deposit (stakePoolDeposit)
+##### 質押池押金 (stakePoolDeposit)
 
-Ensures that stake pools are retired by the stake pool operator when no longer
-needed by them
+確保質押池營運商在不再需要質押池時將其註銷
 
-- Helps reduce long term storage costs
+- 有助於降低長期儲存成本
 
-The rationale for the deposit is to incentivize that scarce memory resources
-are returned when they are no longer required.
-Rewards and stake snapshot calculations are also impacted by the number of
-active stake pools.
+設立押金的理由是為了鼓勵將稀缺的記憶體資源在不再需要時歸還。活躍質押池的數量也會影響獎勵和質押快照的計算。
 
 ###### 保障措施
 
-SPD-01 (y) *stakePoolDeposit* **must not** be lower than 250,000,000 (250 ada)
+SPD-01 (y) *stakePoolDeposit* **不得** 低於 250,000,000 (250 ada)
 
-SPD-02 (y) *stakePoolDeposit* **must not** exceed 500,000,000 (500 ada)
+SPD-02 (y) *stakePoolDeposit* **不得** 超過 500,000,000 (500 ada)
 
-SPD-03 (y) *stakePoolDeposit* **must not** be negative
+SPD-03 (y) *stakePoolDeposit* **不得** 為負值
 
-##### Minimum Pool Cost (minPoolCost)
+##### 質押池最低固定獎勵比例 (minPoolCost)
 
-Part of the rewards mechanism
+獎勵機制的一部分
 
-- The minimum pool cost is transferred to the pool rewards address before
-any delegator rewards are paid
-
-###### 保障措施
-
-MPC-01 (y) *minPoolCost* **must not** be negative
-
-MPC-02 (y) *minPoolCost* **must not** exceed 500,000,000 (500 ada)
-
-MPC-03 (x - "should") *minPoolCost* **should** be set in line with the
-economic cost for operating a pool
-
-##### Treasury Cut (treasuryCut)
-
-Part of the rewards mechanism
-
-- The treasury cut portion of the monetary expansion is transferred to the
-treasury before any pool rewards are paid
-- Can be set in the range 0.0-1.0 (0%-100%)
+- 質押池最低固定獎勵比例會先轉入質押池獎勵地址，之後才支付委託人的獎勵
 
 ###### 保障措施
 
-TC-01 (y) *treasuryCut* **must not** be lower than 0.1 (10%)
+MPC-01 (y) *minPoolCost* **不得** 為負值
 
-TC-02 (y) *treasuryCut* **must not** exceed 0.3 (30%)
+MPC-02 (y) *minPoolCost* **不得** 超過 500,000,000 (500 ada)
 
-TC-03 (y) *treasuryCut* **must not** be negative
+MPC-03 (x - "should") *minPoolCost* **應該** 根據運營質押池的經濟成本來設定
 
-TC-04 (y) *treasuryCut* **must not** exceed 1.0 (100%)
+##### 國庫擴展率 (treasuryCut)
 
-TC-05 (~ - no access to change history)  *treasuryCut* **must not** be changed
-more than once in any 36 epoch period (approximately 6 months)
+獎勵機制的一部分
 
-##### Monetary Expansion Rate (monetaryExpansion)
-
-Part of the rewards mechanism
-
-- The monetary expansion controls the amount of reserves that is used for
-rewards each epoch
-
-Governs the long-term sustainability of Cardano
-
-- The reserves are gradually depleted until no rewards are supplied
+- 國庫擴展率是來自貨幣擴展的一部分資金，會在支付質押池獎勵之前轉入國庫
+- 可設定範圍為 0.0-1.0 (0%-100%)
 
 ###### 保障措施
 
-ME-01 (y) *monetaryExpansion* **must not** exceed 0.005
+TC-01 (y) *treasuryCut* **不得** 低於 0.1 (10%)
 
-ME-02 (y) *monetaryExpansion* **must not** be lower than 0.001
+TC-02 (y) *treasuryCut* **不得** 超過 0.3 (30%)
 
-ME-03 (y) *monetaryExpansion* **must not** be negative
+TC-03 (y) *treasuryCut* **不得** 為負值
 
-ME-04 (x - "should") *monetaryExpansion* **should not** be varied by more than
-+/- 10% in any 73-epoch period (approximately 12 months)
+TC-04 (y) *treasuryCut* **不得** 超過 1.0 (100%)
 
-ME-05 (x - "should") *monetaryExpansion* **should not** be changed more than
-once in any 36-epoch period (approximately 6 months)
+TC-05 (~ - 無法變更歷史紀錄)  *treasuryCut* **不得** 在 36 個紀元內（約 6 個月）變更超過一次
 
-##### Plutus Script Execution Prices (executionUnitPrices[priceSteps/priceMemory])
+##### 貨幣擴展率 (monetaryExpansion)
 
-Define the fees for executing Plutus scripts
+獎勵機制的一部分
 
-Gives an economic return for Plutus script execution
+- 貨幣擴展率控制每個紀元用於獎勵的儲備金額
 
-Provides security against low-cost DoS attacks
+管理 Cardano 的長期可持續性
+
+- 儲備金會逐漸耗盡，直到不再提供獎勵
 
 ###### 保障措施
 
-EIUP-PS-01 (y) *executionUnitPrices[priceSteps]* **must not** exceed
+ME-01 (y) *monetaryExpansion* **不得** 超過 0.005
+
+ME-02 (y) *monetaryExpansion* **不得** 低於 0.001
+
+ME-03 (y) *monetaryExpansion* **不得** be 為負值
+
+ME-04 (x - "should") *monetaryExpansion* **不應該** 在任何 73 個紀元內（約 12 個月）變動超過 +/- 10%
+
+ME-05 (x - "should") *monetaryExpansion* **不應該** 在任何 36 個紀元內（約 6 個月）變更超過一次
+
+##### Plutus 腳本執行價格 (executionUnitPrices[priceSteps/priceMemory])
+
+定義執行 Plutus 腳本的費用
+
+為執行 Plutus 腳本提供經濟回報
+
+提供對低成本 DoS 攻擊的安全保障
+
+###### 保障措施
+
+EIUP-PS-01 (y) *executionUnitPrices[priceSteps]* **不得** 超過
 2,000 / 10,000,000
 
-EIUP-PS-02 (y) *executionUnitPrices[priceSteps]* **must not** be lower than
+EIUP-PS-02 (y) *executionUnitPrices[priceSteps]* **不得** 低於
 500 / 10,000,000
 
-EIUP-PM-01 (y) *executionUnitPrices[priceMemory]* **must not** exceed
+EIUP-PM-01 (y) *executionUnitPrices[priceMemory]* **不得** 超過
 2,000 / 10,000
 
-EIUP-PM-02 (y) *executionUnitPrices[priceMemory]* **must not** be lower than
+EIUP-PM-02 (y) *executionUnitPrices[priceMemory]* **不得** 低於
 400 / 10,000
 
-EIUP-GEN-01 (x - "similar to") The execution prices **must** be set so that
-i) the cost of executing a transaction with maximum CPU steps is similar to the
-cost of a maximum sized non-script transaction and
-ii) the cost of executing a transaction with maximum memory units is similar to
-the cost of a maximum sized non-script transaction
+EIUP-GEN-01 (x - "similar to") 執行價格 **必須** 設置為
+i)  執行具有最大 CPU 步驟的交易成本，應與最大尺寸的非腳本交易成本相似，以及
+ii) 執行具有最大記憶體單位的交易成本，應與最大尺寸的非腳本交易成本相似
 
-EIUP-GEN-02 (x - "should") The execution prices **should** be adjusted
-whenever transaction fees are adjusted (*txFeeFixed/txFeePerByte*).
-The goal is to ensure that the processing delay is similar for
-"full" transactions, regardless of their type.
-This helps ensure that the requirements on block diffusion/propagation times
-are met.
+EIUP-GEN-02 (x - "should") 執行價格 **應該** 在每次調整交易費用時進行調整 (*txFeeFixed/txFeePerByte*).
+目標是確保所有「完整」交易的處理延遲相似，無論其類型如何。這有助於確保區塊擴散和傳播時間的要求得到滿足。
 
-##### Transaction fee per byte for a reference script (minFeeRefScriptCoinsPerByte)
+##### 每位元組參考腳本的交易費用 (minFeeRefScriptCoinsPerByte)
 
-Defines the cost for using Plutus reference scripts in Lovelace
+定義使用 Plutus 參考腳本的費用，以 Lovelace 計算
 
 ###### 保障措施
 
-MFRS-01 (y) *minFeeRefScriptCoinsPerByte* **must not** exceed
+MFRS-01 (y) *minFeeRefScriptCoinsPerByte* **不得** 超過
 1,000  (0.001 ada)
 
-- This ensures that transactions can be paid for
+- 這確保交易費用可以支付
 
-MFRS-02 (y) *minFeeRefScriptCoinsPerByte* **must not** be negative
+MFRS-02 (y) *minFeeRefScriptCoinsPerByte* **不得** 為負值
 
-MFRS-03 (x - "should") To maintain a consistent level of protection against
-denial-of-service attacks, *minFeeRefScriptCoinsPerByte* **should** be adjusted
-whenever Plutus Execution prices are adjusted
-(*executionUnitPrices[steps/memory]*) and whenever *txFeeFixed* is adjusted
+MFRS-03 (x - "should") 為了維持一致的防範拒絕服務攻擊的保護水準，*minFeeRefScriptCoinsPerByte* **應該** 在調整 Plutus 執行價格 (*executionUnitPrices[steps/memory]*) 和調整 *txFeeFixed* 時進行調整
 
-MFRS-04 (x - unquantifiable) Any changes to *minFeeRefScriptCoinsPerByte*
-**must** consider the implications of reducing the cost of a
-denial-of-service attack or increasing the maximum transaction fee
+MFRS-04 (x - unquantifiable) 任何對 *minFeeRefScriptCoinsPerByte* 的變更 **必須** 考慮降低拒絕服務攻擊成本或提高最大交易費用的影響。
 
-#### 2.3 Network Parameters
+#### 2.3 網路參數
 
-The overall goals when managing the Cardano Blockchain network parameters are
-to:
+管理 Cardano 區塊鏈網路參數的整體目標是：
 
-1. Match the available Cardano Blockchain Layer 1 network capacity to current
-or future traffic demands, including payment transactions, layer 1 DApps,
-sidechain management and governance needs
-2. Balance traffic demands for different user groups, including
-payment transactions, minters of Fungible/Non-Fungible Tokens, Plutus scripts,
-DeFi developers, Stake Pool Operators and voting transactions
+1. 將可用的 Cardano 區塊鏈第一層網路容量與當前或未來的流量需求相匹配，包括支付交易、第一層去中心化應用（DApps）、側鏈管理和治理需求。
+2. 平衡不同用戶群體的流量需求，包括支付交易、同質化/非同質化代幣的鑄造者、Plutus 腳本、去中心化金融（DeFi）開發者、質押池營運商和投票交易。
 
-##### Triggers for Change
+##### 變更觸發因素
 
-Changes to network parameters may be triggered by:
+對網路參數的變更可能會受到以下因素的觸發：
 
-1. Measured changes in traffic demands over a 2-epoch period (10 days)
-2. Anticipated changes in traffic demands
-3. Community requests
+1. 在兩個紀元期間（10天）內測量到的流量需求變化
+2. 預期的流量需求變化
+3. 社群請求
 
-##### Counter-indicators
+##### 反指標
 
-Changes may need to be reversed and/or should not be enacted in the event of:
+在以下情況下，變更可能需要被撤回或不應執行：
 
-- Excessive block propagation delays
-- Stake pools being unable to handle traffic volume
-- Scripts being unable to complete execution
+- 區塊傳播延遲過長
+- 質押池無法處理流量
+- 腳本無法完成執行
 
-##### Core Metrics
+##### 核心指標
 
-All decisions on parameter changes should be informed by:
+所有有關參數變更的決策應基於以下資訊：
 
-- Block propagation delay profile
-- Traffic volume (block size over time)
-- Script volume (size of scripts and execution units)
-- Script execution cost benchmarks
-- Block propagation delay/diffusion benchmarks
+- 區塊傳播延遲曲線
+- 流量量（隨時間變化的區塊大小）
+- 腳本量（腳本的大小和執行單位）
+- 腳本執行成本基準
+- 區塊傳播延遲/擴散基準
 
-Detailed benchmarking results are required to confirm the effect of any changes
-on mainnet performance or behavior prior to enactment.
-The effects of different transaction mixes must be analyzed,
-including normal transactions, Plutus scripts, and governance actions.
+在執行任何變更之前，需要詳細的基準測試結果，以確認其對主網性能或行為的影響。還必須分析不同交易組合的影響，包括普通交易、Plutus 腳本和治理行動。
 
 ###### 保障措施
 
-NETWORK-01 (x - "should") No individual network parameter **should**
-change more than once per two epochs
+NETWORK-01 (x - "should") 每個單獨的網路參數 **不應該**
+在兩個紀元內變更超過一次。
 
-NETWORK-02 (x - "should") Only one network parameter **should** be changed
-per epoch unless they are directly correlated,
-e.g., per-transaction and per-block memory unit limits
+NETWORK-02 (x - "should") 每個紀元 **應該** 變更一個網路參數，除非它們之間存在直接關聯。
+例如每筆交易和每個區塊的記憶體單位限制。
 
-#### Changes to Specific Network Parameters
+#### 特定網路參數的變更
 
-##### Block Size (maxBlockBodySize)
+##### 區塊大小 (maxBlockBodySize)
 
-The maximum size of a block, in Bytes.
+區塊的最大大小，以位元組計算。
 
 ###### 保障措施
 
-MBBS-01 (y) *maxBlockBodySize* **must not** exceed 122,880 Bytes (120KB)
+MBBS-01 (y) *maxBlockBodySize* **不應該** 超過 122,880 位元組 (120KB)
 
-MBBS-02 (y) *maxBlockBodySize* **must not** be lower than  24,576 Bytes (24KB)
+MBBS-02 (y) *maxBlockBodySize* **不應該** 低於  24,576 位元組 (24KB)
 
-MBBS-03 (x - "exceptional circumstances") *maxBlockBodySize* **must not** be
-decreased, other than in exceptional circumstances where there are
-potential problems with security, performance or functionality
+MBBS-03 (x - "exceptional circumstances") *maxBlockBodySize* **不應該** 被減少，除非在特殊情況下出現安全性、性能或功能方面的潛在問題。
 
 MBBS-04 (~ - no access to existing parameter values) *maxBlockBodySize*
-**must** be large enough to include at least one transaction
-(that is, *maxBlockBodySize* **must** be at least *maxTxSize*)
+**必須** 足夠大，以包含至少一筆交易
+(即 *maxBlockBodySize* **必須** 至少為 *maxTxSize*)
 
-MBBS-05 (x - "should") *maxBlockBodySize* **should** be changed by at most
-10,240 Bytes (10KB) per epoch (5 days), and preferably by 8,192 Bytes (8KB)
-or less per epoch
+MBBS-05 (x - "should") *maxBlockBodySize* **應該** 每個紀元（5天）最多變更 10,240 位元組（10KB），最好每個紀元變更 8,192 位元組（8KB）或更少。
 
-MBBS-06 (x - "should") The block size **should not** induce an additional
-Transmission Control Protocol (TCP) round trip.
-Any increase beyond this must be backed by performance analysis,
-simulation and benchmarking
+MBBS-06 (x - "should") 區塊大小 **不應該** 產生額外的傳輸控制協議（TCP）往返延遲。
+任何超出此範圍的增加必須以性能分析、模擬和基準測試作為支持。
 
-MBBS-07 (x - "unquantifiable") The impact of any change to *maxBlockBodySize*
-**must** be confirmed by detailed benchmarking/simulation
-and not exceed the requirements of the block diffusion/propagation time budgets,
-as described below.
-Any increase to *maxBlockBodySize* must also consider future requirements
-for Plutus script execution (*maxBlockExecutionUnits[steps]*) against
-the total block diffusion target of 3s with 95% block propagation within 5s.
-The limit on maximum block size may be increased in the future if this is
-supported by benchmarking and monitoring results
+MBBS-07 (x - "unquantifiable") 對 *maxBlockBodySize* 的任何變更影響
+**必須** 透過詳細的基準測試/模擬確認，並且不應超過區塊擴散/傳播時間預算的要求，如下所述。
+對 *maxBlockBodySize* 的任何增加還必須考慮未來對 Plutus 腳本執行 (*maxBlockExecutionUnits[steps]*) 的需求，並以 3 秒的總區塊擴散目標及 95% 的區塊傳播在 5 秒內為基準。如果有基準測試和監控結果支持，未來可以增加最大區塊大小的限制。
 
-##### Transaction Size (maxTxSize)
+##### 交易大小 (maxTxSize)
 
-The maximum size of a transaction, in Bytes.
+交易的最大大小，以位元組計算。
 
 ###### 保障措施
 
-MTS-01 (y) *maxTxSize* **must not** exceed 32,768 Bytes (32KB)
+MTS-01 (y) *maxTxSize* **不得** 超過 32,768 位元組 (32KB)
 
-MTS-02 (y) *maxTxSize* **must not** be negative
+MTS-02 (y) *maxTxSize* **不得** 為負值
 
 MTS-03 (~ - no access to existing parameter values) *maxTxSize*
-**must not** be decreased
+**不得** 減少
 
-MTS-04 (~ - no access to existing parameter values) *maxTxSize* **must not**
-exceed *maxBlockBodySize*
+MTS-04 (~ - no access to existing parameter values) *maxTxSize* **不應該**
+超過 *maxBlockBodySize*
 
-MTS-05 (x - "should") *maxTxSize* **should not** be increased by more than
-2,560 Bytes (2.5KB) in any epoch, and preferably **should** be increased by
-2,048 Bytes (2KB) or less per epoch
+MTS-05 (x - "should") *maxTxSize* **不應該** 在任何紀元中增加超過 2,560 位元組 (2.5KB)，且最好 **應該** 每個紀元增加 2,048 位元組 (2KB) 或更少
 
-MTS-06 (x - "should") *maxTxSize* **should not** exceed 1/4 of the block size
+MTS-06 (x - "should") *maxTxSize* **不應該** 超過區塊大小的 1/4
 
-##### Memory Unit Limits (maxBlockExecutionUnits[memory], maxTxExecutionUnits[memory])
+##### 記憶體單位限制 (maxBlockExecutionUnits[memory], maxTxExecutionUnits[memory])
 
-The limit on the maximum number of memory units that can be used by
-Plutus scripts, either per-transaction or per-block.
+Plutus 腳本每筆交易或每個區塊可使用的最大記憶體單位數量限制。
 
 ###### 保障措施
 
-MTEU-M-01 (y) *maxTxExecutionUnits[memory]* **must not** exceed
-40,000,000 units
+MTEU-M-01 (y) *maxTxExecutionUnits[memory]* **不得** 超過
+40,000,000 單位
 
-MTEU-M-02 (y) *maxTxExecutionUnits[memory]* **must not** be negative
+MTEU-M-02 (y) *maxTxExecutionUnits[memory]* **不得** 為負值
 
 MTEU-M-03 (~ - no access to existing parameter values)
-*maxTxExecutionUnits[memory]* **must not** be decreased
+*maxTxExecutionUnits[memory]* **不得** 減少
 
-MTEU-M-04 (x - "should") *maxTxExecutionUnits[memory]* **should not** be
-increased by more than 2,500,000 units in any epoch
+MTEU-M-04 (x - "should") *maxTxExecutionUnits[memory]* **不應該** 在任何紀元中增加超過 2,500,000 單位
 
-MBEU-M-01 (y) *maxBlockExecutionUnits[memory]* **must not** exceed
-120,000,000 units
+MBEU-M-01 (y) *maxBlockExecutionUnits[memory]* **不得** 超過 120,000,000 單位
 
-MBEU-M-02 (y) *maxBlockExecutionUnits[memory]* **must not** be negative
+MBEU-M-02 (y) *maxBlockExecutionUnits[memory]* **不得** 為負值
 
-MBEU-M-03 (x - "should") *maxBlockExecutionUnits[memory]* **should not**
-be changed (increased or decreased) by more than 10,000,000 units in any epoch
+MBEU-M-03 (x - "should") *maxBlockExecutionUnits[memory]* **不應該**
+在任何紀元中更改（增加或減少）超過 10,000,000 單位
 
-MBEU-M-04 (x - unquantifiable) The impact of any change to
-*maxBlockExecutionUnits[memory]* **must** be confirmed by
-detailed benchmarking/simulation and not exceed the requirements of
-the diffusion/propagation time budgets, as also impacted by
-*maxBlockExecutionUnits[steps]*.
-Any increase **must** also consider previously agreed future requirements for
-the total block size (*maxBlockBodySize*) measured against the total
-block diffusion target of 3s with 95% block propagation within 5s.
-Future Plutus performance improvements may allow the per-block limit
-to be increased, but must be balanced against the overall diffusion limits
-as specified in the previous sentence, and future requirements
+MBEU-M-04 (x - unquantifiable) 任何對
+*maxBlockExecutionUnits[memory]* 的更改 **必須** 透過詳細的基準測試/模擬確認，且不得超過擴散/傳播時間預算的要求，這也受到 *maxBlockExecutionUnits[steps]* 的影響。
+任何增加 **必須** 考量先前協議的未來需求，總區塊大小 (*maxBlockBodySize*) 應符合總區塊擴散目標為 3 秒，且 95% 的區塊在 5 秒內傳播。
+未來的 Plutus 性能改進可能允許增加每個區塊的限制，但必須與前述的整體擴散限制及未來需求保持平衡。
 
 MEU-M-01 (~ - no access to existing parameter values)
-*maxBlockExecutionUnits[memory]* **must not** be less than
+*maxBlockExecutionUnits[memory]* **不得** 小於
 *maxTxExecutionUnits[memory]*
 
-##### CPU Unit Limits (maxBlockExecutionUnits[steps], maxTxExecutionUnits[steps])
+##### CPU 單位限制 (maxBlockExecutionUnits[steps], maxTxExecutionUnits[steps])
 
-The limit on the maximum number of CPU steps that can be used by Plutus scripts,
-either per-transaction or per-block.
+Plutus 腳本每筆交易或每個區塊可使用的最大 CPU 步驟數量限制。
 
 ###### 保障措施
 
-MTEU-S-01 (y) *maxTxExecutionUnits[steps]* **must not** exceed
-15,000,000,000 (15Bn) units
+MTEU-S-01 (y) *maxTxExecutionUnits[steps]* **不得** 超過
+15,000,000,000 (15Bn) 單位
 
-MTEU-S-02 (y) *maxTxExecutionUnits[steps]* **must not** be negative
+MTEU-S-02 (y) *maxTxExecutionUnits[steps]* **不得** 為負值
 
 MTEU-S-03 (~ - no access to existing parameter values)
-*maxTxExecutionUnits[steps]* **must not** be decreased
+*maxTxExecutionUnits[steps]* **不得** 減少
 
-MTEU-S-04 (x - "should") *maxTxExecutionUnits[steps]* **should not** be
-increased by more than 500,000,000 (500M) units in any epoch (5 days)
+MTEU-S-04 (x - "should") *maxTxExecutionUnits[steps]* **不應該** 在任何紀元（5 天）內增加超過 500,000,000 (500M) 單位。
 
-MBEU-S-01 (y) *maxBlockExecutionUnits[steps]* **must not** exceed
-40,000,000,000 (40Bn) units
+MBEU-S-01 (y) *maxBlockExecutionUnits[steps]* **不得** 超過
+40,000,000,000 (40Bn) 單位
 
-MBEU-S-02 (y) *maxBlockExecutionUnits[steps]* **must not** be negative
+MBEU-S-02 (y) *maxBlockExecutionUnits[steps]* **不得** 為負值
 
-MBEU-S-03 (x - "should") *maxBlockExecutionUnits[steps]* **should not** be
-changed (increased or decreased) by more than 2,000,000,000 (2Bn) units
-in any epoch (5 days)
+MBEU-S-03 (x - "should") *maxBlockExecutionUnits[steps]* **不應該** 在任何紀元（5 天）內更改（增加或減少）超過 2,000,000,000 (2Bn) 單位。
 
-MBEU-S-04 (x - unquantifiable) The impact of the change to
-*maxBlockExecutionUnits[steps]* **must** be confirmed
-by detailed benchmarking/simulation and not exceed the requirements of the
-block diffusion/propagation time budgets,
-as also impacted by *maxBlockExecutionUnits[memory]*.
-Any increase **must** also consider previously identified future requirements
-for the total block size (*maxBlockBodySize*) measured against the
-total block diffusion target of 3s with 95% block propagation within 5s.
-Future Plutus performance improvements may allow the per-block limit to be
-increased, but **must** be balanced against the overall diffusion limits
-as specified in the previous sentence, and future requirements
+MBEU-S-04 (x - unquantifiable) 任何對
+*maxBlockExecutionUnits[steps]* 的更改 **必須** 透過詳細的基準測試/模擬確認，且不得超過區塊擴散/傳播時間預算的要求，
+這也受到 *maxBlockExecutionUnits[memory]* 的影響。
+任何增加 **必須** 量先前確定的未來需求，總區塊大小 (*maxBlockBodySize*) 應符合總區塊擴散目標為 3 秒，且 95% 的區塊在 5 秒內傳播。
+未來的 Plutus 性能改進可能允許增加每個區塊的限制，但 **必須** 與前述的整體擴散限制及未來需求保持平衡。
 
 MEU-S-01 (~ - no access to existing parameter values)
-*maxBlockExecutionUnits[steps]* **must not** be less than
+*maxBlockExecutionUnits[steps]* **不得** 小於
 *maxTxExecutionUnits[steps]*
 
-##### Block Header Size (maxBlockHeaderSize)
+##### 區塊標頭大小 (maxBlockHeaderSize)
 
-The size of the block header.
+區塊標頭的大小。
 
-Note that increasing the block header size may affect the overall block size
-(*maxBlockBodySize*)
+請注意，增加區塊標頭的大小可能會影響整體區塊大小 (*maxBlockBodySize*)
 
 ###### 保障措施
 
-MBHS-01 (y) *maxBlockHeaderSize* **must not** exceed 5,000 Bytes
+MBHS-01 (y) *maxBlockHeaderSize* **不得** 超過 5,000 位元組
 
-MBHS-02 (y) *maxBlockHeaderSize* **must not** be negative
+MBHS-02 (y) *maxBlockHeaderSize* **不得** 為負值
 
 MBHS-03 (x - "largest valid header" is subject to change) *maxBlockHeaderSize*
-**must** be large enough for the largest valid header
+**必須** 足夠大以容納最大的有效標頭
 
-MBHS-04 (x - "should") *maxBlockHeaderSize* **should** only normally be
-increased if the protocol changes
+MBHS-04 (x - "should") *maxBlockHeaderSize* **應該** 只在協議變更時正常增加
 
-MBHS-05 (x - "should") *maxBlockHeaderSize* **should** be
-within TCP's initial congestion window (3 or 10 MTUs)
+MBHS-05 (x - "should") *maxBlockHeaderSize* **應該** 在 TCP 的初始擁塞窗口內 (3 or 10 MTUs)
 
-#### 2.4 Technical/Security Parameters
+#### 2.4 技術/安全參數
 
-The overall goals when managing the technical/security parameters are:
+管理技術/安全參數的整體目標是：
 
-1. Ensure the security of the Cardano network in terms of decentralization,
-protection against Sybil and 51% attacks and protection against
-denial of service attacks
-2. Enable changes to the Plutus language
+1. 確保 Cardano 網路的安全性，涉及去中心化、防範 Sybil 攻擊和 51% 攻擊以及防止拒絕服務攻擊。
+2. 使 Plutus 語言能夠進行更改。
 
-##### Triggers for Change
+##### 變更觸發因素
 
-1. Changes in the number of active SPOs
-2. Changes to the Plutus language
-3. Security threats
-4. Community requests
+1. 活躍質押池營運商（SPO）的數量變化
+2. Plutus 語言的變更
+3. 安全威脅
+4. 社群請求
 
-##### Counter-indicators
+##### 反指標
 
-- Economic concerns, e.g. when changing the number of stake pools
+- 經濟考量，例如在變更質押池數量時
 
-##### Core Metrics
+##### 核心指標
 
-- Number of stake pools
-- Level of decentralization
+- 質押池數量
+- 去中心化水準
 
-#### Changes to Specific Technical/Security Parameters
+#### 特定技術/安全參數的變更
 
-##### Target Number of Stake Pools (stakePoolTargetNum)
+##### 目標質押池數量 (stakePoolTargetNum)
 
-Sets the target number of stake pools
+設定目標質押池的數量
 
-- The expected number of pools when the network is in the equilibrium state
-- Primarily a security parameter, ensuring decentralization by
-pool division/replication
-- Has an economic effect as well as a security affect - economic advice is also
-required when changing this parameter
-- Large changes in this parameter will trigger mass redelegation events
+- 當網路處於平衡狀態時，預期的池數量。
+- 主要是一項安全參數，通過池的分割/複製來確保去中心化。
+- 此參數具有經濟影響及安全影響，變更此參數時也需考量經濟建議。
+- 此參數的大幅變更將觸發大規模的重新委託事件。
 
 ###### 保障措施
 
-SPTN-01 (y) *stakePoolTargetNum* **must not** be lower than 250
+SPTN-01 (y) *stakePoolTargetNum* **不得** 低於 250
 
-SPTN-02 (y) *stakePoolTargetNum* **must not** exceed 2,000
+SPTN-02 (y) *stakePoolTargetNum* **不得** 超過 2,000
 
-SPTN-03 (y) *stakePoolTargetNum* **must not** be negative
+SPTN-03 (y) *stakePoolTargetNum* **不得** 為負值
 
-SPTN-04 (y) *stakePoolTargetNum* **must not** be zero
+SPTN-04 (y) *stakePoolTargetNum* **不得** 為零
 
-##### Pledge Influence Factor (poolPledgeInfluence)
+##### 抵押影響因子 (poolPledgeInfluence)
 
-Enables the pledge protection mechanism
+啟用抵押保護機制。
 
-Provides protection against Sybil attack
+提供對 Sybil 攻擊的保護。
 
-- Higher values reward pools that have more pledge and
-penalize pools that have less pledge
+- 更高的數值會獎勵擁有較多抵押的池，並懲罰擁有較少抵押的池
 
-Has an economic effect as well as technical effect - economic advice is also
-required
+此參數具有經濟影響和技術影響，因此也需考量經濟建議。
 
-- Can be set in the range 0.0-infinity
+- 可設置範圍為 0.0 到無限大。
 
 ###### 保障措施
 
-PPI-01 (y) *poolPledgeInfluence* **must not** be lower than 0.1
+PPI-01 (y) *poolPledgeInfluence* **不得** 低於 0.1
 
-PPI-02 (y) *poolPledgeInfluence* **must not** exceed 1.0
+PPI-02 (y) *poolPledgeInfluence* **不得** 超過 1.0
 
-PPI-03 (y) *poolPledgeInfluence* **must not** be negative
+PPI-03 (y) *poolPledgeInfluence* **不得** 為負值
 
-PPI-04 (x - "should") *poolPledgeInfluence* **should not** vary by more than
-+/- 10% in any 18-epoch period (approximately 3 months)
+PPI-04 (x - "should") *poolPledgeInfluence* **不應該** 在任何 18 紀元期間（約 3 個月）內變動超過 +/- 10%。
 
-##### Pool Retirement Window (poolRetireMaxEpoch)
+##### 質押池退休窗口 (poolRetireMaxEpoch)
 
-Defines the maximum number of epochs notice that a pool can give
-when planning to retire
+定義質押池在計劃退休時可以給予的最大紀元通知數量。
 
 ###### 保障措施
 
-PRME-01 (y) *poolRetireMaxEpoch* **must not** be negative
+PRME-01 (y) *poolRetireMaxEpoch* **不得** 為負值
 
-PRME-02 (x - "should") *poolRetireMaxEpoch* **should not** be lower than 1
+PRME-02 (x - "should") *poolRetireMaxEpoch* **不應該** 低於 1
 
-##### Collateral Percentage (collateralPercentage)
+##### 擔保百分比 (collateralPercentage)
 
-Defines how much collateral must be provided when executing a Plutus script
-as a percentage of the normal execution cost
+定義執行 Plutus 腳本時必須提供的擔保金額，作為正常執行成本的百分比。
 
-- Collateral is additional to fee payments
-- If a script fails to execute, then the collateral is lost
-- The collateral is never lost if a script executes successfully
+- 擔保為額外費用支付。
+- 如果腳本執行失敗，則擔保會損失。
+- 如果腳本成功執行，則擔保不會損失。
 
-Provides security against low-cost attacks by making it more expensive
-rather than less expensive to execute failed scripts
+透過增加執行失敗腳本的成本來提供對低成本攻擊的安全保障。
 
 ###### 保障措施
 
-CP-01 (y) *collateralPercentage* **must not** be lower than 100
+CP-01 (y) *collateralPercentage* **不得** 低於 100
 
-CP-02 (y) *collateralPercentage* **must not** exceed 200
+CP-02 (y) *collateralPercentage* **不得** 超過 200
 
-CP-03 (y) *collateralPercentage* **must not** be negative
+CP-03 (y) *collateralPercentage* **不得** 為負值
 
-CP-04 (y) *collateralPercentage* **must not** be zero
+CP-04 (y) *collateralPercentage* **不得** 為零
 
-##### Maximum number of collateral inputs (maxCollateralInputs)
+##### 最大擔保輸入數量 (maxCollateralInputs)
 
-Defines the maximum number of inputs that can be used for collateral
-when executing a Plutus script
-
-###### 保障措施
-
-MCI-01 (y) *maxCollateralInputs* **must not** be lower than 1
-
-##### Maximum Value Size (maxValueSize)
-
-The limit on the serialized size of the Value in each output.
+定義執行 Plutus 腳本時可以用作擔保的最大輸入數量。
 
 ###### 保障措施
 
-MVS-01 (y) *maxValueSize* **must not** exceed 12,288 Bytes (12KB)
+MCI-01 (y) *maxCollateralInputs* **不得** 低於 1
 
-MVS-02 (y) *maxValueSize* **must not** be negative
+##### 最大值大小 (maxValueSize)
 
-MVS-03 (~ - no access to existing parameter values) *maxValueSize* **must** be
-less than *maxTxSize*
+每個輸出的序列化值的大小限制。
+
+###### 保障措施
+
+MVS-01 (y) *maxValueSize* **不得** 超過 12,288 位元組 (12KB)
+
+MVS-02 (y) *maxValueSize* **不得** 為負值
+
+MVS-03 (~ - no access to existing parameter values) *maxValueSize* **必須** 小於 *maxTxSize*
 
 MVS-04 (~ - no access to existing parameter values)
-*maxValueSize* **must not** be reduced
+*maxValueSize* **不得** 減少
 
 MVS-05 (x - "sensible output" is subject to interpretation)
-*maxValueSize* **must** be large enough to allow sensible outputs
-(e.g. any existing on-chain output or anticipated outputs that could be
-produced by new ledger rules)
+*maxValueSize* **必須** 足夠大，以允許合理的輸出（例如，任何現有的鏈上輸出或根據新帳本規則預期產生的輸出）。
 
-##### Plutus Cost Models (costModels)
+##### Plutus 成本模型 (costModels)
 
-Define the base costs for each Plutus primitive in terms of CPU and memory unit
+定義每個 Plutus 原始型別的基本成本，單位為 CPU 和記憶體。
 
-- There are about 150 distinct micro-parameters in total
+- 總共有約 150 個不同的微參數。
 
-Cost models are defined for each Plutus language version.
-A new language version may introduce additional micro-parameters or
-remove existing micro-parameters.
+成本模型針對每個 Plutus 語言版本進行定義。
+新的語言版本可能會引入額外的微參數或刪除現有的微參數。
 
 ###### 保障措施
 
-PCM-01 (x - unquantifiable) *Cost model* values **must** be set by
-benchmarking on a reference architecture
+PCM-01 (x - unquantifiable) *成本模型* 值 **必須** 透過參考架構的基準測試來設置。
 
 PCM-02 (x - primitives and language versions aren't introduced in
 transactions)
-The *cost model* **must** be updated if new primitives are introduced or
-a new Plutus language version is added
+*成本模型* **必須** 在引入新原始型別或添加新 Plutus 語言版本時進行更新。
 
 PCM-03 (~ - no access to *Plutus cost model* parameters)
-*Cost model* values **should not** be negative
+*成本模型* 值 **不應該** 為負值
 
-PCM-04 (~ - no access to *Plutus cost model* parameters) A *cost model*
-**must** be supplied for each Plutus language version that the protocol supports
+PCM-04 (~ - no access to *Plutus cost model* parameters) **必須** 必須為每個協議支持的 Plutus 語言版本提供 *成本模型*
 
-#### 2.5 Governance Parameters
+#### 2.5 治理參數
 
-The overall goals when managing the governance parameters are to:
+管理治理參數的整體目標是：
 
-1. Ensure governance stability
-2. Maintain a representative form of governance as outlined in CIP-1694
+1. 確保治理穩定性
+2. 維持代表性的治理形式，如 CIP-1694 所述
 
-##### Triggers for Change
+##### 變更觸發因素
 
-Changes to governance parameters may be triggered by:
+治理參數的變更可能會受到以下因素的觸發：
 
-1. Community requests
-2. Regulatory requirements
-3. Unexpected or unwanted governance outcomes
-4. Entering a state of no confidence
+1. 社區請求
+2. 監管要求
+3. 意外或不希望的治理結果
+4. 進入不信任狀態
 
-##### Counter-indicators
+##### 反指標
 
-Changes may need to be reversed and/or should not be enacted in the event of:
+在以下情況下，變更可能需要撤回和/或不應實施：
 
-- Unexpected effects on governance
-- Excessive Layer 1 load due to on-chain voting or excessive numbers of
-governance actions
+- 對治理產生意外影響
+- 由於鏈上投票或過多治理行為而導致的過度 Layer 1 負載
 
-##### Core Metrics
+##### 核心指標
 
-All decisions on parameter changes should be informed by:
+所有有關參數變更的決策應以以下因素為依據：
 
-- Governance participation levels
-- Governance behaviors and patterns
-- Regulatory considerations
-- Confidence in the governance system
-- The effectiveness of the governance system in managing necessary change
+- 治理參與水平
+- 治理行為和模式
+- 監管考量
+- 對治理系統的信心
+- 治理系統在管理必要變更中的有效性
 
-#### Changes to Specific Governance Parameters
+#### 變更特定治理參數
 
-##### Deposit for Governance Actions (govDeposit)
+##### 治理行為押金 (govDeposit)
 
-The deposit that is charged when submitting a governance action.
+提交治理行為時收取的押金。
 
-- Helps to limit the number of actions that are submitted
+- 有助於限制提交的行為數量
 
 ###### 保障措施
 
-GD-01 (y) *govDeposit* **must not** be negative
+GD-01 (y) *govDeposit* **不得** 為負值
 
-GD-02 (y) *govDeposit* **must not** be lower than 1,000,000 (1 ada)
+GD-02 (y) *govDeposit* **不得** 低於 1,000,000 (1 ada)
 
-GD-03 (y) *govDeposit* **must not** exceed 10,000,000,000,000 (10 Million ada)
+GD-03 (y) *govDeposit* **不得** 超過 10,000,000,000,000 (1 億 ada)
 
-GD-04 (x - "should") *govDeposit* **should** be adjusted in line with
-fiat changes
+GD-04 (x - "should") *govDeposit* **應該** 隨法幣變動進行調整
 
-##### Deposit for DReps (dRepDeposit)
+##### 委託代表押金 (dRepDeposit)
 
-The deposit that is charged when registering a DRep.
+註冊委託代表時所收取的押金。
 
-- Helps to limit the number of active DReps
-
-###### 保障措施
-
-DRD-01 (y) *dRepDeposit* **must not** be negative
-
-DRD-02 (y) *dRepDeposit* **must not** be lower than 1,000,000 (1 ada)
-
-DRD-03 (y) *dRepDeposit* **must not** exceed 100,000,000,000 (100,000 ada)
-
-DRD-04 (x - "should") *dRepDeposit* **should** be
-adjusted in line with fiat changes
-
-##### DRep Activity Period (dRepActivity)
-
-The period (as a whole number of epochs)
-after which a DRep is considered to be inactive for vote calculation purposes,
-if they do not vote on any proposal.
+- 有助於限制活躍委託代表的數量
 
 ###### 保障措施
 
-DRA-01 (y) *dRepActivity* **must not** be lower than 13 epochs (2 months)
+DRD-01 (y) *dRepDeposit* **不得** 為負值
 
-DRA-02 (y) *dRepActivity* **must not** exceed 37 epochs (6 months)
+DRD-02 (y) *dRepDeposit* **不得** 低於 1,000,000 (1 ada)
 
-DRA-03 (y) *dRepActivity* **must not** be negative
+DRD-03 (y) *dRepDeposit* **不得** 超過 100,000,000,000 (100,000 ada)
 
-DRA-04 (~ - no access to existing parameter values) *dRepActivity* **must** be
-greater than *govActionLifetime*
+DRD-04 (x - "should") *dRepDeposit* **應該** 隨法幣變動進行調整
 
-DRA-05 (x - "should") *dRepActivity* **should** be calculated in human terms
-(2 months etc)
+##### 委託代表活動期 (dRepActivity)
 
-##### DRep and SPO Governance Action Thresholds (dRepVotingThresholds[...],poolVotingThresholds[...])
+在此期間（以整數紀元計算），若委託代表未對任何提案投票，則其被視為在投票計算中不活躍。
 
-Thresholds on the active voting stake that is required to ratify a
-specific type of governance action by either DReps or SPOs.
+###### 保障措施
 
-- Ensures legitimacy of the action
+DRA-01 (y) *dRepActivity* **不得** 低於 13 紀元（2 個月）
 
-The threshold parameters are listed below:
+DRA-02 (y) *dRepActivity* **不得** 超過 37 紀元（6 個月）
+
+DRA-03 (y) *dRepActivity* **不得** 為負值
+
+DRA-04 (~ - no access to existing parameter values) *dRepActivity* **必須** 大於 *govActionLifetime*
+
+DRA-05 (x - "should") *dRepActivity* **應該** 以人類可理解的方式計算（例如 2 個月等）
+
+##### 委託代表(Drep)與質押池營運商(SPO)治理行動門檻 (dRepVotingThresholds[...],poolVotingThresholds[...])
+
+針對委託代表或質押池營運商所需的有效投票權限門檻，以核准特定類型的治理行動。
+
+- 確保行動的合法性
+
+以下是門檻參數的列表：
 
 *dRepVotingThresholds*:
 
@@ -1077,362 +985,273 @@ The threshold parameters are listed below:
 
 ###### 保障措施
 
-VT-GEN-01 (y) All thresholds **must** be in the range 50%-100%
+VT-GEN-01 (y) 所有門檻 **必須** 在 50%-100% 範圍內
 
-VT-GEN-02 (y) Economic, network and technical parameter thresholds
-**must** be in the range 51%-75%
+VT-GEN-02 (y) 經濟、網路和技術參數門檻
+**必須** 在 51%-75% 範圍內
 
-VT-GEN-03 (y) Governance parameter thresholds **must** be in the range 75%-90%
+VT-GEN-03 (y) 治理參數門檻 **必須** 在 75%-90% 範圍內
 
-VT-HF-01 (y) **Hard fork** action thresholds **must** be in the range 51%-80%
+VT-HF-01 (y) **硬分叉** 行動門檻 **必須** 在 51%-80% 範圍內
 
-VT-CON-01 (y) **New Constitution or guardrails script action** thresholds
-**must** be in the range 65%-90%
+VT-CON-01 (y) **新憲法或保障措施腳本行動** 門檻
+**必須** 在 65%-90% 範圍內
 
-VT-CC-01 (y) **Update Constitutional Committee action** thresholds
-**must** be in the range 51%-90%
+VT-CC-01 (y) **更新憲法委員會行動** 門檻
+**必須** 在 51%-90% 範圍內
 
-VT-NC-01 (y) **No confidence** action thresholds **must** be
-in the range 51%-75%
+VT-NC-01 (y) **不信任** 行動門檻 **必須** 在 51%-75% 範圍內
 
-##### Governance Action Lifetime (govActionLifetime)
+##### 治理行動有效期 (govActionLifetime)
 
-The period after which a governance action will expire if it is not enacted
+若未被執行，治理行動將在此期間後失效。
 
-- As a whole number of epochs
+- 以整數紀元計算
 
 ###### 保障措施
 
-GAL-01 (y) *govActionLifetime* **must not** be lower than 1 epoch (5 days)
+GAL-01 (y) *govActionLifetime* **不得** 低於 1 紀元（5 天）
 
-GAL-03 (x - "should") *govActionLifetime* **should not** be
-lower than 2 epochs (10 days)
+GAL-03 (x - "should") *govActionLifetime* **不應該** 低於 2 紀元（10 天）
 
-GAL-02 (y) *govActionLifetime* **must not** exceed 15 epochs (75 days)
+GAL-02 (y) *govActionLifetime* **不得** 超過 15 紀元（75 天）
 
-GAL-04 (x - "should") *govActionLifetime* **should** be
-calibrated in human terms (eg 30 days, two weeks),
-to allow sufficient time for voting etc. to take place
+GAL-04 (x - "should") *govActionLifetime* **應該** 以人類可理解的方式進行調整（例如 30 天、兩週），以確保有足夠的時間進行投票等。
 
 GAL-05 (~ - no access to existing parameter values) *govActionLifetime*
-**must** be less than *dRepActivity*
+**必須** 小於 *dRepActivity*
 
-##### Maximum Constitutional Committee Term (committeeMaxTermLimit)
+##### 憲法委員會最長任期 (committeeMaxTermLimit)
 
-The limit on the maximum term that a committee member may serve
-
-###### 保障措施
-
-CMTL-01 (y) *committeeMaxTermLimit* **must not** be zero
-
-CMTL-02 (y) *committeeMaxTermLimit* **must not** be negative
-
-CMTL-03 (y) *committeeMaxTermLimit* **must not** be lower than 18 epochs
-(90 days, or approximately 3 months)
-
-CMTL-04 (y) *committeeMaxTermLimit* **must not** exceed 293 epochs
-(approximately 4 years)
-
-CMTL-05 (x - "should") *committeeMaxTermLimit* **should not** exceed
-220 epochs (approximately 3 years)
-
-##### The minimum size of the Constitutional Committee (committeeMinSize)
-
-The least number of members that can be included in a Constitutional Committee
-following a governance action to change the Constitutional Committee.
+委員會成員可擔任的最長任期限制
 
 ###### 保障措施
 
-CMS-01 (y) *committeeMinSize* **must not** be negative
+CMTL-01 (y) *committeeMaxTermLimit* **不得** 為零
 
-CMS-02 (y) *committeeMinSize* **must not** be lower than 3
+CMTL-02 (y) *committeeMaxTermLimit* **不得** 為負值
 
-CMS-03 (y) *committeeMinSize* **must not** exceed 10
+CMTL-03 (y) *committeeMaxTermLimit* **不得** 低於 18 紀元（90 天，約 3 個月）
 
-#### 2.6 Monitoring and Reversion of Parameter Changes
+CMTL-04 (y) *committeeMaxTermLimit* **不得** 超過 293 紀元（約 4 年）
 
-All network parameter changes **must be** monitored carefully for no less than
-2 epochs (10 days)
+CMTL-05 (x - "should") *committeeMaxTermLimit* **不應該** 超過 220 紀元（約 3 年） (approximately 3 years)
 
-- Changes **must** be reverted as soon as possible if block propagation delays
-exceed 4.5s for more than 5% of blocks over any 6 hour rolling window
+##### 憲法委員會的最小規模 (committeeMinSize)
 
-All other parameter changes should be monitored
-
-- The reversion plan **should** be implemented if the overall effect
-on performance, security or functionality is unacceptable.
-
-A specific reversion/recovery plan **must be** produced for
-each parameter change.
-This plan must include:
-
-- Which parameters need to change and in which ways in order to return to the
-previous state (or a similar state)
-- How to recover the network in the event of disastrous failure
-
-This plan **should** be followed if problems are observed
-following the parameter change.
-Note that not all changes can be reverted.
-Additional care must be taken when making changes to these parameters.
-
-#### 2.7 Non-Updatable Protocol Parameters
-
-Some fundamental protocol parameters cannot be changed by the
-Protocol Parameter Update governance action.
-These parameters can only be changed in a new Genesis file as
-part of a hard fork.
-It is not necessary to provide specific guardrails on updating these parameters.
-
-### 3 GUARDRAILS AND GUIDELINES ON TREASURY WITHDRAWAL ACTIONS
-
-**Treasury withdrawal** actions specify the destination
-and amount of a number of withdrawals from the Cardano treasury.
+在治理行動後，憲法委員會中可包括的最少成員數量。
 
 ###### 保障措施
 
-TREASURY-01 (x)  DReps **must** define a net change limit for
-the Cardano Treasury's balance per period of time.
+CMS-01 (y) *committeeMinSize* **不得** 為負值
 
-TREASURY-02 (x)  The budget for the Cardano Treasury **must not** exceed
-the net change limit for the Cardano Treasury's balance per period of time.
+CMS-02 (y) *committeeMinSize* **不得** 低於 3
 
-TREASURY-03 (x)  The budget for the Cardano Treasury **must** be
-denominated in ada.
+CMS-03 (y) *committeeMinSize* **不得** 超過 10
 
-TREASURY-04 (x)  Treasury withdrawals **must not** be ratified until there is
-a community-approved Cardano budget then in effect pursuant to a previous
-on-chain governance action agreed by the DReps with a threshold of greater than
-50% of the active voting stake.
+#### 2.6 參數變更的監控與恢復
 
-### 4 GUARDRAILS AND GUIDELINES ON HARD FORK INITIATION ACTIONS
+所有網路參數變更 **必須** 監控至少 2 紀元（10 天）。
 
-The **hard fork initiation** action requires both a new major and a new minor
-protocol version to be specified.
+- 如果區塊傳播延遲超過 4.5 秒，且在任何 6 小時的時間段內有超過 5% 的區塊受到影響，則變更 **must** 立即恢復。
 
-- As positive integers
+所有其他參數變更應該進行監控。
 
-As the result of a hard fork, new updatable protocol parameters may be
-introduced.
-Guardrails may be defined for these parameters,
-which will take effect following the hard fork.
-Existing updatable protocol parameters may also be deprecated by the hard fork,
-in which case the guardrails become obsolete for all future changes.
+- 如果對性能、安全性或功能的整體影響不可接受，則 **應該** 實施恢復計畫。
+
+每項參數變更 **必須** 制定具體的恢復計畫。
+此計畫必須包括：
+
+- 需要變更哪些參數以及如何變更，以便返回到先前的狀態（或相似狀態）
+- 如何在發生災難性故障時恢復網路
+
+如果在參數變更後觀察到問題，則 **應該** 遵循此計畫。
+請注意，並非所有變更都可以恢復。
+對這些參數的變更必須格外小心。
+
+#### 2.7 不可更新的協議參數
+
+某些基本的協議參數不能通過協議參數更新的治理行動進行變更。
+這些參數只能作為硬分叉的一部分，在新的 Genesis 檔案中進行變更。
+不必為更新這些參數提供特定的保障措施。
+
+### 3 國庫取款行動的保障措施與指導方針
+
+**國庫取款** 行動指定了從 Cardano 國庫提取的金額及其目的地。
+
+###### 保障措施
+
+TREASURY-01 (x)  委託代表 **必須** 為 Cardano 國庫的餘額定義每個時間段的淨變更限額。
+
+TREASURY-02 (x)  國庫的預算 **不得** 超過該時間段的淨變更限額。
+
+TREASURY-03 (x)  Cardano 國庫的預算 **必須** 以 ada 為單位。
+
+TREASURY-04 (x)  在獲得社區批准的 Cardano 預算生效之前，國庫取款 **不得** 被核准，該預算需根據之前的鏈上治理行動獲得委託代表同意，且其有效投票權限門檻必須超過 50%。
+
+### 4 硬分叉啟動行動的保障措施與指導方針
+
+**硬分叉啟動** 行動要求指定新的主要和次要協議版本。
+
+- 以正整數表示
+
+作為硬分叉的結果，可能會引入新的可更新協議參數。
+這些參數可以定義保障措施，並在硬分叉後生效。
+現有的可更新協議參數也可能在硬分叉中被淘汰，在這種情況下，該保障措施對於未來的所有變更將不再適用。
 
 ###### 保障措施
 
 HARDFORK-01 (~ - no access to existing parameter values)
-The major protocol version **must** be the same as or one greater than
-the major version that will be enacted immediately prior to this change.
-If the major protocol version is one greater,
-then the minor protocol version **must** be zero.
+主要協議版本 **必須** 與立即在此變更之前生效的主要版本相同或大於一。
+如果主要協議版本大於一，則次要協議版本 **必須** 為零。
 
 HARDFORK-02 (~ - no access to existing parameter values)
-The minor protocol version **must** be no less than the minor version
-that will be enacted immediately prior to this change.
+次要協議版本 **must** 小於立即在此變更之前生效的次要版本。
 
-HARDFORK-03 (~ - no access to existing parameter values) At least one of the
-protocol versions (major or minor or both) **must** change.
+HARDFORK-03 (~ - no access to existing parameter values) 至少有一個協議版本（主要或次要或兩者） **必須** 變更。
 
-HARDFORK-04 (x) At least 85% of stake pools by active stake **should** have
-upgraded to a Cardano node version that is capable of processing
-the rules associated with the new protocol version.
+HARDFORK-04 (x) 至少 85% 的質押池按活躍質押 **應該** 升級到能夠處理與新協議版本相關規則的 Cardano 節點版本。
 
-HARDFORK-05 (x) Any new updatable protocol parameters
-that are introduced with a hard fork **must** be included in this Appendix
-and suitable guardrails defined for those parameters.
+HARDFORK-05 (x) 任何隨著硬分叉引入的新可更新協議參數 **必須** 包含在本附錄中，並為這些參數定義適當的保障措施。
 
-HARDFORK-06 (x) Settings for any new protocol parameters
-that are introduced with a hard fork
-**must** be included in the appropriate Genesis file.
+HARDFORK-06 (x) 隨著硬分叉引入的任何新協議參數的設置
+**必須** 包含在適當的 Genesis 檔案中。
 
-HARDFORK-07 (x) Any deprecated protocol parameters **must** be indicated
-in this Appendix.
+HARDFORK-07 (x) 任何被淘汰的協議參數 **必須** 在本附錄中標示。
 
 HARDFORK-08 (~ - no access to *Plutus cost model* parameters)
-New Plutus versions **must** be supported by a
-version-specific *Plutus cost model* that covers each primitive that is
-available in the new Plutus version.
+新的 Plutus 版本 **必須** 由一個版本特定的 Plutus *Plutus 成本模型* 支持，該模型涵蓋新 Plutus 版本中可用的每個原始型別。
 
-### 5 GUARDRAILS AND GUIDELINES ON UPDATE CONSTITUTIONAL COMMITTEE OR THRESHOLD ACTIONS
+### 5 更新憲法委員會或門檻行動的保障措施與指導方針
 
-**Update Constitutional Committee or Threshold** governance actions
-may change the size, composition or required voting thresholds for the
-Constitutional Committee
+**更新憲法委員會或門檻** 的治理行動可以改變憲法委員會的規模、組成或所需投票門檻。
 
 ###### 保障措施
 
-UPDATE-CC-01 (x)  **Update Constitutional Committee and/or threshold**
-**and/or term** governance actions **must not** be ratified until Ada holders
-have ratified through an on-chain governance action the Final Constitution.
+UPDATE-CC-01 (x)  **更新憲法委員會和/或門檻**
+**和/或任期** 的治理行動 **不得** 在 Ada 持有者透過鏈上治理行動批准最終憲法之前被核准。
 
-### 6 GUARDRAILS AND GUIDELINES ON NEW CONSTITUTION OR GUARDRAILS SCRIPT ACTIONS
+### 6 新憲法或保障措施腳本行動的保障措施與指導方針
 
-New constitution or guardrails script actions change the hash of the
-on-chain constitution and the associated guardrails script.
+新憲法或保障措施腳本行動會改變鏈上憲法的哈希值及相關的保障措施腳本。
 
 ###### 保障措施
 
-NEW-CONSTITUTION-01 (x)  An **New Constitution**
-**or Guardrails Script** governance action **must** be submitted to define
-any required guardrails for new parameters that are introduced
-via a Hard Fork governance action
+NEW-CONSTITUTION-01 (x)  一項 **新憲法**
+**或保障措施腳本** 的治理行動 **必須** 被提交，以定義通過硬分叉治理行動引入的新參數所需的任何保障措施。
 
-### 7 GUARDRAILS AND GUIDELINES ON NO CONFIDENCE ACTIONS
+### 7 不信任行動的保障措施與指導方針
 
-**No confidence** actions signal a state of no confidence
-in the governance system.
-No guardrails are imposed on **No Confidence** actions.
+**不信任** 行動表示對治理系統的不信任狀態。
+對於 **不信任** 行動不設置任何保障措施。
 
 ###### 保障措施
 
-- None
+- 無
 
-### 8 GUARDRAILS AND GUIDELINES ON INFO ACTIONS
+### 8 資訊行動的保障措施與指導方針
 
-**Info** actions are not enacted on chain.
-No guardrails are imposed on **Info** actions.
-
-###### 保障措施
-
-- None
-
-### 9 GUARDRAILS DURING THE INTERIM PERIOD
-
-Interim Period
-
-The Interim Period begins with the Chang Hard-Fork and ends after
-a community-ratified Final Constitution is enacted on-chain.
-Throughout the Interim Period, technical and constitution-enforced triggers
-will progressively turn on the features of CIP-1694.
-
-Interim Period Technical Rollout:
-
-- The Chang Hard Fork will enable three initial CIP-1694 governance actions
-and enable the representative framework to be established.
-These actions are the **"Info"**, **"Hard-fork initiation"** and
-**"Protocol parameter changes"** actions.
-Ada holders will be able to register as and delegate to DReps immediately after
-the hard fork but, as described in CIP-1694, DRep voting will not be available,
-except on **"Info"** actions.
-This ensures that Ada holders have sufficient time to choose
-their voting delegations.
-SPOs will be able to vote as described in CIP-1694.
-**"Hard-fork initiation"** and **"Protocol parameter changes"** actions
-will also be ratified by the Constitutional Committee.
-Ada holders will be able to withdraw their staking rewards as usual.
-
-- A subsequent hard fork, ratified by the Constitutional Committee and SPOs,
-shortly after the Chang Hard Fork, will enable the four remaining
-CIP-1694 governance actions: **"treasury withdrawals"**,
-**"motion of no-confidence"**,
-**"update constitutional committee and/or threshold and/or terms"**, and
-**"new constitution or guardrails script"**.
-At this point, DRep voting will be enabled and staking rewards can only be
-withdrawn if the Ada holder has delegated their vote
-(including to the pre-defined Abstain/No Confidence voting options).
+**資訊** 行動不會在鏈上執行。
+對於**資訊** 行動不設置任何保障措施。
 
 ###### 保障措施
 
-INTERIM-01 (x) To provide sufficient time for DReps to register and
-campaign and for Ada holders to choose their initial voting delegations,
-at least 18 epochs (90 days, or approximately 3 months) **must** elapse after
-the Chang hard fork before the subsequent hard fork can be ratified.
-Once the subsequent hard fork is enacted, DRep voting can occur
-as described in CIP-1694.
+- 無
 
-INTERIM-02 (x) Treasury withdrawals **must not** be ratified until there is
-a community-approved Cardano Blockchain Ecosystem budget then in effect pursuant
-to a previous on-chain governance action.
+### 9 在過渡期間的保障措施
 
-INTERIM-03 (x) Treasury withdrawals **must** be consistent with the
-community-approved Cardano Blockchain ecosystem budget(s).
+過渡期間
 
-INTERIM-04 (x) Ada holders **must** have ratified the Final Constitution
-as specified in Appendix II before ratifying any other proposed
-**"new constitution"**, **"update constitutional committee**
-**and/or threshold and/or terms"**, and
-**"motion of no-confidence"** governance actions.
+過渡期間始於 Chang 硬分叉，並在社群批准的最終憲法在線上生效後結束。
+在過渡期間，技術和憲法強制的觸發器將逐步啟用 CIP-1694 的功能。
 
-INTERIM-05 (x)  **"New guardrails script"** actions
-that are consistent with the Interim Constitution may be ratified during
-the interim period, provided the Interim Constitution itself is not changed.
+過渡期間技術推出：
 
-### 10 LIST OF PROTOCOL PARAMETER GROUPS
+- Chang 硬分叉將啟用三個初始的 CIP-1694 治理行動，並建立代表性框架。
+這些行動包括 **「資訊」**, **「硬分叉啟動」** 和
+**「協議參數變更」** 行動。
+Ada 持有者將能夠在硬分叉後立即註冊為 DRep 並進行委託，但根據 CIP-1694 的說明，DRep 投票將不會可用，除非是 **「資訊」** 行動。
+這確保了 Ada 持有者有足夠的時間來選擇他們的投票委託。
+質押池營運商 (SPOs) 將能夠按照 CIP-1694 的說明進行投票。
+**「硬分叉啟動」** 和 **「協議參數變更」** 行動也將由憲法委員會批准。Ada 持有者將能夠如常提領他們的質押獎勵。
 
-The protocol parameters are grouped by type,
-allowing different thresholds to be set for each group.
+- 在 Chang 硬分叉之後，憲法委員會和質押池營運商批准的後續硬分叉，將啟用四項剩餘的 CIP-1694 治理行動：**「國庫取款」**、**「不信任動議」**、**「更新憲法委員會和/或門檻和/或條款」** 及 **「新憲法或保障措施腳本」**。此時，委託代表投票將被啟用，質押獎勵僅能在 Ada 持有者已委託其投票（包括預先定義的棄權/不信任投票選項）後提取。
 
-The network group consists of:
+###### 保障措施
 
-- *maximum block body size* (*maxBlockBodySize*)
-- *maximum transaction size* (*maxTxSize*)
-- *maximum block header size* (*maxBlockHeaderSize*)
-- *maximum size of a serialized asset value* (*maxValueSize*)
-- *maximum script execution units in a single transaction*
+
+
+INTERIM-01 (x) 為了給委託代表足夠的時間進行註冊和競選，並讓 Ada 持有者選擇初始投票委託，**必須** 在 Chang 硬分叉之後經過至少 18 個紀元（90 天，約 3 個月）後，才能批准隨後的硬分叉。一旦隨後的硬分叉生效，委託代表投票可以按照 CIP-1694 的描述進行。
+
+INTERIM-02 (x) 在社群批准的 Cardano 區塊鏈生態系統預算生效之前，國庫取款 **不得** 被批准，該預算根據之前的鏈上治理行動而定。
+
+INTERIM-03 (x) 國庫取款 **必須** 與社群批准的 Cardano 區塊鏈生態系統預算保持一致。
+
+INTERIM-04 (x) Ada 持有者 **必須** 在批准任何其他提議的 **「新憲法」**、**「更新憲法委員會和/或門檻和/或條款」** 及
+**「不信任動議」** 治理行動之前，先批准附錄 II 中所提到的最終憲法。
+
+INTERIM-05 (x)  **「新保障措施腳本」** 與過渡憲法一致的行動可以在過渡期間內被批准，前提是過渡憲法本身不被更改。
+
+### 10 協定參數組清單
+
+協定參數依類型分組，使每個組別能設置不同的門檻。
+
+網路組別包含：
+
+- *最大區塊主體大小* (*maxBlockBodySize*)
+- *最大交易大小* (*maxTxSize*)
+- *最大區塊標頭大小* (*maxBlockHeaderSize*)
+- *最大序列化資產值大小* (*maxValueSize*)
+- *單一交易中的最大腳本執行單位*
 (*maxTxExecutionUnits[steps]*)
-- *maximum script execution units in a single block*
+- *單一區塊中的最大腳本執行單位*
 (*maxBlockExecutionUnits[steps]*)
-- *maximum number of collateral inputs* (*maxCollateralInputs*)
+- *最大擔保輸入數量* (*maxCollateralInputs*)
 
-The economic group consists of:
+經濟組別包含：
 
-- *minimum fee coefficient* (*txFeePerByte*)
-- *minimum fee constant* (*txFeeFixed*)
-- *minimum fee per byte for reference scripts* (*minFeeRefScriptCoinsPerByte*)
-- *delegation key Lovelace deposit* (*stakeAddressDeposit*)
-- *pool registration Lovelace deposit* (*stakePoolDeposit*)
-- *monetary expansion* (*monetaryExpansion*)
-- *treasury expansion* (*treasuryCut*)
-- *minimum fixed rewards cut for pools* (*minPoolCost*)
-- *minimum Lovelace deposit per byte of serialized UTxO* (*coinsPerUTxOByte*)
-- *prices of Plutus execution units*
-(*executionUnitPrices[priceSteps/priceMemory]*)
+- *最小手續費係數* (*txFeePerByte*)
+- *最小手續費常數* (*txFeeFixed*)
+- *參考腳本每位元組的最小手續費* (*minFeeRefScriptCoinsPerByte*)
+- *委託金鑰押金(Lovelace)* (*stakeAddressDeposit*)
+- *質押池註冊押金(Lovelace)* (*stakePoolDeposit*)
+- *貨幣擴展率* (*monetaryExpansion*)
+- *國庫擴展率* (*treasuryCut*)
+- *最低固定獎勵分配給池的比例* (*minPoolCost*)
+- *每位元組序列化 UTxO 的最低押金* (*coinsPerUTxOByte*)
+- *Plutus 腳本執行價格* (*executionUnitPrices[priceSteps/priceMemory]*)
 
-The technical group consists of:
+技術組別包含：
 
-- *pool pledge influence* (*poolPledgeInfluence*)
-- *pool retirement maximum epoch* (*poolRetireMaxEpoch*)
-- *desired number of pools* (*stakePoolTargetNum*)
-- *Plutus execution cost models* (*costModels*)
-- *proportion of collateral needed for scripts* (*collateralPercentage*)
+- *質押池抵押影響* (*poolPledgeInfluence*)
+- *質押池退休的最大紀元* (*poolRetireMaxEpoch*)
+- *期望質押池數量* (*stakePoolTargetNum*)
+- *Plutus 執行成本模型* (*costModels*)
+- *腳本所需的擔保比例* (*collateralPercentage*)
 
-The governance group consists of all the new protocol parameters
-that are introduced in CIP-1694:
+治理組別包含在 CIP-1694 中引入的所有新協定參數：
 
-- *governance voting thresholds*
+- *治理投票門檻*
 (*dRepVotingThresholds[...], poolVotingThresholds[...]*)
-- *governance action maximum lifetime in epochs* (*govActionLifetime*)
-- *governance action deposit* (*govActionDeposit*)
-- *DRep deposit amount* (*dRepDeposit*)
-- *DRep activity period in epochs* (*dRepActivity*)
-- *minimal constitutional committee size* (*committeeMinSize*)
-- *maximum term length (in epochs) for the constitutional committee members*
+- *治理行動在紀元中的最大有效期* (*govActionLifetime*)
+- *治理行動押金* (*govActionDeposit*)
+- *委託代表押金金額* (*dRepDeposit*)
+- *委託代表的活動期（以紀元計）* (*dRepActivity*)
+- *最低憲法委員會成員數量* (*committeeMinSize*)
+- *憲法委員會成員的最長任期（以紀元計）*
 (*committeeMaxTermLimit*)
 
-## APPENDIX II: RATIFICATION OF FINAL CONSTITUTION
+## 附錄 II：最終憲法的批准
 
 ### 第一節
 
-A series of global workshops for Ada holders to discuss and debate the
-Articles of a final constitution will commence during the second half of 2024.
-Workshops shall be geographically distributed to capture the breadth
-of sentiment in the Cardano community.
-Workshops shall elect up to a total of one hundred and forty delegates
-comprising up to seventy voting delegates and up to seventy non-voting
-alternate delegates, who shall participate in a Constitutional Convention.
-Each voting delegate participating in the Constitutional Convention
-shall have an equal vote.
+針對 Ada 持有者討論和辯論最終憲法條款的全球研討會將於 2024 年下半年開始。研討會將在不同地區舉行，以反映 Cardano 社群的廣泛意見。研討會將選出最多一百四十名代表，包括最多七十名投票代表和七十名不具投票權的替代代表，他們將參加憲法大會。每位參加憲法大會的投票代表將擁有平等的投票權。
 
 ### 第二節
 
-The Constitutional Convention shall be held no later than the end of 2024.
+憲法大會將在 2024 年底之前舉行。
 
 ### 第三節
 
-The Final Constitution shall be approved at the Constitutional Convention
-where delegates elected to attend the Constitutional Convention shall agree
-to the Final Constitution with such amendments as they deem
-appropriate and necessary.
-The Final Constitution as approved at the Constitutional Convention
-shall be submitted as a governance action in accordance with CIP-1694
-no later than January 31, 2025.
+最終憲法將在憲法大會上獲得批准，參加憲法大會的代表將根據他們認為適當和必要的修正案達成共識。
+憲法大會批准的最終憲法將按照 CIP-1694 於 2025 年 1 月 31 日之前提交作為治理行動。
