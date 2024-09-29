@@ -25,7 +25,9 @@ Make sure to translate the following words into the specified terms:
 [byte] -> [位元組],
 [level] -> [水準],
 [Fungible] -> [同質化],
-[Not-Fungible] -> [非同質化]
+[Not-Fungible] -> [非同質化],
+[pledge] -> [抵押],
+[primitive] -> [原始型別]
  -->
 
 # Cardano 區塊鏈生態系統臨時憲法
@@ -723,167 +725,149 @@ MBHS-04 (x - "should") *maxBlockHeaderSize* **應該** 只在協議變更時正�
 
 MBHS-05 (x - "should") *maxBlockHeaderSize* **應該** 在 TCP 的初始擁塞窗口內 (3 or 10 MTUs)
 
-#### 2.4 Technical/Security Parameters
+#### 2.4 技術/安全參數
 
-The overall goals when managing the technical/security parameters are:
+管理技術/安全參數的整體目標是：
 
-1. Ensure the security of the Cardano network in terms of decentralization,
-protection against Sybil and 51% attacks and protection against
-denial of service attacks
-2. Enable changes to the Plutus language
+1. 確保 Cardano 網路的安全性，涉及去中心化、防範 Sybil 攻擊和 51% 攻擊以及防止拒絕服務攻擊。
+2. 使 Plutus 語言能夠進行更改。
 
-##### Triggers for Change
+##### 變更觸發因素
 
-1. Changes in the number of active SPOs
-2. Changes to the Plutus language
-3. Security threats
-4. Community requests
+1. 活躍質押池營運商（SPO）的數量變化
+2. Plutus 語言的變更
+3. 安全威脅
+4. 社群請求
 
-##### Counter-indicators
+##### 反指標
 
-- Economic concerns, e.g. when changing the number of stake pools
+- 經濟考量，例如在變更質押池數量時
 
-##### Core Metrics
+##### 核心指標
 
-- Number of stake pools
-- Level of decentralization
+- 質押池數量
+- 去中心化水準
 
-#### Changes to Specific Technical/Security Parameters
+#### 特定技術/安全參數的變更
 
-##### Target Number of Stake Pools (stakePoolTargetNum)
+##### 目標質押池數量 (stakePoolTargetNum)
 
-Sets the target number of stake pools
+設定目標質押池的數量
 
-- The expected number of pools when the network is in the equilibrium state
-- Primarily a security parameter, ensuring decentralization by
-pool division/replication
-- Has an economic effect as well as a security affect - economic advice is also
-required when changing this parameter
-- Large changes in this parameter will trigger mass redelegation events
+- 當網路處於平衡狀態時，預期的池數量。
+- 主要是一項安全參數，通過池的分割/複製來確保去中心化。
+- 此參數具有經濟影響及安全影響，變更此參數時也需考量經濟建議。
+- 此參數的大幅變更將觸發大規模的重新委託事件。
 
 ###### 保障措施
 
-SPTN-01 (y) *stakePoolTargetNum* **must not** be lower than 250
+SPTN-01 (y) *stakePoolTargetNum* **不得** 低於 250
 
-SPTN-02 (y) *stakePoolTargetNum* **must not** exceed 2,000
+SPTN-02 (y) *stakePoolTargetNum* **不得** 超過 2,000
 
-SPTN-03 (y) *stakePoolTargetNum* **must not** be negative
+SPTN-03 (y) *stakePoolTargetNum* **不得** 為負值
 
-SPTN-04 (y) *stakePoolTargetNum* **must not** be zero
+SPTN-04 (y) *stakePoolTargetNum* **不得** 為零
 
-##### Pledge Influence Factor (poolPledgeInfluence)
+##### 質押影響因子 (poolPledgeInfluence)
 
-Enables the pledge protection mechanism
+啟用質押保護機制。
 
-Provides protection against Sybil attack
+提供對 Sybil 攻擊的保護。
 
-- Higher values reward pools that have more pledge and
-penalize pools that have less pledge
+- 更高的數值會獎勵擁有較多抵押的池，並懲罰擁有較少抵押的池
 
-Has an economic effect as well as technical effect - economic advice is also
-required
+此參數具有經濟影響和技術影響，因此也需考量經濟建議。
 
-- Can be set in the range 0.0-infinity
+- 可設置範圍為 0.0 到無限大。
 
 ###### 保障措施
 
-PPI-01 (y) *poolPledgeInfluence* **must not** be lower than 0.1
+PPI-01 (y) *poolPledgeInfluence* **不得** 低於 0.1
 
-PPI-02 (y) *poolPledgeInfluence* **must not** exceed 1.0
+PPI-02 (y) *poolPledgeInfluence* **不得** 超過 1.0
 
-PPI-03 (y) *poolPledgeInfluence* **must not** be negative
+PPI-03 (y) *poolPledgeInfluence* **不得** 為負值
 
-PPI-04 (x - "should") *poolPledgeInfluence* **should not** vary by more than
-+/- 10% in any 18-epoch period (approximately 3 months)
+PPI-04 (x - "should") *poolPledgeInfluence* **不應該** 在任何 18 紀元期間（約 3 個月）內變動超過 +/- 10%。
 
-##### Pool Retirement Window (poolRetireMaxEpoch)
+##### 池退役窗口 (poolRetireMaxEpoch)
 
-Defines the maximum number of epochs notice that a pool can give
-when planning to retire
+定義池在計劃退役時可以給予的最大紀元通知數量。
 
 ###### 保障措施
 
-PRME-01 (y) *poolRetireMaxEpoch* **must not** be negative
+PRME-01 (y) *poolRetireMaxEpoch* **不得** 為負值
 
-PRME-02 (x - "should") *poolRetireMaxEpoch* **should not** be lower than 1
+PRME-02 (x - "should") *poolRetireMaxEpoch* **不應該** 低於 1
 
-##### Collateral Percentage (collateralPercentage)
+##### 抵押百分比 (collateralPercentage)
 
-Defines how much collateral must be provided when executing a Plutus script
-as a percentage of the normal execution cost
+定義執行 Plutus 腳本時必須提供的抵押金額，作為正常執行成本的百分比。
 
-- Collateral is additional to fee payments
-- If a script fails to execute, then the collateral is lost
-- The collateral is never lost if a script executes successfully
+- 抵押金為額外費用支付。
+- 如果腳本執行失敗，則抵押金會損失。
+- 如果腳本成功執行，則抵押金不會損失。
 
-Provides security against low-cost attacks by making it more expensive
-rather than less expensive to execute failed scripts
+透過增加執行失敗腳本的成本來提供對低成本攻擊的安全保障。
 
 ###### 保障措施
 
-CP-01 (y) *collateralPercentage* **must not** be lower than 100
+CP-01 (y) *collateralPercentage* **不得** 低於 100
 
-CP-02 (y) *collateralPercentage* **must not** exceed 200
+CP-02 (y) *collateralPercentage* **不得** 超過 200
 
-CP-03 (y) *collateralPercentage* **must not** be negative
+CP-03 (y) *collateralPercentage* **不得** 為負值
 
-CP-04 (y) *collateralPercentage* **must not** be zero
+CP-04 (y) *collateralPercentage* **不得** 為零
 
-##### Maximum number of collateral inputs (maxCollateralInputs)
+##### 抵押輸入的最大數量 (maxCollateralInputs)
 
-Defines the maximum number of inputs that can be used for collateral
-when executing a Plutus script
-
-###### 保障措施
-
-MCI-01 (y) *maxCollateralInputs* **must not** be lower than 1
-
-##### Maximum Value Size (maxValueSize)
-
-The limit on the serialized size of the Value in each output.
+定義執行 Plutus 腳本時可以用作抵押的最大輸入數量。
 
 ###### 保障措施
 
-MVS-01 (y) *maxValueSize* **must not** exceed 12,288 Bytes (12KB)
+MCI-01 (y) *maxCollateralInputs* **不得** 低於 1
 
-MVS-02 (y) *maxValueSize* **must not** be negative
+##### 最大值大小 (maxValueSize)
 
-MVS-03 (~ - no access to existing parameter values) *maxValueSize* **must** be
-less than *maxTxSize*
+每個輸出的序列化值的大小限制。
+
+###### 保障措施
+
+MVS-01 (y) *maxValueSize* **不得** 超過 12,288 位元組 (12KB)
+
+MVS-02 (y) *maxValueSize* **不得** 為負值
+
+MVS-03 (~ - no access to existing parameter values) *maxValueSize* **必須** 小於 *maxTxSize*
 
 MVS-04 (~ - no access to existing parameter values)
-*maxValueSize* **must not** be reduced
+*maxValueSize* **不得** 減少
 
 MVS-05 (x - "sensible output" is subject to interpretation)
-*maxValueSize* **must** be large enough to allow sensible outputs
-(e.g. any existing on-chain output or anticipated outputs that could be
-produced by new ledger rules)
+*maxValueSize* **必須** 足夠大，以允許合理的輸出（例如，任何現有的鏈上輸出或根據新帳本規則預期產生的輸出）。
 
-##### Plutus Cost Models (costModels)
+##### Plutus 成本模型 (costModels)
 
-Define the base costs for each Plutus primitive in terms of CPU and memory unit
+定義每個 Plutus 原始型別的基本成本，單位為 CPU 和記憶體。
 
-- There are about 150 distinct micro-parameters in total
+- 總共有約 150 個不同的微參數。
 
-Cost models are defined for each Plutus language version.
-A new language version may introduce additional micro-parameters or
-remove existing micro-parameters.
+成本模型針對每個 Plutus 語言版本進行定義。
+新的語言版本可能會引入額外的微參數或刪除現有的微參數。
 
 ###### 保障措施
 
-PCM-01 (x - unquantifiable) *Cost model* values **must** be set by
-benchmarking on a reference architecture
+PCM-01 (x - unquantifiable) *成本模型* 值 **必須** 透過參考架構的基準測試來設置。
 
 PCM-02 (x - primitives and language versions aren't introduced in
 transactions)
-The *cost model* **must** be updated if new primitives are introduced or
-a new Plutus language version is added
+*成本模型* **必須** 在引入新原始型別或添加新 Plutus 語言版本時進行更新。
 
 PCM-03 (~ - no access to *Plutus cost model* parameters)
-*Cost model* values **should not** be negative
+*成本模型* 值 **不應該** 為負值
 
-PCM-04 (~ - no access to *Plutus cost model* parameters) A *cost model*
-**must** be supplied for each Plutus language version that the protocol supports
+PCM-04 (~ - no access to *Plutus cost model* parameters) **必須** 必須為每個協議支持的 Plutus 語言版本提供 *成本模型*
 
 #### 2.5 Governance Parameters
 
