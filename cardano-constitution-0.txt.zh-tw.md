@@ -386,19 +386,15 @@ TFGEN-01 (x - "should") 為了維持對拒絕服務攻擊的一致防護水準�
 
 TFGEN-02 (x - unquantifiable) 對 *txFeePerByte* 或 *txFeeFixed* 的任何變更 **必須** 考慮到降低拒絕服務攻擊成本或提高最高交易費用的影響，以至於可能無法建立交易。
 
-##### UTxO cost per byte (utxoCostPerByte)
+##### 每位元組的UTxO成本 (utxoCostPerByte)
 
-Defines the cost for storage in UTxOs
+定義UTxO存儲的成本。
 
-- Sets a minimum threshold on ada that is held within a single UTxO
-(~1 ada minimum, could be >= 50 ada in the worst case)
-- Provides protection against low-cost denial of service attack on UTxO storage.
-This attack has been executed on other chains - it is not theoretical.
-DoS protection decreases in line with the free node memory
-(proportional to UTxO growth)
-- Helps reduce long term storage costs
-- Provides an incentive to return UTxOs when no longer needed.
-Should significantly exceed minimum tx cost (~ 0.15 ada)
+- 設定在單一UTxO中持有的最低ada閾值
+(~1 ada，最壞情況可達50 ada或更多)
+- 提供對低成本拒絕服務攻擊（DoS）對UTxO存儲的保護。這種攻擊已在其他區塊鏈上執行過，並非理論上存在。DoS保護會隨著閒置節點記憶體的減少而降低（與UTxO增長成正比）。
+- 有助於降低長期存儲成本
+- 提供在不再需要UTxOs時歸還的激勵。應顯著超過最低交易成本。 (~ 0.15 ada)
 
 ###### 保障措施
 
