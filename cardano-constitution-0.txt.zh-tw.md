@@ -869,104 +869,96 @@ PCM-03 (~ - no access to *Plutus cost model* parameters)
 
 PCM-04 (~ - no access to *Plutus cost model* parameters) **必須** 必須為每個協議支持的 Plutus 語言版本提供 *成本模型*
 
-#### 2.5 Governance Parameters
+#### 2.5 治理參數
 
-The overall goals when managing the governance parameters are to:
+管理治理參數的整體目標是：
 
-1. Ensure governance stability
-2. Maintain a representative form of governance as outlined in CIP-1694
+1. 確保治理穩定性
+2. 維持代表性的治理形式，如 CIP-1694 所述
 
-##### Triggers for Change
+##### 變更觸發因素
 
-Changes to governance parameters may be triggered by:
+治理參數的變更可能會受到以下因素的觸發：
 
-1. Community requests
-2. Regulatory requirements
-3. Unexpected or unwanted governance outcomes
-4. Entering a state of no confidence
+1. 社區請求
+2. 監管要求
+3. 意外或不希望的治理結果
+4. 進入不信任狀態
 
-##### Counter-indicators
+##### 反指標
 
-Changes may need to be reversed and/or should not be enacted in the event of:
+在以下情況下，變更可能需要撤回和/或不應實施：
 
-- Unexpected effects on governance
-- Excessive Layer 1 load due to on-chain voting or excessive numbers of
-governance actions
+- 對治理產生意外影響
+- 由於鏈上投票或過多治理行為而導致的過度 Layer 1 負載
 
-##### Core Metrics
+##### 核心指標
 
-All decisions on parameter changes should be informed by:
+所有有關參數變更的決策應以以下因素為依據：
 
-- Governance participation levels
-- Governance behaviors and patterns
-- Regulatory considerations
-- Confidence in the governance system
-- The effectiveness of the governance system in managing necessary change
+- 治理參與水平
+- 治理行為和模式
+- 監管考量
+- 對治理系統的信心
+- 治理系統在管理必要變更中的有效性
 
-#### Changes to Specific Governance Parameters
+#### 變更特定治理參數
 
-##### Deposit for Governance Actions (govDeposit)
+##### 治理行為押金 (govDeposit)
 
-The deposit that is charged when submitting a governance action.
+提交治理行為時收取的押金。
 
-- Helps to limit the number of actions that are submitted
-
-###### 保障措施
-
-GD-01 (y) *govDeposit* **must not** be negative
-
-GD-02 (y) *govDeposit* **must not** be lower than 1,000,000 (1 ada)
-
-GD-03 (y) *govDeposit* **must not** exceed 10,000,000,000,000 (10 Million ada)
-
-GD-04 (x - "should") *govDeposit* **should** be adjusted in line with
-fiat changes
-
-##### Deposit for DReps (dRepDeposit)
-
-The deposit that is charged when registering a DRep.
-
-- Helps to limit the number of active DReps
+- 有助於限制提交的行為數量
 
 ###### 保障措施
 
-DRD-01 (y) *dRepDeposit* **must not** be negative
+GD-01 (y) *govDeposit* **不得** 為負值
 
-DRD-02 (y) *dRepDeposit* **must not** be lower than 1,000,000 (1 ada)
+GD-02 (y) *govDeposit* **不得** 低於 1,000,000 (1 ada)
 
-DRD-03 (y) *dRepDeposit* **must not** exceed 100,000,000,000 (100,000 ada)
+GD-03 (y) *govDeposit* **不得** 超過 10,000,000,000,000 (1 億 ada)
 
-DRD-04 (x - "should") *dRepDeposit* **should** be
-adjusted in line with fiat changes
+GD-04 (x - "should") *govDeposit* **應該** 隨法幣變動進行調整
 
-##### DRep Activity Period (dRepActivity)
+##### 委託代表押金 (dRepDeposit)
 
-The period (as a whole number of epochs)
-after which a DRep is considered to be inactive for vote calculation purposes,
-if they do not vote on any proposal.
+註冊委託代表時所收取的押金。
+
+- 有助於限制活躍委託代表的數量
 
 ###### 保障措施
 
-DRA-01 (y) *dRepActivity* **must not** be lower than 13 epochs (2 months)
+DRD-01 (y) *dRepDeposit* **不得** 為負值
 
-DRA-02 (y) *dRepActivity* **must not** exceed 37 epochs (6 months)
+DRD-02 (y) *dRepDeposit* **不得** 低於 1,000,000 (1 ada)
 
-DRA-03 (y) *dRepActivity* **must not** be negative
+DRD-03 (y) *dRepDeposit* **不得** 超過 100,000,000,000 (100,000 ada)
 
-DRA-04 (~ - no access to existing parameter values) *dRepActivity* **must** be
-greater than *govActionLifetime*
+DRD-04 (x - "should") *dRepDeposit* **應該** 隨法幣變動進行調整
 
-DRA-05 (x - "should") *dRepActivity* **should** be calculated in human terms
-(2 months etc)
+##### 委託代表活躍期 (dRepActivity)
 
-##### DRep and SPO Governance Action Thresholds (dRepVotingThresholds[...],poolVotingThresholds[...])
+在此期間（以整數紀元計算），若委託代表未對任何提案投票，則其被視為在投票計算中不活躍。
 
-Thresholds on the active voting stake that is required to ratify a
-specific type of governance action by either DReps or SPOs.
+###### 保障措施
 
-- Ensures legitimacy of the action
+DRA-01 (y) *dRepActivity* **不得** 低於 13 紀元（2 個月）
 
-The threshold parameters are listed below:
+DRA-02 (y) *dRepActivity* **不得** 超過 37 紀元（6 個月）
+
+DRA-03 (y) *dRepActivity* **不得** 為負值
+
+DRA-04 (~ - no access to existing parameter values) *dRepActivity* **必須** 大於 *govActionLifetime*
+
+DRA-05 (x - "should") *dRepActivity* **應該** 以人類可理解的方式計算（例如 2 個月等）
+
+##### 委託代表(Drep)與質押池營運商(SPO)治理行動門檻 (dRepVotingThresholds[...],poolVotingThresholds[...])
+
+針對委託代表或質押池營運商所需的有效投票權限門檻，以核准特定類型的治理行動。
+
+- 確保行動的合法性
+
+以下是門檻參數的列表：
 
 *dRepVotingThresholds*:
 
@@ -991,77 +983,69 @@ The threshold parameters are listed below:
 
 ###### 保障措施
 
-VT-GEN-01 (y) All thresholds **must** be in the range 50%-100%
+VT-GEN-01 (y) 所有門檻 **必須** 在 50%-100% 範圍內
 
-VT-GEN-02 (y) Economic, network and technical parameter thresholds
-**must** be in the range 51%-75%
+VT-GEN-02 (y) 經濟、網路和技術參數門檻
+**必須** 在 51%-75% 範圍內
 
-VT-GEN-03 (y) Governance parameter thresholds **must** be in the range 75%-90%
+VT-GEN-03 (y) 治理參數門檻 **必須** 在 75%-90% 範圍內
 
-VT-HF-01 (y) **Hard fork** action thresholds **must** be in the range 51%-80%
+VT-HF-01 (y) **硬分叉** 行動門檻 **必須** 在 51%-80% 範圍內
 
-VT-CON-01 (y) **New Constitution or guardrails script action** thresholds
-**must** be in the range 65%-90%
+VT-CON-01 (y) **新憲法或保障措施腳本行動** 門檻
+**必須** 在 65%-90% 範圍內
 
-VT-CC-01 (y) **Update Constitutional Committee action** thresholds
-**must** be in the range 51%-90%
+VT-CC-01 (y) **更新憲法委員會行動** 門檻
+**必須** 在 51%-90% 範圍內
 
-VT-NC-01 (y) **No confidence** action thresholds **must** be
-in the range 51%-75%
+VT-NC-01 (y) **不信任** 行動門檻 **必須** 在 51%-75% 範圍內
 
-##### Governance Action Lifetime (govActionLifetime)
+##### 治理行動有效期 (govActionLifetime)
 
-The period after which a governance action will expire if it is not enacted
+若未被執行，治理行動將在此期間後失效。
 
-- As a whole number of epochs
+- 以整數紀元計算
 
 ###### 保障措施
 
-GAL-01 (y) *govActionLifetime* **must not** be lower than 1 epoch (5 days)
+GAL-01 (y) *govActionLifetime* **不得** 低於 1 紀元（5 天）
 
-GAL-03 (x - "should") *govActionLifetime* **should not** be
-lower than 2 epochs (10 days)
+GAL-03 (x - "should") *govActionLifetime* **不應該** 低於 2 紀元（10 天）
 
-GAL-02 (y) *govActionLifetime* **must not** exceed 15 epochs (75 days)
+GAL-02 (y) *govActionLifetime* **不得** 超過 15 紀元（75 天）
 
-GAL-04 (x - "should") *govActionLifetime* **should** be
-calibrated in human terms (eg 30 days, two weeks),
-to allow sufficient time for voting etc. to take place
+GAL-04 (x - "should") *govActionLifetime* **應該** 以人類可理解的方式進行調整（例如 30 天、兩週），以確保有足夠的時間進行投票等。
 
 GAL-05 (~ - no access to existing parameter values) *govActionLifetime*
-**must** be less than *dRepActivity*
+**必須** 小於 *dRepActivity*
 
-##### Maximum Constitutional Committee Term (committeeMaxTermLimit)
+##### 憲法委員會最大任期 (committeeMaxTermLimit)
 
-The limit on the maximum term that a committee member may serve
-
-###### 保障措施
-
-CMTL-01 (y) *committeeMaxTermLimit* **must not** be zero
-
-CMTL-02 (y) *committeeMaxTermLimit* **must not** be negative
-
-CMTL-03 (y) *committeeMaxTermLimit* **must not** be lower than 18 epochs
-(90 days, or approximately 3 months)
-
-CMTL-04 (y) *committeeMaxTermLimit* **must not** exceed 293 epochs
-(approximately 4 years)
-
-CMTL-05 (x - "should") *committeeMaxTermLimit* **should not** exceed
-220 epochs (approximately 3 years)
-
-##### The minimum size of the Constitutional Committee (committeeMinSize)
-
-The least number of members that can be included in a Constitutional Committee
-following a governance action to change the Constitutional Committee.
+委員會成員可擔任的最大任期限制
 
 ###### 保障措施
 
-CMS-01 (y) *committeeMinSize* **must not** be negative
+CMTL-01 (y) *committeeMaxTermLimit* **不得** 為零
 
-CMS-02 (y) *committeeMinSize* **must not** be lower than 3
+CMTL-02 (y) *committeeMaxTermLimit* **不得** 為負值
 
-CMS-03 (y) *committeeMinSize* **must not** exceed 10
+CMTL-03 (y) *committeeMaxTermLimit* **不得** 低於 18 紀元（90 天，約 3 個月）
+
+CMTL-04 (y) *committeeMaxTermLimit* **不得** 超過 293 紀元（約 4 年）
+
+CMTL-05 (x - "should") *committeeMaxTermLimit* **不應該** 超過 220 紀元（約 3 年） (approximately 3 years)
+
+##### 憲法委員會的最小規模 (committeeMinSize)
+
+在治理行動後，憲法委員會中可包括的最少成員數量。
+
+###### 保障措施
+
+CMS-01 (y) *committeeMinSize* **不得** 為負值
+
+CMS-02 (y) *committeeMinSize* **不得** 低於 3
+
+CMS-03 (y) *committeeMinSize* **不得** 超過 10
 
 #### 2.6 Monitoring and Reversion of Parameter Changes
 
